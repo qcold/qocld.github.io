@@ -114,7 +114,7 @@ layui.use(['layer', 'element', 'carousel', 'util', 'form'], function () {
     });
 
     //新域名提示
-    layer.msg('追梦网数据将存放在GitHub上，网站关闭后启用！www.flymore.ga', {icon: 4});
+    layer.msg('欢迎来到丹乐网的备份站，请保存我们的域名www.flymore.ga', {icon: 4});
     //支付宝红包弹窗
 /*    var cookie_hongbao = $.cookie("hongbao");
     if(cookie_hongbao==null){
@@ -130,7 +130,7 @@ layui.use(['layer', 'element', 'carousel', 'util', 'form'], function () {
             shadeClose: true,
             shade: 0.8,
             area: ['380px', '90%'],
-            content: '感谢支持，追梦网已关闭所有赞助方式，我们有缘再见！'
+            content: '感谢支持，丹乐网已关闭所有赞助方式，我们有缘再见！'
         });
     }
 
