@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <title>仙侠修真 - 丹乐文库 - 丹乐网 - 完结耽美文珍藏书库</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link href="https://cdn.jsdelivr.net/npm/layui-src@2.5.4/dist/css/layui.css" rel="stylesheet">
+<link href="/skin/default/css/site.min.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="//at.alicdn.com/t/font_532845_y8sa3poeef6layvi.css" rel="stylesheet" />
+<link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
+<!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+<!--[if lt IE 9]>
+<script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+<script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+<div class="layui-bg-black fly-header">
+    <div class="layui-container">
+        <a class="fly-logo" href="https://flymore.ga/">
+            <img alt="qcold" src="https://flymore.ga/skin/default/images/logo-q.png">
+        </a>
+        <ul class="layui-nav fly-nav" lay-filter="">
+            <li class="layui-nav-item layui-hide-xs">
+                <a href="javascript:"><i class="layui-icon">&#xe756;</i> 排行榜</a>
+                <dl class="layui-nav-child"> <!-- 二级菜单 -->
+                    <dd><a href="https://flymore.ga/html/good/">推荐排行</a></dd>
+                    <dd><a href="https://flymore.ga/html/hots/">总点击榜</a></dd>
+                    <dd><a href="https://flymore.ga/html/year/">年点击榜</a></dd>
+                    <dd><a href="https://flymore.ga/html/season/">季点击榜</a></dd>
+                    <dd><a href="https://flymore.ga/book/">新鲜上线</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item layui-hide-xs">
+                <a href="https://flymore.ga/book/"><i class="layui-icon">&#xe857;</i> 分类</a>
+                <dl class="layui-nav-child"> <!-- 二级菜单 -->
+                    <dd><a href="https://flymore.ga/book/future/">末世机甲</a></dd>
+                    <dd><a href="https://flymore.ga/book/modern/">现代都市</a></dd>
+                    <dd><a href="https://flymore.ga/book/antiquity/">古风雅韵</a></dd>
+                    <dd><a href="https://flymore.ga/book/rebirth/">穿越重生</a></dd>
+                    <dd><a href="https://flymore.ga/book/fantasy/">玄幻网游</a></dd>
+                    <dd><a href="https://flymore.ga/book/xianxia/">仙侠修真</a></dd>
+                    <dd><a href="https://flymore.ga/book/terror/">灵异神怪</a></dd>
+                    <dd><a href="https://flymore.ga/book/same/">耽美同人</a></dd>
+                    <dd><a href="https://flymore.ga/book/other/">耽美其他</a></dd>
+                    <dd><a href="https://flymore.ga/book/emotion/">酷儿话题</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item layui-hide-xs">
+                <a class="zanzhu" href="javascript:"><i class="layui-icon">&#xe735;</i> 赞助我们</a>
+            </li>
+        </ul>
+        <ul class="layui-nav fly-nav-user">
+            <li class="layui-nav-item">
+                <a href="javascript:" id="search"><i class="layui-icon" style="font-size: 24px;">&#xe615;</i></a>
+            </li>
+            <script src="https://flymore.ga/e/member/login/loginjs.php"></script>
+        </ul>
+    </div>
+</div>
+
+<div class="fly-panel fly-column layui-hide-sm layui-show-xs menuBar" style="display: none">
+    <div class="layui-container">
+        <ul class="layui-clear">
+            <li><a href='https://flymore.ga/book/future/'>科幻</a></li>
+            <li><a href='https://flymore.ga/book/modern/'>现代</a></li>
+            <li><a href='https://flymore.ga/book/antiquity/'>古代</a></li>
+            <li><a href='https://flymore.ga/book/rebirth/'>穿越</a></li>
+            <li><a href='https://flymore.ga/book/fantasy/'>玄幻</a></li>
+            <li><a href='https://flymore.ga/book/xianxia/'>仙侠</a></li>
+            <li><a href='https://flymore.ga/book/terror/'>灵异</a></li>
+            <li><a href='https://flymore.ga/book/same/'>同人</a></li>
+            <li><a href='https://flymore.ga/book/other/'>其他</a></li>
+            <li><a href="https://flymore.ga/book/emotion/">玩觅 <span class="layui-badge-dot"></span></a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="layui-container">
+    <div class="layui-col-md7" id="search-bar" style="display: none;position: fixed;background-color: #515a6e; opacity: 0.8;z-index: 10;">
+        <div class="fly-panel" style="background-color: #515a6e;padding: 20px 20px; text-align: center;">
+            <form action='https://flymore.ga/e/search/index.php' class="layui-form" method='post'>
+                <input class="layui-input" id='words' name='keyboard' placeholder="搜索其实很简单" style="width: 70%;display: inline-block" type="text">
+                <input name="show" type="hidden" value="title,writer,newstext"/>
+                <input name="tempid" type="hidden" value="1"/>
+                <button class="layui-btn" lay-filter="searchSubmit" lay-submit style="width:20%;display:inline-block">搜索</button>
+            </form>
+            <div class="fly-tags" style="margin-top: 10px"><a href="https://flymore.ga/e/tags/?tagid=413" target="_blank">穿越</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=3950" target="_blank">重生</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=1638" target="_blank">强强</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4192" target="_blank">甜文</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=2718" target="_blank">生子</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4107" target="_blank">包子</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4216" target="_blank">都市</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4187" target="_blank">修真</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4181" target="_blank">种田</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4158" target="_blank">娱乐圈</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4102" target="_blank">系统</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=1660" target="_blank">年下</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4193" target="_blank">灵异</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=25" target="_blank">同人</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=306" target="_blank">男人</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4248" target="_blank">豪门</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=2449" target="_blank">HE</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4005" target="_blank">宫廷</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4273" target="_blank">空间</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4199" target="_blank">末世</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4554" target="_blank">1V1</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=370" target="_blank">网游</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=2442" target="_blank">自由自在</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=3975" target="_blank">架空</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4285" target="_blank">励志</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4250" target="_blank">异能</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4124" target="_blank">异世</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=412" target="_blank">时空</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4318" target="_blank">快穿</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=427" target="_blank">哥哥</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=91" target="_blank">少年</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4272" target="_blank">机甲</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=385" target="_blank">游戏</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4369" target="_blank">网配</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=6883" target="_blank">长生千叶</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4105" target="_blank">莫晨欢</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=6617" target="_blank">叶忆落</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4471" target="_blank">虐恋</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=129" target="_blank">幸福</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=5082" target="_blank">颜若优雅</a></div>
+        </div>
+    </div>
+    <div class="layui-row layui-col-space15">
+
+
+    <div class="layui-col-md12">
+        <div class="home-tips">
+            <i style="float:left;line-height:17px;" class="fa fa-volume-up"></i>
+            <div class="home-tips-container">
+                                <span style="color: red;padding-left: 5px;"><a href="https://flymore.ga/book/emotion/2019-10-04/87354.html" target="_blank">舍不得说再见，但已到离别时</a></span>
+                                <span style="color: red;padding-left: 5px;"><a href="https://flymore.ga/book/emotion/2018-01-06/73604.html" target="_blank">书友必看：打开追梦网的正确姿势</a></span>
+                            </div>
+        </div>
+    </div>
+
+    <div class="layui-col-md8">
+        <!--列表开始-->
+        <div class="fly-panel">
+            <div class="fly-panel-title fly-filter">
+                <span class="layui-breadcrumb" lay-separator=">">
+                  <a href="https://flymore.ga/index.html">首页</a>&nbsp;>&nbsp;<a href="https://flymore.ga/book/">文库</a>&nbsp;>&nbsp;<a href="https://flymore.ga/book/xianxia/">仙侠修真</a>
+                </span>
+            </div>
+        </div>
+        <div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/xianxia/2017-04-03/66023.html">修仙之九重昆仑（修真）中——藏弓半步</a>
+        </div>
+        <div class="article-abstract"> 第五十三章：克丑门主 崇明楼位于克丑门地势最高的地方，黑色的宏伟建筑古朴威严，是门主所居住的地方。 陆吾现在要进去，苦无站在楼顶急了，这么多人竟然还捉不住一个人。 &ldquo;真是丢人！&rdquo;愠怒的声音在整</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-04-03</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;修真</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;7</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/xianxia/2017-04-03/66022.html">修仙之九重昆仑（修真）下——藏弓半步</a>
+        </div>
+        <div class="article-abstract"> 第一百零二章：无量宗主 刚刚落地，陆吾从储物袋中拿出一套衣服换上，四周黑乎乎地一片，他似乎正好落在一座山上，四周都是茂密的树林。 年爻抓起他的右手看了看，手指骨节分明，十分好看。&ldquo;你把龙爪也炼了？</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-04-03</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;修真</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;8</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/xianxia/2017-04-03/65976.html">每天起床都看到模范夫夫在闹分手（修真）下——mijia</a>
+        </div>
+        <div class="article-abstract"> 第四十八章 在确定合作关系后，萧铭与越青之间的关系更显亲密。越青对萧铭全无防备，几乎不需要花任何心思，他便将对方的来历弄得一清二楚。 越青的师父也是一名女散修，当年无意间路过越青家，发现尚且年幼的越青音</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-04-03</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;修真</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;14</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/xianxia/2017-04-03/65977.html">每天起床都看到模范夫夫在闹分手（修真）上——mijia</a>
+        </div>
+        <div class="article-abstract"> 文案： 做错了事，萧铭从未后悔，因为他素来自私冷漠。 事迹败露，萧铭也不会怨天尤人，不想死，那就只能逃跑。 苦主提着剑在他身后紧追不舍，萧铭完全可以理解， 但是追杀着追杀着，似乎有什么奇怪的东西混进来了？</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-04-03</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;修真</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;21</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/xianxia/2017-04-03/65960.html">鲫鱼修仙记（修真）上——清蒸董</a>
+        </div>
+        <div class="article-abstract"> 文案： 作为一条寿命只有十五年的淡水鱼，姬钰表示好好活着就够了。 作为一条能修炼的淡水鱼，姬钰表示跟着师父好好修炼，争取活过十五岁就够了。 正在努力修炼，争取作条长寿鱼的姬钰脑袋被揉了一下，茫然仰头。 楚</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-04-03</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;修真</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;24</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/xianxia/2017-04-03/65959.html">鲫鱼修仙记（修真）下——清蒸董</a>
+        </div>
+        <div class="article-abstract"> 第四十一章 就在玄雪峰集体闭关之时，天玄大陆发生了一件大事，五百年一次的妖兽潮提前到来了。 &ldquo;宗主！正天宗乃四大宗门之首，此次危机涉及整个大陆，我宗应当义不容辞啊。&rdquo; &ldquo;玄土真人所言极是，</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-04-03</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;修真</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;12</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/xianxia/2017-04-03/65945.html">海天一色（修真）上——禅狐</a>
+        </div>
+        <div class="article-abstract"> 文案： 双CP，古耽。 在此故事人物、团体组织、情节设定皆为架空。 个志情报：网志。 作者情报：网站&amp;times;噗浪 第1章：楔子 那年白道尘二十九岁，身旁跟着一名弟子月湛清，入道门二年，性格轻浮贪玩，虽说月湛清桀</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-04-03</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;修真</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;7</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/xianxia/2017-04-03/65944.html">海天一色（修真）下——禅狐</a>
+        </div>
+        <div class="article-abstract"> 第14章 中界山位于大陆中心，实为千百座山峰的统称，据传群岳一体是支撑天地的柱石之一。中界山每一处起伏和山水都与星斗流云相对应，不同层天则有无数浮岛，岛上传说有仙人或灵兽修炼。 修炼越精纯者，所在之处越邈</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-04-03</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;修真</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;6</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/xianxia/2017-04-03/65943.html">穿书之投喂反派的正确方式（修真）——长乐思央</a>
+        </div>
+        <div class="article-abstract"> 文案： 熟读剧情三十遍，一朝穿越XX文，为保小命傅云隽决定做个远离剧情远离主角的好人。 师兄弟和睦，有师父庇佑，做饭技能满分，傅云隽的日子过得平平顺顺。 除了养了只特别能吃又老掉链子的灵宠，还总是莫名其妙</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-04-03</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;修真</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;8</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/xianxia/2017-04-03/65917.html">恋爱宝典（修真）——楼外钟</a>
+        </div>
+        <div class="article-abstract"> 文案： 这大概就是一个不断完善恋爱宝典的过程。 #教你如何追人系列# #甜到酥死，苏到溺死# #为什么我的修真和别家不一样系列# 剧透标题：#我追的人总是失忆系列# #闷污受遇上百变攻# 【修真】恋爱指南： 1、本文1v</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-04-03</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;修真</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;9</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/xianxia/2017-04-02/65876.html">天庭出版集团（穿越修真）上——拉棉花糖的兔子</a>
+        </div>
+        <div class="article-abstract"> 文案： 黄竹，一个现代穿越者，穿成了鸿钧道祖的笔，也是世界上第一支笔。 他琢磨着，本体就决定了他以后该走的道路，那就是&mdash;&mdash; 大力推动洪荒文学产业的发展，让所有人都投入到挖坑和掉坑的事业中来！ 不</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-04-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;修真</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;35</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/xianxia/2017-04-02/65875.html">天庭出版集团（穿越修真）中——拉棉花糖的兔子</a>
+        </div>
+        <div class="article-abstract"> 第48章：天婚（下） 主题：广寒宫那么冷清，为何常仪仙子还不愿意出来热闹地方参加宴会呢？ 内容：惆怅&amp;hellip;&amp;hellip;来了天庭几百年也未见到常仪仙子，真想温暖她&amp;hellip;&amp;hellip; 1L：楼主你傻么？冷清个毛，常</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-04-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;修真</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;17</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/xianxia/2017-04-02/65874.html">天庭出版集团（穿越修真）下——拉棉花糖的兔子</a>
+        </div>
+        <div class="article-abstract"> 第98章：哪吒降世 话说女娲一面安排灵珠子择日投胎，另一面还有一手准备。 帝俊曾安排妺喜媚惑夏桀王，女娲受到启发，祭出招妖幡，招来轩辕坟三妖，乃是千年狐狸精、九头雉鸡精和玉石琵琶精，命其托身在后宫，使纣王</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-04-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;修真</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;15</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/xianxia/2017-04-02/65775.html">重生第三世之剑灵金手指（修真）——第三只土狗</a>
+        </div>
+        <div class="article-abstract"> 文案： 从前有一位骨骼惊奇天赋奇高十全九美的少年，唯一的缺点是点背，点背的快要报复社会了。他师父是个魔，他从小到大各种意外死了无数次，他师父就动用时空之力不断的给他读档重生，这么磕磕绊绊的好不容易活到</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-04-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;修真</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;8</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/xianxia/2017-04-02/65758.html">攻略面瘫师兄（修真）+番外——白露未霜</a>
+        </div>
+        <div class="article-abstract"> 文案： 闷骚冰山攻&amp;times;自以为腹黑其实有点呆萌受 （受主动 受主动 受主动） 二十年的痴恋追逐，为了那人堕入魔道，众叛亲离，最后却只落得了这样的一个下场，沈珏缓缓地闭上眼，任周围的灵气疯狂的涌入金丹，最后</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-04-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;修真</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;28</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/xianxia/2017-04-02/65703.html">双界之男神归来（穿越修真一）——犯二的萌小兔</a>
+        </div>
+        <div class="article-abstract"> 文案： 莫筠一生毫无保留的爱过了一次，最终落得粉身碎骨的下场。 一颗佛珠，一场仙缘，意外打开两界穿梭之门。 回到这段感情之初，毅然转身。不一样的选择，不一样的人生。 归来的男神，且看如何风起云涌！ 莫筠未</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-04-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;修真</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;42</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/xianxia/2017-04-02/65702.html">双界之男神归来（穿越修真二）——犯二的萌小兔</a>
+        </div>
+        <div class="article-abstract"> 第46章：龙骨之争 莫筠处理完秦家的事情之后，并没有对那个面具男进行追击。修士对于冥冥之中注定的一些事情，都会有一种直觉。他跟这个面具男，应该还会有交集。 回到家中之后，莫筠就留了一张字条在桌上。君邵阳有</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-04-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;修真</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;19</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/xianxia/2017-04-02/65701.html">双界之男神归来（穿越修真三）——犯二的萌小兔</a>
+        </div>
+        <div class="article-abstract"> 第83章：如此霸气 丰让抬头看着城门上的牌匾：&ldquo;圣域，里面是不是就是圣地了？这里是三大圣地其中之一还是三大圣地分布在圣域之中？&rdquo; 俞忌呼出口气，平复了一些微微激动的情绪，道：&ldquo;进去之后就是</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-04-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;修真</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;31</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/xianxia/2017-04-02/65700.html">双界之男神归来（穿越修真四）——犯二的萌小兔</a>
+        </div>
+        <div class="article-abstract"> 第117章：飞升之秘 九思听闻莫筠的呢喃，只是随意的看了他一眼，并没有追问以他如今这微末的修为，如何得知这种天道秘辛。身怀混沌青莲本源的气运之子，总会有属于自己的机缘，以世人望尘莫及的速度，走向一个连上古</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-04-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;修真</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;22</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/xianxia/2017-04-02/65699.html">双界之男神归来（穿越修真五）——犯二的萌小兔</a>
+        </div>
+        <div class="article-abstract"> 第159章：紫枭尾随 因自家老祖被那混入大中天的修士斩杀，所以李家派了不少的人去守住结界进出口，但当秦啸恒手中的那株圣药被抛出之时，身为炼丹世家的李家人首当其冲的冲了上去，抢了那圣药就跑。 即便因此放过那</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-04-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;修真</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;21</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/xianxia/2017-04-02/65688.html">穿书之异世求生（菊花保卫战修真）——峰岩枫榆</a>
+        </div>
+        <div class="article-abstract"> 文案： 原名：菊花保卫战 传说集齐七龙珠就可以召唤神龙 传说喝了麒麟血就可以称霸武林。 传说吃了唐僧肉就可以长生不老。 传说得到神子的人就可以得到全天下！ 萧云看着一群群窥视他菊花的人欲哭无泪 尼玛，谁说得</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-04-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;修真</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;14</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/xianxia/2017-04-02/65665.html">重生之歪瓜裂枣傻狍子（修真）上——艾酒</a>
+        </div>
+        <div class="article-abstract"> 文案： 谢景山上辈子被自己开大玩死了。 重生之后痛定思痛，安心升级打坏人养狍（徒）子（弟），哦对了，还要把那个凑表碾的情敌赶得远远的。 架空，没有历史根据，胡编乱造。 注意： 1.金手指，那是必须的。 2.神逻</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-04-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;修真</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;12</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/xianxia/2017-04-02/65664.html">重生之歪瓜裂枣傻狍子（修真）下+番外——艾酒</a>
+        </div>
+        <div class="article-abstract"> 第41章：赴会（2） 陪欣环逛首饰实在不是什么省心的事儿，偏偏这酒楼地处繁华街道，周围的首饰店大大小小倒也实在繁多，欣环简直是依次逛过去。 进入第六家店的时候谢景山有些吃不消了，他不明白这些东西怎么能逛这</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-04-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;修真</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;7</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/xianxia/2017-04-02/65663.html">执子之手之前尘过往（修真）——叶溪月</a>
+        </div>
+        <div class="article-abstract"> 文案： 这是一篇前文，让我们一直期待正式的文章执子之手之睥睨天下，四月二十八四月十八四月二十八&amp;hellip;&amp;hellip; 内容标签：幻想空间 异世大陆 奇幻魔幻 仙侠修真 主角：轩辕彦曦，南宫清瞳 ┃ 配角：东方靖天，</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-04-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;修真</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;11</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/xianxia/2017-04-02/65544.html">那朵白莲小师弟（修真）+番外——勺子去哪里了</a>
+        </div>
+        <div class="article-abstract"> 文案： 全天河宗都知道轩辕峰是废材专收地，当然除了天资聪颖可爱的小师弟外。 而外人嘴里天资聪颖可爱的小师弟白涟其实是一个天天顶着一双死鱼眼，连启蒙教育都还未完成除非必要，连一字都不肯讲的小面瘫罢了。 不</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-04-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;修真</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;20</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/xianxia/2017-04-02/65514.html">修真时代下——绍兴十一</a>
+        </div>
+        <div class="article-abstract"> 第29章 东沧海出了房间后，就到了地下室的交易会场。 擂台早已没人了，因为是最后一天，摆摊的也不多，倒是修炼区格外热闹。 因为东沧海已经练气四层，前几天买的东西已经用不上了，他把那些东西拿出来放在地下，但</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-04-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;修真</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;10</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/xianxia/2017-04-02/65515.html">修真时代上——绍兴十一</a>
+        </div>
+        <div class="article-abstract"> 文案： 东沧海历经千难万险，得到人生中的第一本秘籍。 结果发现封面上四个大字&mdash;&mdash;采阳真经。 练还是不练，保住节操还是长生不死，这是个问题。 本文不n&amp;rho;. 主角：东沧海 ┃ 配角： ┃ 其它：都市，修</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-04-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;修真</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;14</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/xianxia/2017-04-02/65379.html">穿书之谢室友不杀之恩（修真）——玛依</a>
+        </div>
+        <div class="article-abstract"> 文案： 在穿越后七年，陆目才发现自己原来是穿进一篇以三观不正而成经典的爽文里头。 然并卵，发现这点时他已经强【哔&mdash;&mdash;】了主角的丁丁。 想到后来主角对敌人的各种报复方式，陆目就感到压力山大&amp;helli</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-04-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;修真</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;17</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/xianxia/2017-04-02/65368.html">狐修（穿越修真一）——柳木桃</a>
+        </div>
+        <div class="article-abstract"> 文案： 莫辰以为自己是一只风流狐狸，双修道侣无数，然后忽然有一天他发现，自己竟然是天下第一专情的好狐狸！ 主受，小攻他其实是一朵天上飘来的真&amp;middot;白莲花。 内容标签： 强强 因缘邂逅 天作之合 搜索关键字</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-04-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;修真</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;32</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/xianxia/2017-04-02/65367.html">狐修（穿越修真二）——柳木桃</a>
+        </div>
+        <div class="article-abstract"> 第53章：万法归一殿 沈异星这么晚来找莫辰是有正事的，见捞不到玉露丸吃，他便死了心，对莫辰道：&ldquo;莫师兄，五盟斗法第一轮比赛是三人混战的形式，你可愿与我和阿月一队？&rdquo; 这个莫辰倒是头回听说，不是他</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-04-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;修真</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;27</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/xianxia/2017-04-02/65366.html">狐修（穿越修真三）——柳木桃</a>
+        </div>
+        <div class="article-abstract"> 第105章：地下石殿 萧运天眨眼间就陷进了碎石坑里，因为是头朝下，甚至连呼救的机会都没有。莫辰想再跳过去救宁远，谁知就在这时，宁远旁边的碎石突然一阵翻滚，竟冒出来个人头。 是癸灵！ 莫辰暗道该死，早就知道这</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-04-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;修真</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;12</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/xianxia/2017-04-02/65365.html">狐修（穿越修真四）——柳木桃</a>
+        </div>
+        <div class="article-abstract"> 第157章：故地重游 一听那传音符里的内容，宁远怀里的白狐便一下挣脱他怀抱，跑到扁舟边上用狐狸屁股对着他。宁远知道这是小狐狸生气了，其实也难怪，好几次他都是因为莫问虚对它爽约，今天他都承诺过要带它出来玩一</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-04-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;修真</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;21</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/xianxia/2017-04-02/65364.html">狐修（穿越修真五）——柳木桃</a>
+        </div>
+        <div class="article-abstract"> 第207章：九级妖狐 莫辰盯着白衣少年，还没发泄完激动的情绪，忽然一疼，竟感觉到有无数恼人的小爪子在他身上乱抓，甚至还有几个胆大包天的家伙在揪他的狐狸毛。 简直岂有此理！ 莫辰运转灵力，一下便将那些叽叽喳喳</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-04-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;修真</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;14</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/xianxia/2017-04-02/65363.html">狐修（穿越修真六）——柳木桃</a>
+        </div>
+        <div class="article-abstract"> 第261章：他是聚神期妖修！ &ldquo;万年雪莲瓣！哈哈！我果然又找到了一片万年雪莲瓣！&rdquo;东方信从莫辰身后追过来，看也没有看他一眼，竟然直接从他身边经过，走到棺椁旁。 有那么一瞬，莫辰觉得会发生点什么，</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-04-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;修真</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;12</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/xianxia/2017-04-02/65362.html">藏目斐思（修真）——笔灯敲花</a>
+        </div>
+        <div class="article-abstract"> 文案： 他的一瞬，于止泊而言是无数的千万年。 所以他不过错失了那一瞬间，然后便错失了余后的许多年。 可是这又如何，十万年都等了，这一生都用来等他又有何妨，时间会见证这一切，一如那句誓言，朝夕思慕，生死与</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-04-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;修真</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;7</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/xianxia/2017-04-02/65361.html">东方玄幻之征途（修真）上——天下天</a>
+        </div>
+        <div class="article-abstract"> 文案： 离奇身世；逆天法器；兄弟手足；佳人相伴；傲视独尊&amp;hellip;&amp;hellip; 这是一个小土少爷在竹马离去家族被灭之后被迫走上变强之路的故事。逆天法宝、变态萌宠，统统收入囊中，背景逆天天赋异禀又如何，照样娶回</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-04-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;修真</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;25</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/xianxia/2017-04-02/65360.html">东方玄幻之征途（修真）下——天下天</a>
+        </div>
+        <div class="article-abstract"> 第40章：长人手的巨鼠 司徒超来不及阻止，所有人都争先恐后的跳了进去，仿佛受了蛊惑一般，就连常宏义都跳了下去，司徒超虽然浑身是汗热的要死，但心中还是有些不放心。 常宏义见司徒超还在岸边站着，于是开口道&amp;ld</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-04-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;修真</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;7</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/xianxia/2017-04-02/65300.html">穿书之在下养了个神（修真）——白狐辞</a>
+        </div>
+        <div class="article-abstract"> 文案： 沈晋之死后穿进了一本女主&amp;times;双男主修仙的小黄书里，角色是那种专门负责智商下线，以自身的愚蠢来衬托男主英姿的小炮灰。 好在身体里有个金手指，并且与其中一个男主年少相识。 虽然说现在这个男主角略微</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-04-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;修真</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;17</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/xianxia/2017-04-02/65296.html">被双修道侣抽走魂魄怎么破（修真）中——月光船</a>
+        </div>
+        <div class="article-abstract"> 第53章 元元海上空，此刻一片混乱。 水中亦然。 唯有黑色巨船之内，热热闹闹欢笑一片。 &ldquo;哎哟还英雄救美！&rdquo; &ldquo;老牛鼻子你赶紧去救啊！&rdquo; &ldquo;挨了我贼鸥这一下，就算金丹真人也够呛。&amp;rdq</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-04-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;修真</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;6</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/xianxia/2017-04-02/65297.html">被双修道侣抽走魂魄怎么破（修真）上——月光船</a>
+        </div>
+        <div class="article-abstract"> 文案： 东仙小世界驭兽高手余之归，大婚之夜，被双修道侣抽取魂魄，炼成妖兽以御天劫。幸得好友席长天拼死相救，以命换命，余之归一缕残魂，偷生到西仙小世界。 从自欺欺人中清醒的余之归，从头修炼，报恩报仇。 不</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-04-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;修真</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;18</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/xianxia/2017-04-02/65295.html">被双修道侣抽走魂魄怎么破（修真）下——月光船</a>
+        </div>
+        <div class="article-abstract"> 第101章：除夕快乐 头一天的夜晚，在西仙界千千万万个夜晚中，只是最普通的一夜。 第二天的早上，在紫凝仙宗千千万万个早晨中，也不过是极平常的一个早晨。 南宫子铭知道余之归回了紫凝仙宗，然而对方只在席长天宅邸</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-04-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;修真</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;6</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/xianxia/2017-04-02/65275.html">BOSS三寸半（前传修真）——小鹿犬</a>
+        </div>
+        <div class="article-abstract"> 文案： 又名《迷你剑仙家养手册》、《BOSS和我同居的日子》、《我的恋人缩水了》、《救命，我家恋人人格分裂》、《BOSS阴魂不散》。 BOSS：你们想太污！三寸半不是我丁丁尺寸！ 温乐：谁有我倒霉？恋人比宠物还难伺</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-04-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;修真</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;9</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/xianxia/2017-04-02/65237.html">穿越之抽象派画师（修真）上——燕然之</a>
+        </div>
+        <div class="article-abstract"> 文案： 想曾经纪舒也是一枚比电线杆还直的帅哒哒直男 可穿越后偏偏让他遇上了个强大而体贴的师傅大人 便一不小心在心里打起了伤（情）风（难）败（自）俗（扼）的小九九 这俗话说得好想与一个人长期发展，最直接有效</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-04-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;修真</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;13</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/xianxia/2017-04-02/65236.html">穿越之抽象派画师（修真）下+番外——燕然之</a>
+        </div>
+        <div class="article-abstract"> 第五十五章：筑基 当凝聚出最后一个小气旋时，纪舒的丹田就如要炸锅一般变得异常扭曲。一直被超出容量的气旋撑着，纪舒的丹田小世界一点点的被撑大，然如今却是有种到极限的感觉，纪舒感觉到自己的丹田小世界若不扩</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-04-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;修真</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;6</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/xianxia/2017-04-02/65146.html">每一个看上[伪]直男的师兄都是上辈子折翼的鸡翅（修真）上——叶泛舟</a>
+        </div>
+        <div class="article-abstract"> 文案： 有些时候悲剧可能不是一个。 而是一个悲剧之后一连串带来了很多悲剧。 比如秦云就是个很好的例子。 人帅有钱天赋高，偏偏阴差阳错的在他自己都没反应过来的时候成了个基佬，而自己看上的那个人还是个直男。</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-04-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;修真</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;9</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/xianxia/2017-04-02/65145.html">每一个看上[伪]直男的师兄都是上辈子折翼的鸡翅（修真）下+番外——叶泛舟</a>
+        </div>
+        <div class="article-abstract"> 第三十八章 暂且不提青枫真人到底是为了让秦云可以安心接过通行令还是真的没人愿意去，总之秘境里有聚气丸这件事这对于秦云来说是百利无一害的事情，比如他可以借着这个机会逃过和沈泞有关的一切消息，也有一定的可</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-04-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;修真</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;8</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/xianxia/2017-04-02/65137.html">穿书之炮灰逆袭攻略（修真）上——陌碎</a>
+        </div>
+        <div class="article-abstract"> 文案： 问：如果有一天你发现自己穿进修仙小说里怎么办？ 答：抱紧主角大腿不要动摇！ 这是一个关于某个倒霉读者穿进一本他最喜欢的小说求生存的故事。 但是当有一天这个原本应该种马的主角被掰弯肿！么！破！ 某读</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-04-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;修真</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;47</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/xianxia/2017-04-02/65136.html">穿书之炮灰逆袭攻略（修真）下——陌碎</a>
+        </div>
+        <div class="article-abstract"> 第33章 洛祈懒懒的点头，&ldquo;既然这件事我洛家也掺和进去了，那你洛家使者的身份还是稍微避避嫌的好。反正还有秦家和沈家的使者在，定然能还我师兄一个公道才是。&rdquo; 洛十七恭敬的点头，然后毫不犹豫的站到洛</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-04-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;修真</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;10</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/xianxia/2017-04-02/65036.html">揣着剧情拯救世界（修真）上——百漱流央</a>
+        </div>
+        <div class="article-abstract">文案： 《三界至尊》是种马文中的杀马特，主角圣君霄前期是一朵出淤泥而不染真善美化身的白莲花，后期则是一朵濯清涟而黑化一心毁灭世界的地狱花。 这转折点就发生在他众叛亲离，最后被他一心孺慕报答的宗门上玄宗追</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-04-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;修真</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;18</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/xianxia/2017-04-02/65035.html">揣着剧情拯救世界（修真）中——百漱流央</a>
+        </div>
+        <div class="article-abstract">第33章：当年坠崖 作为一个专业神棍，早就听习惯了周围一圈师弟师妹装模作样的&ldquo;观你面相印堂神色巴拉巴拉&rdquo;，自己也经常说这种话，但听别人或者自己说和别人讲给自己听是完全不一样的。 距离景泽离开半个</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-04-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;修真</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;7</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div>
+        <div id="paging"><a title="Total record">&nbsp;<b>1290</b> </a>&nbsp;&nbsp;<a href="https://flymore.ga/book/xianxia/index.html">首页</a>&nbsp;<a href="https://flymore.ga/book/xianxia/index_12.html">上一页</a>&nbsp;<a href="https://flymore.ga/book/xianxia/index_11.html">11</a>&nbsp;<a href="https://flymore.ga/book/xianxia/index_12.html">12</a>&nbsp;<b>13</b>&nbsp;<a href="https://flymore.ga/book/xianxia/index_14.html">14</a>&nbsp;<a href="https://flymore.ga/book/xianxia/index_15.html">15</a>&nbsp;<a href="https://flymore.ga/book/xianxia/index_14.html">下一页</a>&nbsp;<a href="https://flymore.ga/book/xianxia/index_26.html">尾页</a></div>
+
+
+
+    </div>
+
+    <div class="layui-col-md4">
+        <!--<div class="fly-panel" style="padding:10px;text-align: center">
+            <a href="https://qr.alipay.com/c1x0322413lubhpxsac5mcc"><img src="[!&#45;&#45;news.url&#45;&#45;]skin/default/images/hongbao.png" alt="打开支付宝领红包" style="width: 90%"></a>
+            <p style="padding: 10px"><a href="https://qr.alipay.com/c1x0322413lubhpxsac5mcc"><button class="layui-btn layui-btn-radius layui-btn-normal">打开支付宝领红包</button></p>
+        </div>-->
+
+        <div class="fly-panel" style="padding: 20px 0; text-align: center;">
+            <div class="layui-anim avatar"><a href="javascript:;"><img src="https://flymore.ga/skin/default/images/avatar.jpg" alt="再贱就再见" style="width:120px; height:120px; border-radius:100%;"></a></div>
+            <h1>
+                <a href="javascript:;" style="font-size: 24px">再贱就再见</a>
+                <i class="layui-icon icon-nan" style="font-size: 22px; color: #1E9FFF;">&#xe662;</i>
+            </h1>
+            <p style="color: #999999;margin: 8px">
+                <a target="_blank" title="email" href="mailto:iflymore@yandex.com"><i style="padding-right: 5px;" class="iconfont icon-mail"></i> <span>联系我们</span></a>
+                &nbsp;<i class="layui-icon">&#xe715;</i> <span>耽美 - 中国</span>
+            </p>
+            <p style="color: #999999;margin: 8px">为每一位到来的朋友，传递纯真的梦想！</p>
+            <hr />
+            <div>
+<!--                <a title="QQ" href="http://vac.qq.com/wallet/qrcode.htm?m=tenpay&a=1&u=157557906&ac=9807C9835FD81D271CC2C21000CDC5CD35A04ABB984CD75883955BF253C2702F&n=%E6%B5%AE%E5%A4%B8&f=wallet"><i style="font-size: 32px;padding-right: 15px;" class="iconfont icon-qq"></i></a>-->
+<!--                <a title="wechat" href="wxp://f2f0JTx6mVmCgy-JbWSx28GIxpsIP7KwHDlg"><i style="font-size: 32px;padding-right: 15px;" class="iconfont icon-wechat"></i></a>-->
+<!--                <a title="alipay" href="https://QR.ALIPAY.COM/FKX09446YBW45NR1SFI80F"><i style="font-size: 32px;padding-right: 15px;" class="iconfont icon-alipay"></i></a>-->
+                <a target="_blank" title="telegram" href="https://t.me/xbbchat"><i style="font-size: 32px;padding-right: 15px;" class="iconfont icon-line"></i></a>
+                <a target="_blank" title="paypal" href="https://paypal.me/qcold/"><i style="font-size: 32px;padding-right: 15px;" class="iconfont icon-paypal"></i></a>
+<!--                <a title="hongbao" href="https://qr.alipay.com/c1x0322413lubhpxsac5mcc"><i style="font-size: 32px;" class="iconfont icon-ai-hongbao"></i></a>-->
+            </div>
+        </div>
+
+        <dl class="fly-panel fly-list-one">
+            <dt class="fly-panel-title"><i class="layui-icon">&#xe705;</i>  最新小说</dt>
+                        <dd>[修真]<a href="https://flymore.ga/book/xianxia/2018-10-13/79229.html">异界（修真 穿越）下――夜陨</a> <span><i class="layui-icon">&#xe60e;</i> 2018-10-13</span></dd>
+                        <dd>[修真]<a href="https://flymore.ga/book/xianxia/2018-10-13/79228.html">异界（修真 穿越）中――夜陨</a> <span><i class="layui-icon">&#xe60e;</i> 2018-10-13</span></dd>
+                        <dd>[修真]<a href="https://flymore.ga/book/xianxia/2018-10-13/79227.html">异界（修真 穿越）上――夜陨</a> <span><i class="layui-icon">&#xe60e;</i> 2018-10-13</span></dd>
+                        <dd>[修真]<a href="https://flymore.ga/book/xianxia/2018-10-13/79220.html">重生之前对头（修真 五）――草草～</a> <span><i class="layui-icon">&#xe60e;</i> 2018-10-13</span></dd>
+                        <dd>[修真]<a href="https://flymore.ga/book/xianxia/2018-10-13/79219.html">重生之前对头（修真 四）――草草～</a> <span><i class="layui-icon">&#xe60e;</i> 2018-10-13</span></dd>
+                        <dd>[修真]<a href="https://flymore.ga/book/xianxia/2018-10-13/79218.html">重生之前对头（修真 三）――草草～</a> <span><i class="layui-icon">&#xe60e;</i> 2018-10-13</span></dd>
+                        <dd>[修真]<a href="https://flymore.ga/book/xianxia/2018-10-13/79217.html">重生之前对头（修真 二）――草草～</a> <span><i class="layui-icon">&#xe60e;</i> 2018-10-13</span></dd>
+                        <dd>[修真]<a href="https://flymore.ga/book/xianxia/2018-10-13/79216.html">重生之前对头（修真 一）――草草～</a> <span><i class="layui-icon">&#xe60e;</i> 2018-10-13</span></dd>
+                        <dd>[修真]<a href="https://flymore.ga/book/xianxia/2018-10-10/79079.html">意难平（修真）――日最野</a> <span><i class="layui-icon">&#xe60e;</i> 2018-10-10</span></dd>
+                        <dd>[修真]<a href="https://flymore.ga/book/xianxia/2018-10-01/78929.html">多谢尊神相搭救（修真）――墨白涅</a> <span><i class="layui-icon">&#xe60e;</i> 2018-10-01</span></dd>
+                    </dl>
+
+        <dl class="fly-panel fly-list-one">
+            <dt class="fly-panel-title"><i class="layui-icon">&#xe705;</i>  推荐小说</dt>
+                    </dl>
+
+        <dl class="fly-panel fly-list-one">
+            <dt class="fly-panel-title"><i class="layui-icon">&#xe705;</i>  热门小说</dt>
+                        <dd>[修真]<a href="https://flymore.ga/book/xianxia/2017-11-19/72659.html">手撕系统重生后（修真一）——风之克罗地亚</a> <span><i class="layui-icon">&#xe60e;</i> 2017-11-19</span></dd>
+                        <dd>[修真]<a href="https://flymore.ga/book/xianxia/2017-04-08/68773.html">天才狂少的男妻（修真1）——风雅</a> <span><i class="layui-icon">&#xe60e;</i> 2017-04-08</span></dd>
+                        <dd>[修真]<a href="https://flymore.ga/book/xianxia/2017-03-26/58767.html">重生之师父不作死（修真一）——曲偕</a> <span><i class="layui-icon">&#xe60e;</i> 2017-03-26</span></dd>
+                        <dd>[修真]<a href="https://flymore.ga/book/xianxia/2017-10-21/72186.html">重生之嫁衣系统（修真一）——伯夏</a> <span><i class="layui-icon">&#xe60e;</i> 2017-10-21</span></dd>
+                        <dd>[修真]<a href="https://flymore.ga/book/xianxia/2018-10-13/79216.html">重生之前对头（修真 一）――草草～</a> <span><i class="layui-icon">&#xe60e;</i> 2018-10-13</span></dd>
+                        <dd>[修真]<a href="https://flymore.ga/book/xianxia/2018-02-05/74118.html">重生之江公子今天不开车（X冷淡治疗手册 修真 一）――发呆的樱桃子</a> <span><i class="layui-icon">&#xe60e;</i> 2018-02-05</span></dd>
+                        <dd>[修真]<a href="https://flymore.ga/book/xianxia/2017-07-02/70457.html">九世养成（穿越修真一）——繁丧三千</a> <span><i class="layui-icon">&#xe60e;</i> 2017-07-02</span></dd>
+                        <dd>[修真]<a href="https://flymore.ga/book/xianxia/2017-04-09/69128.html">重生之魔道祖师（修真新修版一）——墨香铜臭</a> <span><i class="layui-icon">&#xe60e;</i> 2017-04-09</span></dd>
+                        <dd>[修真]<a href="https://flymore.ga/book/xianxia/2018-02-02/74095.html">机械男神（穿越 修真）上――厉九歌</a> <span><i class="layui-icon">&#xe60e;</i> 2018-02-02</span></dd>
+                        <dd>[修真]<a href="https://flymore.ga/book/xianxia/2017-10-09/71990.html">无名之火（修真末世）上——木叶籽</a> <span><i class="layui-icon">&#xe60e;</i> 2017-10-09</span></dd>
+                    </dl>
+    </div>
+
+
+    </div>
+    </div>
+
+    <div class="fly-footer">
+    <p>Copyright &copy; 2013-<script type='text/javascript'>var creditsyear = new Date();document.write(creditsyear.getFullYear());</script> <a href="https://flymore.ga">flymore.ga</a></p>
+    <p class="layui-hide-xs">本站所有内容全部来源于互联网，版权归属于原作者，如果对作品内容、版权等方面有质疑，或对本站有意见建议请发送Email至<a href='mailto:iflymore@yandex.com'>iflymore@yandex.com</a>，感谢您的合作与支持。</p>
+</div>
+<a href="#" id="back-to-top"><i class="layui-icon" style="font-size: 36px;">&#xe604;</i></a>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/layui-src@2.5.4/dist/layui.js"></script>
+<script src='https://flymore.ga/skin/default/js/lang.js'></script>
+<script src="https://flymore.ga/skin/default/js/site.min.js"></script>
+    </body>
+</html>

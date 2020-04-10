@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <title>酷儿话题 - 丹乐文库 - 丹乐网 - 完结耽美文珍藏书库</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link href="https://cdn.jsdelivr.net/npm/layui-src@2.5.4/dist/css/layui.css" rel="stylesheet">
+<link href="/skin/default/css/site.min.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="//at.alicdn.com/t/font_532845_y8sa3poeef6layvi.css" rel="stylesheet" />
+<link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
+<!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+<!--[if lt IE 9]>
+<script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+<script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+<div class="layui-bg-black fly-header">
+    <div class="layui-container">
+        <a class="fly-logo" href="https://flymore.ga/">
+            <img alt="qcold" src="https://flymore.ga/skin/default/images/logo-q.png">
+        </a>
+        <ul class="layui-nav fly-nav" lay-filter="">
+            <li class="layui-nav-item layui-hide-xs">
+                <a href="javascript:"><i class="layui-icon">&#xe756;</i> 排行榜</a>
+                <dl class="layui-nav-child"> <!-- 二级菜单 -->
+                    <dd><a href="https://flymore.ga/html/good/">推荐排行</a></dd>
+                    <dd><a href="https://flymore.ga/html/hots/">总点击榜</a></dd>
+                    <dd><a href="https://flymore.ga/html/year/">年点击榜</a></dd>
+                    <dd><a href="https://flymore.ga/html/season/">季点击榜</a></dd>
+                    <dd><a href="https://flymore.ga/book/">新鲜上线</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item layui-hide-xs">
+                <a href="https://flymore.ga/book/"><i class="layui-icon">&#xe857;</i> 分类</a>
+                <dl class="layui-nav-child"> <!-- 二级菜单 -->
+                    <dd><a href="https://flymore.ga/book/future/">末世机甲</a></dd>
+                    <dd><a href="https://flymore.ga/book/modern/">现代都市</a></dd>
+                    <dd><a href="https://flymore.ga/book/antiquity/">古风雅韵</a></dd>
+                    <dd><a href="https://flymore.ga/book/rebirth/">穿越重生</a></dd>
+                    <dd><a href="https://flymore.ga/book/fantasy/">玄幻网游</a></dd>
+                    <dd><a href="https://flymore.ga/book/xianxia/">仙侠修真</a></dd>
+                    <dd><a href="https://flymore.ga/book/terror/">灵异神怪</a></dd>
+                    <dd><a href="https://flymore.ga/book/same/">耽美同人</a></dd>
+                    <dd><a href="https://flymore.ga/book/other/">耽美其他</a></dd>
+                    <dd><a href="https://flymore.ga/book/emotion/">酷儿话题</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item layui-hide-xs">
+                <a class="zanzhu" href="javascript:"><i class="layui-icon">&#xe735;</i> 赞助我们</a>
+            </li>
+        </ul>
+        <ul class="layui-nav fly-nav-user">
+            <li class="layui-nav-item">
+                <a href="javascript:" id="search"><i class="layui-icon" style="font-size: 24px;">&#xe615;</i></a>
+            </li>
+            <script src="https://flymore.ga/e/member/login/loginjs.php"></script>
+        </ul>
+    </div>
+</div>
+
+<div class="fly-panel fly-column layui-hide-sm layui-show-xs menuBar" style="display: none">
+    <div class="layui-container">
+        <ul class="layui-clear">
+            <li><a href='https://flymore.ga/book/future/'>科幻</a></li>
+            <li><a href='https://flymore.ga/book/modern/'>现代</a></li>
+            <li><a href='https://flymore.ga/book/antiquity/'>古代</a></li>
+            <li><a href='https://flymore.ga/book/rebirth/'>穿越</a></li>
+            <li><a href='https://flymore.ga/book/fantasy/'>玄幻</a></li>
+            <li><a href='https://flymore.ga/book/xianxia/'>仙侠</a></li>
+            <li><a href='https://flymore.ga/book/terror/'>灵异</a></li>
+            <li><a href='https://flymore.ga/book/same/'>同人</a></li>
+            <li><a href='https://flymore.ga/book/other/'>其他</a></li>
+            <li><a href="https://flymore.ga/book/emotion/">玩觅 <span class="layui-badge-dot"></span></a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="layui-container">
+    <div class="layui-col-md7" id="search-bar" style="display: none;position: fixed;background-color: #515a6e; opacity: 0.8;z-index: 10;">
+        <div class="fly-panel" style="background-color: #515a6e;padding: 20px 20px; text-align: center;">
+            <form action='https://flymore.ga/e/search/index.php' class="layui-form" method='post'>
+                <input class="layui-input" id='words' name='keyboard' placeholder="搜索其实很简单" style="width: 70%;display: inline-block" type="text">
+                <input name="show" type="hidden" value="title,writer,newstext"/>
+                <input name="tempid" type="hidden" value="1"/>
+                <button class="layui-btn" lay-filter="searchSubmit" lay-submit style="width:20%;display:inline-block">搜索</button>
+            </form>
+            <div class="fly-tags" style="margin-top: 10px"><a href="https://flymore.ga/e/tags/?tagid=413" target="_blank">穿越</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=3950" target="_blank">重生</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=1638" target="_blank">强强</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4192" target="_blank">甜文</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=2718" target="_blank">生子</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4107" target="_blank">包子</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4216" target="_blank">都市</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4187" target="_blank">修真</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4181" target="_blank">种田</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4158" target="_blank">娱乐圈</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4102" target="_blank">系统</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=1660" target="_blank">年下</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4193" target="_blank">灵异</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=25" target="_blank">同人</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=306" target="_blank">男人</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4248" target="_blank">豪门</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=2449" target="_blank">HE</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4005" target="_blank">宫廷</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4273" target="_blank">空间</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4199" target="_blank">末世</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4554" target="_blank">1V1</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=370" target="_blank">网游</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=2442" target="_blank">自由自在</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=3975" target="_blank">架空</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4285" target="_blank">励志</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4250" target="_blank">异能</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4124" target="_blank">异世</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=412" target="_blank">时空</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4318" target="_blank">快穿</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=427" target="_blank">哥哥</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=91" target="_blank">少年</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4272" target="_blank">机甲</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=385" target="_blank">游戏</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4369" target="_blank">网配</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=6883" target="_blank">长生千叶</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4105" target="_blank">莫晨欢</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=6617" target="_blank">叶忆落</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4471" target="_blank">虐恋</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=129" target="_blank">幸福</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=5082" target="_blank">颜若优雅</a></div>
+        </div>
+    </div>
+    <div class="layui-row layui-col-space15">
+
+
+    <div class="layui-col-md12">
+        <div class="home-tips">
+            <i style="float:left;line-height:17px;" class="fa fa-volume-up"></i>
+            <div class="home-tips-container">
+                                <span style="color: red;padding-left: 5px;"><a href="https://flymore.ga/book/emotion/2019-10-04/87354.html" target="_blank">舍不得说再见，但已到离别时</a></span>
+                                <span style="color: red;padding-left: 5px;"><a href="https://flymore.ga/book/emotion/2018-01-06/73604.html" target="_blank">书友必看：打开追梦网的正确姿势</a></span>
+                            </div>
+        </div>
+    </div>
+
+    <div class="layui-col-md8">
+        <!--列表开始-->
+        <div class="fly-panel">
+            <div class="fly-panel-title fly-filter">
+                <span class="layui-breadcrumb" lay-separator=">">
+                  <a href="https://flymore.ga/index.html">首页</a>&nbsp;>&nbsp;<a href="https://flymore.ga/book/">文库</a>&nbsp;>&nbsp;<a href="https://flymore.ga/book/emotion/">酷儿话题</a>
+                </span>
+            </div>
+        </div>
+        <div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/emotion/2017-10-02/71540.html">越交友，越寂寞</a>
+        </div>
+        <div class="article-abstract">还记的我们年少轻狂，懵懵懂懂的旧日时光吗？在网络上偷偷摸摸地搜索“同志”字眼，在屈指可数的几个论坛里惴惴不安地谈论毛宁与红豆，在小书店里面红耳赤地攥着耽美漫画，扔下钞票便一路狂奔的日子，回想起来是多么的青涩与美好！在那个网络刚刚开始普及的年代，中国的同性恋也逐渐摆脱了公园，渔场之类的“幽会”场所，开始大规模转战网络。那</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-10-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;玩觅</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;12</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/emotion/2017-10-02/71538.html">为什么必须起诉“同性恋治疗”？</a>
+        </div>
+        <div class="article-abstract">首先交代一下背景信息：7月31号，中国首例“同性恋治疗”诉讼案，在北京市海淀区人民法院开庭审理。化名为小振的同志状告重庆某家心理诊所用电击方式进行“同性恋矫正”，他同时控告中国最大网络搜索引擎百度，为这家诊所打广告。这是中国首例同性恋者就性倾向歧视性商业行为提起诉讼。经过4个小时的审理过程后，最终结果是法院没有就审</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-10-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;玩觅</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;16</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/emotion/2017-10-02/71539.html">在太空中同志们如何XXOO？</a>
+        </div>
+        <div class="article-abstract">昨天，神舟十号的航天员在太空中向超过6000万人上了一堂精彩与震撼的“太空授课”——在看完直播后，我与几个朋友对太空中各种神奇现象议论纷纷，然后话题突然邪恶地变了味：航天员可以在太空中XXOO吗？ 在太空中的性.爱又是什么样子呢？在太空中XXOO？这个话题也忒刺激了吧！还记得在《同志亦凡人》中，Emmett与男友趁着机组人员不注意，悄悄溜</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-10-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;玩觅</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;18</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/emotion/2017-10-02/71537.html">爱上的那人“恰好”是同性，但我不是同性恋</a>
+        </div>
+        <div class="article-abstract">最近关于“撑同志，反歧视”的话题在微博上如火如荼，不少打酱油的名人积极也参与其中，例如黎明、蔡康永、梁咏琪，谢娜等人都发布了举着“撑同志反歧视”的照片，表示自己对同志的大力支持。面对如此来势汹汹的支持同性恋，反歧视大潮，普通网友们又怎样看呢？大多数这些名人的粉丝们，都是人云亦云地随声附和——他们没有独_立思考，只会到处c</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-10-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;玩觅</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;13</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/emotion/2017-10-02/71535.html">艾滋机长，你这是犯罪！</a>
+        </div>
+        <div class="article-abstract">记得上周在卡塔尔的机场候机时，发现微博上有人给我发私信，请我关注一下 “艾滋机长” 的新闻。原来是某个19岁的高中生同志发帖举报某航空公司一名机长感染艾滋病，并且（与他）“发生关系的人已经多达几十人，有几位已经确诊感染”。看到这消息后，我的第一反应就是：这是真的吗？这位机长的个人隐私是否被很好的保护了呢？——尽管他真的是一</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-10-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;玩觅</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;9</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/emotion/2017-10-02/71534.html">如果韩美玲早出生XX年，她会这样说</a>
+        </div>
+        <div class="article-abstract">今早在微博上有人私信我，请我看看 @心理咨询师韩美龄 的微博，一时手贱，就点进去瞧了瞧。这位被“首席心理咨询师”、“特邀心理专家”诸如此类刺眼光环笼罩着大妈在她的微博里，赤裸裸地宣传她凭借一己之力已经治疗“一百多例”同性恋，并且“大部转到异性恋”。如果故事仅此而已，那么我是不会有什么特殊的兴趣的——毕竟江湖骗子年</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-10-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;玩觅</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;8</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/emotion/2017-10-02/71533.html">与俄罗斯相比，中国同志有多幸运？</a>
+        </div>
+        <div class="article-abstract">根据昨天的新闻报道，俄罗斯国家杜马周二（6月11日）全票通过了经多次评估后的法案：在俄罗斯，对向未成年者宣传同性恋思想的宣传者予以罚款4000-5000卢布（约800~900元人民币）。对于管理者予以4万负责到5万的罚款（8000~9000元人民币）。对于负责人处以8万卢布（约1.5万元人民币）的罚款。除罚款之外，违反该法案者将会被拘留90天。此外，个人通过互</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-10-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;玩觅</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;14</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/emotion/2017-10-02/71532.html">请支持同性婚姻，否则Gay与Les将牵走你的女/男朋友！</a>
+        </div>
+        <div class="article-abstract">同性婚姻，在世界上许多国家与地区已经成为现实。自2001年荷兰成为第一个允许同性伴侣登记结婚的国家以来，全球已有11个国家（例如丹麦，瑞典，南非等）、美国国内的9个州，以及世界许多地区先后承认同性婚姻合法，正式为同性恋注册结婚，发结婚证。除此之外，还有23个国家（例如法国，英国，瑞士，巴西等）承认同性恋之间的“民事结合”关系——在这些国</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-10-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;玩觅</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;15</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/emotion/2017-10-02/71536.html">同志摄影图集欣赏：爱情皆平等</a>
+        </div>
+        <div class="article-abstract">去年10月，纽约摄影师Braden Summers在Kickstarter上发起一项筹款活动，希望通过这样一种方式获得足够资金去完成《爱情皆平等》（All Love is Equal）系列拍摄项目。他先后到达印度、巴西、法国、南非、黎巴嫩、英国等地拍摄那里的同性伴侣，弥补了经典爱情故事里没有同性情侣的缺憾。最后，他一共从214个投资人手中募集到23,000美元。</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-10-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;玩觅</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;8</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/emotion/2017-10-02/71530.html">视频揭秘：两个男生是怎么爱爱的？</a>
+        </div>
+        <div class="article-abstract">还记得我们的老朋友，来自澳大利亚的Davey Wavey吗？这位阳光帅气的健身教练，曾经因录制视频《永远不能问同性恋这些问题！》而在youtube和Myspace上一炮而红，并且受到来自世界各地的很多人的关注与好评。几年过去，Davey Wavey依旧坚持不断地在自己的个人网站与Youtube上发布新奇、有趣的同性恋科普视频（赞一个！），他从一名“资深基友”的</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-10-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;玩觅</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;21</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/emotion/2017-10-02/71531.html">从数字看发展：中国正在变得对同性恋更包容</a>
+        </div>
+        <div class="article-abstract">皮尤研究中心（Pew Research Center）是美国的一间知名的民意调查组织，总部设于华盛顿特区，是一个无倾向性（non-advocacy）的机构。为了坚持独-立，公证，公开的职业操守，这家调查机构的员工甚至被禁止参加政治谠派，利益团体，以保证调查结果的客观、公正性。两天前（2013年6月4日），皮尤研究中心发布了一系列与同性恋相关的调查报告，其中就包括“Th</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-10-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;玩觅</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;11</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/emotion/2017-10-02/71528.html">基友之间究竟有没有纯友谊？</a>
+        </div>
+        <div class="article-abstract">同志之间究竟有没有纯友谊？大多数人看到这个问题时，肯定想当然地选择“有”——不过大家都免不了事后犹豫：真的有基友可以保持单纯的好朋友关系吗？每个人都有孤单寂寞，欲火中烧的那一刻，在这个时候许多人习惯于翻看手机通讯录与QQ好友名单发愣：不管是否真的打算滚床单，身材，长相，Size，先把身边的好基友挨个意淫一遍再说。所以，同志之间的</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-10-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;玩觅</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;38</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/emotion/2017-10-02/71527.html">MV欣赏：非洲传统乐器卡林巴版《赞比西河》</a>
+        </div>
+        <div class="article-abstract">昨晚窝在沙发里看《中国梦之声》，其中我对一个唱Jazz的女生映像特别深刻，吸引我的不仅仅是她充满磁性的嗓音，还有她手中的“叮叮咚咚” 作响新奇的乐器——拇指钢琴，卡林巴（Kalimba）。拇指钢琴是非洲的传统乐器。在不同的非洲国家，拇指钢琴有不同的名字，例如 Kalimba “卡林巴” 是肯尼亚对这乐器的称谓，而在津巴布韦它则被称为Mbira，</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-10-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;玩觅</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;10</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/emotion/2017-10-02/71526.html">同性恋不应该抚养孩子的十条理由</a>
+        </div>
+        <div class="article-abstract">今天微博上似乎很热闹。事端缘起于@北京厨子 在微博上的一条发言：“ 各位同性恋同学，本人对你们的爱情和婚姻不做任何评价。我只是想指出一个事实，那就是，不抚养孩子，将来没人养老。抚养孩子，一个家庭两个爹，或者两个妈，对孩子的社会性别培养很不好。包括单亲家庭在内。这一不幸的事实需要指出，但如何选择是你们自己的事情。许你们干，</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-10-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;玩觅</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;11</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/emotion/2017-10-02/71529.html">科普：《给男孩子的后庭自慰入门》中文版</a>
+        </div>
+        <div class="article-abstract">话说，前两天李代沫吸毒被抓的事在网络上闹得轰轰烈烈，许多无良媒体乘机挖坟，再次把李代沫成名前的同性“床照”集体曝光，一时间阴谋论、群P论、艾滋论铺天盖地满天飞，舆论哗然。涉毒+同性+被禁，李同学近期的大起大落的留给读者无穷的遐想。网易新闻里，很多人除了留下“贵圈太乱”的跟帖外，纷纷转而对李代沫的同性“艳照”大吐口水：“</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-10-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;玩觅</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;474</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/emotion/2017-10-02/71525.html">设拉子的占卜男孩</a>
+        </div>
+        <div class="article-abstract">前几天，和他一起在上海吃牛扒。午餐时间，加之是周末，尽管门外风雨交加，小小的餐馆里面却异常火爆，人满为患，生意格外的好。我们好不容易找到一个靠窗的位子，点好餐便百无聊赖地等待上菜。我们隔壁桌看样子是一家三口，其中那个小孩子吸引了我的注意。他大约是5,6岁的样子，长得特别惹人喜欢：白里透红的小脸蛋带着一点婴儿肥，大大的脑袋瓜</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-10-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;玩觅</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;8</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/emotion/2017-10-02/71521.html">走进“形婚”之前你必须知道的10件事</a>
+        </div>
+        <div class="article-abstract">又是很长一段时间没有现身，在这里先给大家道个歉哦。其实最近一段时间以来，我一直偷偷 “潜伏” 在上海的各个“同性恋形式婚姻交友”的主题QQ群里，前前后后加入了7, 8个群。认识了许多充满才华的人，也听闻了许多跌宕起伏的故事，真的是既新鲜又精彩呢。如果你对于“形婚”二字仍然不屑一顾，嗤之以鼻，你此时就可以塞住耳朵，闭上眼睛快</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-10-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;玩觅</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;8</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/emotion/2017-10-02/71523.html">根据进化论，为什么同性恋没有“被灭绝”？</a>
+        </div>
+        <div class="article-abstract">进化论是一个有趣的生物学话题：为了适应环境，为了种族繁殖，鱼类爬上了河岸，恐龙长出羽毛变成鸟类，人类学会了直立行走与使用工具。与此同时，进化论也是残酷的，不能适应环境与扩大种族的生物必然惨遭灭绝：恐龙，猛犸象，剑齿虎，华南虎与白鳍豚，他们都输在了无法适应变化的环境与繁殖更多的后代上，物竞天择，适者生存。这样看起来，根据进化论，同性</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-10-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;玩觅</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;10</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/emotion/2017-10-02/71524.html">恶搞：摩门传教士SEX体位16式</a>
+        </div>
+        <div class="article-abstract">最近，色流为在上海的新家装修、家居采购的事忙的焦头烂额，很久没更新博客，实在抱歉啦。不过，亲眼看着自己原本四白落地、空荡冷清的屋子一步步地被崭新的家具与家电包围，变得富有情调，丰富多彩又温馨舒适，我心中那一点属于男人的成就感油然而生。今天要给大家推荐的是一组恶搞的摄影作品《摩门传教士体位16式》。说起摩门教，实际上它</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-10-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;玩觅</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;34</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/emotion/2017-10-02/71522.html">如何接受口交？</a>
+        </div>
+        <div class="article-abstract">时至今日，许多人仍然认为接受ロ.交压根儿不需要任何技巧——你只要选择一个自己喜欢的姿势，之后尽情享受即可。可是，事实真的是这样吗？这样想当然的论调是完全错误的——ロ.交是一项技术活，这不仅仅针对“口”的那方，“被口”者的个人技巧实际上起着至关重要的作用。想让你的性生活激*情四射？那么以下这些“被口”的小窍门你就不能</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-10-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;玩觅</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;10</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/emotion/2017-10-02/71520.html">情人节，你想约一炮吗？</a>
+        </div>
+        <div class="article-abstract">明天就是一年一度的情人节，今天的你又是怎样策划属于自己与他的浪漫情人节呢？是到酒店享受一场超难忘的激*情之夜，还是到一家气氛不错的餐厅订位子？买巧克力与玫瑰花了吗？电影票呢？诚<br />
+然，情人节在许多同志眼中并不是一个值得庆祝的日子，这三个字甚至透露着几分苦逼的情愫——至少在找到值得自己托付终身的另一半之前。实际上，许多单身</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-10-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;玩觅</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;10</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/emotion/2017-10-02/71519.html">流言终结者：同性恋的手指长度</a>
+        </div>
+        <div class="article-abstract">微博上总是充斥着各式各样的“同性恋测试”，其中大部分都是些无稽之谈。比如，有人贴图说“如果你看到两个人都在舞蹈”（原图），那么你就是同性恋——实际上那是一张普普通通的视觉错觉图。还有人贴图说如果能看出杂色块中的数字（原图），那么你就是同性恋，可是这张图片的上面就用俄文大字地写着：“士兵入伍色盲体检”——这就更让人哭笑不</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-10-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;玩觅</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;11</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/emotion/2017-10-02/71518.html">在今天这个特别基情的日子里</a>
+        </div>
+        <div class="article-abstract">昨天一早，就听说了金某人去世的消息。在这个特别的日子里，怀着对半岛美好未来的殷切希望，我特地为大家准备了来自意大利服饰品牌<br />
+Benetton(United Colors of <br />
+Benetton/班尼顿)的一系列基情四射的平面广告，祝愿在金二代驾鹤西去后，普天同庆，世界和平。第一幅照片当然是这回的主角，永远离开我们的金*正日将军。且慢，威风凌凌，雄姿飒爽</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-10-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;玩觅</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;11</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/emotion/2017-10-02/71516.html">为什么直人男生也喜欢肛门“被插入”？</a>
+        </div>
+        <div class="article-abstract">昨天，在百度知道看到这样一篇问答：“ 我是个肌肉男，爱插肛门自*慰，感觉很爽，女友能接受我这样的行为吗？”。在提问中，这位男生用大段的文字描述了他 “绝对不是Gay”，然而却同样喜欢肛.交，甚至喜爱在与女友的性生活同时用性玩具自插肛门。许多人一看到他提问中对肛.交的喜爱，便一口咬定这个男生肯定是同性恋。在他们的脑海中，只有男同性</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-10-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;玩觅</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;11</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/emotion/2017-10-02/71515.html">面对爱情，你的感觉还在吗？</a>
+        </div>
+        <div class="article-abstract">最近一直在豆瓣上听Young mai的歌，很喜欢他这种小清新的混音风格。个人偏爱他的《Baby X Baby》，《Say hello to mama》以及《Feel ain’t there》等几首作品，音乐描述了都市人的爱情，亲情及生活，每一首都令人心潮澎湃，感慨万千。《Feel ain’t there》（感觉不在了）这首歌缅怀了所有都市人或许曾经拥有，但已随风逝去的清纯爱情观，歌词</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-10-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;玩觅</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;11</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/emotion/2017-10-02/71517.html">关于真崎航的一切</a>
+        </div>
+        <div class="article-abstract">关于真崎航，你一定不会感到陌生。在中国大陆，台湾与韩国，真崎航有大量热情的粉丝，人气超高。不过，尽管“真崎航”这个名字如雷贯耳：所有人都知<br />
+道他是赫赫有名的岛国男优，他有自己的新浪微博，还有传说中的中国男友，他的影片或许就藏在你电脑硬盘最隐秘的角落；但是除此之外，几乎没有人知道：真崎航是怎样从一个普通人，华丽变身如今声名显赫，</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-10-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;玩觅</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;11</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/emotion/2017-10-02/71513.html">华丽变身花花公子，就这11招！</a>
+        </div>
+        <div class="article-abstract">问一个问题：你见到心仪的帅哥时，表现是怎样的？脸红心跳，不敢直视，想钻地缝？流着口水，脸上挂着猥亵而下体已然充血？还是落落大方，微笑打招呼，Say hello？从文艺青年到2B青年，再到花花公子，这是每一个适龄Gay正常的感情成长轨迹。或许你缺失了其中的某一环，但是学会如何与自己喜欢的人勾搭，这实际上是一门学问，更是一种社交技巧。之前，我曾经写过</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-10-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;玩觅</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;13</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/emotion/2017-10-02/71514.html">韩国同志电影《REC》赏析，下载</a>
+        </div>
+        <div class="article-abstract">现在，我就要高兴地告诉期待已久的各位童鞋：我已经找到了电影《REC》(알이씨REC）的片源，今天就特地推荐给大家，并提供电影下载。由<br />
+于这部电影在韩国是2011年11月24日刚刚上映，迄今为止不足2个月，因此我搜索起来格外的困难。在中文网站里搜索片源下载，根本找不到任何结果，而<br />
+且在英文日文网站搜索也无效。最后，我迫不得已用韩文搜索，终于</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-10-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;玩觅</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;24</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/emotion/2017-10-02/71512.html">同志是一群毫无“道德感”的人？</a>
+        </div>
+        <div class="article-abstract">恐同分子们最喜欢怎样评价他们的眼中钉，肉中刺？“他们都是一群毫无道德感的人”。这句咒骂许多同志们恐怕都听过不止一两次。同性恋真的没有道德感吗？什么又是恐同分子嘴中的 “道德感” ？是<br />
+的。我们作为同性恋，是缺乏他们所说的“道德感”。这是因为，恐同者所谓的 “道德” <br />
+，只是一个被他们绑架，用于族群仇恨的幌子罢了。因此，无论</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-10-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;玩觅</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;13</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/emotion/2017-10-02/71511.html">《我们一定要在一起》同志公益短片</a>
+        </div>
+        <div class="article-abstract">我曾经介绍过许多国外优秀的公益广告与视频，尽管同志题材的短片往往十分吸引眼球，传播更快，也颇具影响力，但是在中国，选择拍摄的此类短片的导演与作品却寥若晨星，屈指可数。仔细想来，在中国，中规中矩的大导演们往往不愿意趟 “同性恋电影” 这片浑水，而草根导演们即使看见了 “同志题材” 的炙手可热，也更愿意拍摄一部山寨 “断背山”</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-10-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;玩觅</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;11</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/emotion/2017-10-02/71506.html">站起来，一起向恐同者的欺凌说不</a>
+        </div>
+        <div class="article-abstract">歧视，恐怕是这个世界上不分国籍，不分人种，不分民族之间，普遍存在的人类劣根性。就拿咱们老祖宗说起，勿论是三皇五帝，还是唐宗宋祖，勿论多么英<br />
+明神武，都无法做到兼爱世人，而要强调华夷之辨，一定要争出个“华夏”与“蛮夷”的尊卑排序，与此同时，中国皇帝眼中的“夷狄”们也将黄种人视作野蛮人与<br />
+黄祸，大为鄙夷。直<br />
+至今日，来自人性中最肮脏</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-10-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;玩觅</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;11</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/emotion/2017-10-02/71510.html">打破肛交的五条神话！</a>
+        </div>
+        <div class="article-abstract">在所有的人类性行为方式中，肛.交是被人误解最深的。尽管事实上，异性恋中每4个女性中就有1人尝试过肛.交，在男同性恋人群这个比例更高，但是迄今为止肛.交仍然是一项禁忌：因为许多神话与误解，许多人都不愿意尝试肛.交。事<br />
+实上，只要掌握了正确的技巧，肛.交将是充满乐趣与享受的，这是由于肛门具有大量的神经，是人类最为敏感的性感带之一。</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-10-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;玩觅</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;11</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/emotion/2017-10-02/71507.html">中国人那些毫无意义的坚持</a>
+        </div>
+        <div class="article-abstract">我们中国人，自古以来总是喜欢为一些无关紧要的事情伤透脑筋，为其“抛头颅，洒热血”也在所不惜。比如说辫子，衣冠，和小脚，就不知谋害了多少性命！我们的很古的古人，对于头发似乎也还看轻。据刑法看来，最要紧的自然是脑袋，所以大辟是上刑；次要便是生殖器了，所以宫刑和幽闭也是一件吓人的罚；至于髡，那是微乎其微了，“发如韭，剪复生”，可是即使如此</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-10-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;玩觅</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;13</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/emotion/2017-10-02/71509.html">台湾同志舞台剧《下雪了》</a>
+        </div>
+        <div class="article-abstract">今天给大家介绍的是来自台湾的一部舞台剧（注意，不是电影）——《下雪了》。这是一部历史十分悠久的军旅题材的同志舞台剧，创作并首演于1996<br />
+年，迄今已经16个年头。2011年，台湾萤火虫剧团以慎重的态度，重新挑选演员、重新排练，将《下雪了》再次推上了高雄的舞台。舞<br />
+台剧《下雪了》在1996年第一次公演。在那个网络、电子邮件、博客还不</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-10-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;玩觅</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;13</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/emotion/2017-10-02/71508.html">从11岁男孩同性征友到猥亵儿童罪</a>
+        </div>
+        <div class="article-abstract">今天在微博上看到有人转发百度贴吧里面，一个11岁的小朋友发出的 “求攻贴”：“新来的乖乖受，寻攻，附照片”； “初来乍到，多多关照！今年我11岁，寻攻！”帖子下面附着这孩子年轻稚嫩的脸，一脸童真。有图有真相，帖子下面已经密密麻麻的回复，大多数人对于00后的提前“报道” 感到压力很大，也有很多人已经在幻想与这个孩子发生性关系的种种细节</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-10-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;玩觅</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;18</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/emotion/2017-10-02/71505.html">关于我 “支持性乱与滥交” 的误解</a>
+        </div>
+        <div class="article-abstract">写博客这几年来，承蒙大家关照，色流多多少少积攒了几分人气。在《给爱的博客》中，我总是尝试向大家介绍性取向，性行为与性心理的正确观点，却不免一再被人误解。有<br />
+趣的是，这种误解经常是同时来自恐同者与同志——敌人不理解自己，这本身没什么大不了，因为恐同者根本不会尝试去换位思考，尝试理解同志。然而，自己的阵<br />
+营中也有人对我充满误</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-10-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;玩觅</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;8</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/emotion/2017-10-02/71504.html">花为眉？化为煤！……</a>
+        </div>
+        <div class="article-abstract">关于这部电影，之前我已经在许多同志网站上已经有所耳闻，据说是在欧洲，美国与日本的同志电影节上屡获好评，因此也格外的关注。前几天有人给我发来了电影的下载，便满怀期待地将这部片子下载下来，细细的看完——这个决定令我至今后悔不已。这<br />
+部片子让我很吐血+内伤啊：狗血离谱的剧情故事，生硬青涩的表演技巧，鸡同鸭讲的法语对白，矫揉造作</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-10-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;玩觅</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;14</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/emotion/2017-10-02/71503.html">疯狂的同妻</a>
+        </div>
+        <div class="article-abstract">这几天我被一件突发的网络暴力事件深深激怒了：有人堂而皇之地在微博上贴出一男一女的合影，并声称这两人在江西萍乡，即将结婚，而男方是一个骗婚的Gay，女方即将沦为同妻，号召大家人肉他，“揭露他的罪恶”。这样赤裸裸地公开他人的隐私，僭用被害人的肖像，侵犯人权的罪恶行径令人愤慨，而更令我震怒的是，这些卑鄙而下作的行为，居然是披着 “保</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-10-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;玩觅</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;11</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/emotion/2017-10-02/71502.html">我不歧视异性恋！</a>
+        </div>
+        <div class="article-abstract">还记得在浏览网络上的同性恋新闻时，大家最常看见的评论是那一句吗？没错，就是那句：“我不歧视同性恋”。那么，身为同性恋的你，看到这句话后感觉刺耳吗？“我不歧视同性恋”。这句话听上去很大度，蛮宽容——首先标明自己的态度，与疯子们划清界限：我可不是反对同性恋的恐同者哦！可惜，这句话之后往往跟着 “但是”——例如，“我不歧视同性恋，但</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-10-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;玩觅</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;8</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/emotion/2017-10-02/71501.html">同志“被”结婚，究竟是谁在作恶？</a>
+        </div>
+        <div class="article-abstract">关于Gay与普通女性的婚姻我声明了我的观点：坚决反对。文章发布后，我收到一些质疑的声音，有人认为Gay结婚在中国是大势所趋，自己无能为力；也有人提出如果自己真的保持单身，将会令家人尴尬，让他们“抬不起头”，这是在“作恶”。首先，我要谢谢大家的激烈讨论。巴甫洛夫说过，“争论是思想的最好触媒”，真理只有在争辩的过程中才会越来越明澈</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-10-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;玩觅</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;11</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/emotion/2017-10-02/71500.html">荷兰莱顿大学的LGBT社团(图)</a>
+        </div>
+        <div class="article-abstract">　　莱顿大学“骄傲社”：我就要骄傲地存在着　　(荷兰在线) 2006年，一个名为“彩虹社”的学生组织在中国广东的中山大学成立了。“彩虹旗”在世界上被普遍用做LGBT群体(性少数群体，包括同性恋，双性恋以及跨性别人士)反抗偏见和歧视，争取平等权利的标志。“彩虹社”，正如她的名称一样，是一个关注LGBT权益的学生社团。在国内对LGBT群</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-10-02</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;玩觅</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;9</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/emotion/2017-09-03/71042.html">同志应该如何处理与孝道的关系</a>
+        </div>
+        <div class="article-abstract">儒学伦理道德的核心内容之一的“孝道”。在<br />
+本世纪中也之前，中国仍然是世界上人口最多的国家。中国同性恋的人口如果按照同性恋人口全球整体比例（3%~13%）计算，少说也有将近4000万人到<br />
+1.6个亿，同样也占全球同性恋人口的19%。中国是世界上同性恋最多的国家，可是目前阻碍中国同志走出阴影，争取自己合法权益的主要力量，并不是基督教<br />
+（吕</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-09-03</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;玩觅</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;10</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/emotion/2017-09-03/71041.html">关于那一段微小而宏大的爱情</a>
+        </div>
+        <div class="article-abstract">今天给大家推荐的，是一段号称在Youtube上 “瞬间治愈50万人” 的爱情宣言《Yo te amo》（我爱你）。3分多钟的这段视频，记录了一对西班牙同志情侣的生活片段，从对白中的点点滴滴，大家看到了两人简单而又真挚，微小而又宏大的爱情。在这段视频的Youtube页面上，<br />
+上传者写了这样一段话：“Dedicado a todas esas personas, que se frustran y</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-09-03</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;玩觅</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;7</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/emotion/2017-09-03/71040.html">宅男电台：小清新裹挟着突如其来的基情</a>
+        </div>
+        <div class="article-abstract">前几天有朋友推荐我看最新上映的短片《宅男电台》，据坊间传闻这是最近很值得一看的“同志片”。恰好昨天百无聊赖，无所事事，就耐下细碎在优酷上将这部片子慢慢看完。其实我是一个快节奏粗线条的人，对那些柔情似水，耳鬓厮磨的桥段天生免疫，就算看到这些片段也往往不为所动。不过，《宅男电台》绝对是个特例，我居然没有快进，也没有不耐烦</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-09-03</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;玩觅</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;12</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/emotion/2017-09-03/71039.html">就这10招，教你成为同志酒吧勾搭之神！</a>
+        </div>
+        <div class="article-abstract">华灯初上，灯火阑珊。马上就是Friday Night，一周的工作结束，狂欢的钟声响起。嗨，兄弟，今晚准备再去同志酒吧逍遥？可是身处灯红酒绿，鱼龙混杂的酒吧，面对面目各异，品位不同的型男帅哥，你真的可以Hold住么？在同志酒吧里，无论你是期盼一段感情，还只是仅仅希望找个人共度良宵，首先你应该学会如何与形形色色的陌生人打交道，搭讪，调情。与不同的对象</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-09-03</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;玩觅</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;12</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/emotion/2017-09-03/71037.html">男人轮盘，与全世界的Gay随机视频聊天！</a>
+        </div>
+        <div class="article-abstract">我记得是大约是在一年前，当时18岁的安德烈•特诺夫斯基（Andrey Ternovskiy）是还是莫斯科一所高中的辍学生。他没有正经工作，喜欢天天宅在家里，泡在skype上与隔壁的朋友们视频聊天，虚度光阴。有一天，他终于厌倦了与那些skype好友们视频聊天。例如这个年代所有无所事事的宅男一样，安德鲁窝在家里，开始摆弄起网站代码。他花了三天时间搭</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-09-03</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;玩觅</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;534</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/emotion/2017-09-03/71038.html">很有爱的宜家同志广告欣赏</a>
+        </div>
+        <div class="article-abstract">上周末，跟男友一起去了漕溪路的宜家IKEA去看家装与灯具，从中午一直逛到夜里，回来的时候又是满满一大袋。从脚垫到灯具，从剃须镜到调料瓶，应有尽有。两个人一手拽着沉甸甸购物袋的一边，幸福地怀着对新生活的种种设想，匆匆赶上星夜的地铁。每次在宜家里闲逛时，我总能发现一对对的同志们，亲密暧昧地流连在琳琅满目的产品中。实际上，上海宜</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-09-03</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;玩觅</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;14</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/emotion/2017-09-03/71036.html">抢婚现场，“小三”是男人……</a>
+        </div>
+        <div class="article-abstract">昨夜刚刚抵达北京，一身疲惫。从机场辗转到酒店，打开电脑稍事休息，就看到有人在微博上发来一段视频《抢婚现场，小三是男人》，似乎人气很高的样子。我依稀记得不久前，曾经在天涯上看到这则视频的“文字介绍”：某个同样狗血的婚礼中，一个受邀亲朋好友的亲身经历——也是新郎的Gay男友前来砸场子，最终婚礼不了了之。那么，当这种闹剧真的发</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-09-03</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;玩觅</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;22</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/emotion/2017-09-03/71035.html">直男是否可以被 “掰弯” ？</a>
+        </div>
+        <div class="article-abstract">将直男“掰弯”——即让他们“变成Gay”，似乎这总是同志们津津乐道，长盛不衰的固定话题之一。那些Gay们 <br />
+“恋上同班的直男同学，隔壁的直男邻居，办公室的直男同事”等等的传统悲情故事，虽然情节老套却总是赚到人气满满。在同志们擦拭眼角泪光的同时，肯定有人<br />
+愤愤的问：那么，直男真的可以被变成同性恋吗？答<br />
+案是否定的。异性恋是异性恋</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-09-03</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;玩觅</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;10</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/emotion/2017-09-03/71034.html">如何做一个绝世好 “1号”？</a>
+        </div>
+        <div class="article-abstract">首先，我并不支持将某个人定位为1号，或者0号，因为这是对异性恋性关系的一种笨拙模仿。但是，尽管没有男同性恋天生就是纯粹的1号或者0号，在同志肛.交性.爱中，总要有人“攻”，有人“受”，那么，如何做一个令人倾慕眼热的绝世好1号呢？如何做1号对于大多数同志而言貌似并不算一个问题，问题是如何“做好”。从理论角度而言，1号（top），就是指在同志肛</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-09-03</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;玩觅</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;8</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div>
+        <div id="paging"><a title="Total record">&nbsp;<b>527</b> </a>&nbsp;&nbsp;<a href="https://flymore.ga/book/emotion/index.html">首页</a>&nbsp;<a href="https://flymore.ga/book/emotion/index_8.html">上一页</a>&nbsp;<a href="https://flymore.ga/book/emotion/index_7.html">7</a>&nbsp;<a href="https://flymore.ga/book/emotion/index_8.html">8</a>&nbsp;<b>9</b>&nbsp;<a href="https://flymore.ga/book/emotion/index_10.html">10</a>&nbsp;<a href="https://flymore.ga/book/emotion/index_11.html">11</a>&nbsp;<a href="https://flymore.ga/book/emotion/index_10.html">下一页</a>&nbsp;<a href="https://flymore.ga/book/emotion/index_11.html">尾页</a></div>
+
+
+
+    </div>
+
+    <div class="layui-col-md4">
+        <!--<div class="fly-panel" style="padding:10px;text-align: center">
+            <a href="https://qr.alipay.com/c1x0322413lubhpxsac5mcc"><img src="[!&#45;&#45;news.url&#45;&#45;]skin/default/images/hongbao.png" alt="打开支付宝领红包" style="width: 90%"></a>
+            <p style="padding: 10px"><a href="https://qr.alipay.com/c1x0322413lubhpxsac5mcc"><button class="layui-btn layui-btn-radius layui-btn-normal">打开支付宝领红包</button></p>
+        </div>-->
+
+        <div class="fly-panel" style="padding: 20px 0; text-align: center;">
+            <div class="layui-anim avatar"><a href="javascript:;"><img src="https://flymore.ga/skin/default/images/avatar.jpg" alt="再贱就再见" style="width:120px; height:120px; border-radius:100%;"></a></div>
+            <h1>
+                <a href="javascript:;" style="font-size: 24px">再贱就再见</a>
+                <i class="layui-icon icon-nan" style="font-size: 22px; color: #1E9FFF;">&#xe662;</i>
+            </h1>
+            <p style="color: #999999;margin: 8px">
+                <a target="_blank" title="email" href="mailto:iflymore@yandex.com"><i style="padding-right: 5px;" class="iconfont icon-mail"></i> <span>联系我们</span></a>
+                &nbsp;<i class="layui-icon">&#xe715;</i> <span>耽美 - 中国</span>
+            </p>
+            <p style="color: #999999;margin: 8px">为每一位到来的朋友，传递纯真的梦想！</p>
+            <hr />
+            <div>
+<!--                <a title="QQ" href="http://vac.qq.com/wallet/qrcode.htm?m=tenpay&a=1&u=157557906&ac=9807C9835FD81D271CC2C21000CDC5CD35A04ABB984CD75883955BF253C2702F&n=%E6%B5%AE%E5%A4%B8&f=wallet"><i style="font-size: 32px;padding-right: 15px;" class="iconfont icon-qq"></i></a>-->
+<!--                <a title="wechat" href="wxp://f2f0JTx6mVmCgy-JbWSx28GIxpsIP7KwHDlg"><i style="font-size: 32px;padding-right: 15px;" class="iconfont icon-wechat"></i></a>-->
+<!--                <a title="alipay" href="https://QR.ALIPAY.COM/FKX09446YBW45NR1SFI80F"><i style="font-size: 32px;padding-right: 15px;" class="iconfont icon-alipay"></i></a>-->
+                <a target="_blank" title="telegram" href="https://t.me/xbbchat"><i style="font-size: 32px;padding-right: 15px;" class="iconfont icon-line"></i></a>
+                <a target="_blank" title="paypal" href="https://paypal.me/qcold/"><i style="font-size: 32px;padding-right: 15px;" class="iconfont icon-paypal"></i></a>
+<!--                <a title="hongbao" href="https://qr.alipay.com/c1x0322413lubhpxsac5mcc"><i style="font-size: 32px;" class="iconfont icon-ai-hongbao"></i></a>-->
+            </div>
+        </div>
+
+        <dl class="fly-panel fly-list-one">
+            <dt class="fly-panel-title"><i class="layui-icon">&#xe705;</i>  最新小说</dt>
+                        <dd>[玩觅]<a href="https://flymore.ga/book/emotion/2019-10-04/87354.html">舍不得说再见，但已到离别时</a> <span><i class="layui-icon">&#xe60e;</i> 2019-10-04</span></dd>
+                        <dd>[玩觅]<a href="https://flymore.ga/book/emotion/2019-04-21/83593.html">北京小天菜，帅气鲜肉男…(IG介绍)</a> <span><i class="layui-icon">&#xe60e;</i> 2019-04-21</span></dd>
+                        <dd>[玩觅]<a href="https://flymore.ga/book/emotion/2019-04-21/83592.html">爱拈花惹草的男神好帅！网晕倒：拜托带我走</a> <span><i class="layui-icon">&#xe60e;</i> 2019-04-21</span></dd>
+                        <dd>[玩觅]<a href="https://flymore.ga/book/emotion/2019-04-21/83591.html">熟男控别错过呢❤❤❤</a> <span><i class="layui-icon">&#xe60e;</i> 2019-04-21</span></dd>
+                        <dd>[玩觅]<a href="https://flymore.ga/book/emotion/2019-04-21/83590.html">韩国欧爸,健身教练，太好身材了</a> <span><i class="layui-icon">&#xe60e;</i> 2019-04-21</span></dd>
+                        <dd>[玩觅]<a href="https://flymore.ga/book/emotion/2019-04-21/83589.html">OMG! 傻气爆肌模特儿（IG)</a> <span><i class="layui-icon">&#xe60e;</i> 2019-04-21</span></dd>
+                        <dd>[玩觅]<a href="https://flymore.ga/book/emotion/2019-04-21/83588.html">身材超好，胸肌红唇顽皮小男孩 (IG)</a> <span><i class="layui-icon">&#xe60e;</i> 2019-04-21</span></dd>
+                        <dd>[玩觅]<a href="https://flymore.ga/book/emotion/2019-04-21/83587.html">台湾肌肉教练柏辰，坏坏的帅帅的(IG)</a> <span><i class="layui-icon">&#xe60e;</i> 2019-04-21</span></dd>
+                        <dd>[玩觅]<a href="https://flymore.ga/book/emotion/2019-04-21/83586.html">鲜肉帅哥合集, 泼水节来了（二）</a> <span><i class="layui-icon">&#xe60e;</i> 2019-04-21</span></dd>
+                        <dd>[玩觅]<a href="https://flymore.ga/book/emotion/2019-04-21/83585.html">泼水节大盘点（一）肌肉香港男生MARK (IG)</a> <span><i class="layui-icon">&#xe60e;</i> 2019-04-21</span></dd>
+                    </dl>
+
+        <dl class="fly-panel fly-list-one">
+            <dt class="fly-panel-title"><i class="layui-icon">&#xe705;</i>  推荐小说</dt>
+                        <dd>[玩觅]<a href="https://flymore.ga/book/emotion/2019-10-04/87354.html">舍不得说再见，但已到离别时</a> <span><i class="layui-icon">&#xe60e;</i> 2019-10-04</span></dd>
+                        <dd>[玩觅]<a href="https://flymore.ga/book/emotion/2018-01-06/73604.html">书友必看：打开追梦网的正确姿势</a> <span><i class="layui-icon">&#xe60e;</i> 2018-01-06</span></dd>
+                    </dl>
+
+        <dl class="fly-panel fly-list-one">
+            <dt class="fly-panel-title"><i class="layui-icon">&#xe705;</i>  热门小说</dt>
+                        <dd>[玩觅]<a href="https://flymore.ga/book/emotion/2017-09-03/71037.html">男人轮盘，与全世界的Gay随机视频聊天！</a> <span><i class="layui-icon">&#xe60e;</i> 2017-09-03</span></dd>
+                        <dd>[玩觅]<a href="https://flymore.ga/book/emotion/2017-10-02/71529.html">科普：《给男孩子的后庭自慰入门》中文版</a> <span><i class="layui-icon">&#xe60e;</i> 2017-10-02</span></dd>
+                        <dd>[玩觅]<a href="https://flymore.ga/book/emotion/2018-01-06/73604.html">书友必看：打开追梦网的正确姿势</a> <span><i class="layui-icon">&#xe60e;</i> 2018-01-06</span></dd>
+                        <dd>[玩觅]<a href="https://flymore.ga/book/emotion/2019-10-04/87354.html">舍不得说再见，但已到离别时</a> <span><i class="layui-icon">&#xe60e;</i> 2019-10-04</span></dd>
+                        <dd>[玩觅]<a href="https://flymore.ga/book/emotion/2017-10-03/71915.html">写真大曝光：首尔的那些Sexy Boys！</a> <span><i class="layui-icon">&#xe60e;</i> 2017-10-03</span></dd>
+                        <dd>[玩觅]<a href="https://flymore.ga/book/emotion/2017-10-09/72002.html">寫真書大膽全裸奔海露「臀窩」 小鮮肉想揪團進天體營</a> <span><i class="layui-icon">&#xe60e;</i> 2017-10-09</span></dd>
+                        <dd>[玩觅]<a href="https://flymore.ga/book/emotion/2018-01-04/73565.html">走过冷暖的岁月，感知生命的厚重—2017再见 2018你好？</a> <span><i class="layui-icon">&#xe60e;</i> 2018-01-04</span></dd>
+                        <dd>[玩觅]<a href="https://flymore.ga/book/emotion/2017-12-18/73263.html">不得不说的腐文化——灵异耽美文</a> <span><i class="layui-icon">&#xe60e;</i> 2017-12-18</span></dd>
+                        <dd>[玩觅]<a href="https://flymore.ga/book/emotion/2017-10-09/72005.html">男同志情侣晒出爱情长跑25年照片，真是太伟大了</a> <span><i class="layui-icon">&#xe60e;</i> 2017-10-09</span></dd>
+                        <dd>[玩觅]<a href="https://flymore.ga/book/emotion/2018-10-10/79173.html">2017Pornhub男同志最爱G片男星</a> <span><i class="layui-icon">&#xe60e;</i> 2018-10-10</span></dd>
+                    </dl>
+    </div>
+
+
+    </div>
+    </div>
+
+    <div class="fly-footer">
+    <p>Copyright &copy; 2013-<script type='text/javascript'>var creditsyear = new Date();document.write(creditsyear.getFullYear());</script> <a href="https://flymore.ga">flymore.ga</a></p>
+    <p class="layui-hide-xs">本站所有内容全部来源于互联网，版权归属于原作者，如果对作品内容、版权等方面有质疑，或对本站有意见建议请发送Email至<a href='mailto:iflymore@yandex.com'>iflymore@yandex.com</a>，感谢您的合作与支持。</p>
+</div>
+<a href="#" id="back-to-top"><i class="layui-icon" style="font-size: 36px;">&#xe604;</i></a>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/layui-src@2.5.4/dist/layui.js"></script>
+<script src='https://flymore.ga/skin/default/js/lang.js'></script>
+<script src="https://flymore.ga/skin/default/js/site.min.js"></script>
+    </body>
+</html>

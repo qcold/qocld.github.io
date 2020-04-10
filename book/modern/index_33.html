@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <title>现代都市 - 丹乐文库 - 丹乐网 - 完结耽美文珍藏书库</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link href="https://cdn.jsdelivr.net/npm/layui-src@2.5.4/dist/css/layui.css" rel="stylesheet">
+<link href="/skin/default/css/site.min.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="//at.alicdn.com/t/font_532845_y8sa3poeef6layvi.css" rel="stylesheet" />
+<link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
+<!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+<!--[if lt IE 9]>
+<script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+<script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+<div class="layui-bg-black fly-header">
+    <div class="layui-container">
+        <a class="fly-logo" href="https://flymore.ga/">
+            <img alt="qcold" src="https://flymore.ga/skin/default/images/logo-q.png">
+        </a>
+        <ul class="layui-nav fly-nav" lay-filter="">
+            <li class="layui-nav-item layui-hide-xs">
+                <a href="javascript:"><i class="layui-icon">&#xe756;</i> 排行榜</a>
+                <dl class="layui-nav-child"> <!-- 二级菜单 -->
+                    <dd><a href="https://flymore.ga/html/good/">推荐排行</a></dd>
+                    <dd><a href="https://flymore.ga/html/hots/">总点击榜</a></dd>
+                    <dd><a href="https://flymore.ga/html/year/">年点击榜</a></dd>
+                    <dd><a href="https://flymore.ga/html/season/">季点击榜</a></dd>
+                    <dd><a href="https://flymore.ga/book/">新鲜上线</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item layui-hide-xs">
+                <a href="https://flymore.ga/book/"><i class="layui-icon">&#xe857;</i> 分类</a>
+                <dl class="layui-nav-child"> <!-- 二级菜单 -->
+                    <dd><a href="https://flymore.ga/book/future/">末世机甲</a></dd>
+                    <dd><a href="https://flymore.ga/book/modern/">现代都市</a></dd>
+                    <dd><a href="https://flymore.ga/book/antiquity/">古风雅韵</a></dd>
+                    <dd><a href="https://flymore.ga/book/rebirth/">穿越重生</a></dd>
+                    <dd><a href="https://flymore.ga/book/fantasy/">玄幻网游</a></dd>
+                    <dd><a href="https://flymore.ga/book/xianxia/">仙侠修真</a></dd>
+                    <dd><a href="https://flymore.ga/book/terror/">灵异神怪</a></dd>
+                    <dd><a href="https://flymore.ga/book/same/">耽美同人</a></dd>
+                    <dd><a href="https://flymore.ga/book/other/">耽美其他</a></dd>
+                    <dd><a href="https://flymore.ga/book/emotion/">酷儿话题</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item layui-hide-xs">
+                <a class="zanzhu" href="javascript:"><i class="layui-icon">&#xe735;</i> 赞助我们</a>
+            </li>
+        </ul>
+        <ul class="layui-nav fly-nav-user">
+            <li class="layui-nav-item">
+                <a href="javascript:" id="search"><i class="layui-icon" style="font-size: 24px;">&#xe615;</i></a>
+            </li>
+            <script src="https://flymore.ga/e/member/login/loginjs.php"></script>
+        </ul>
+    </div>
+</div>
+
+<div class="fly-panel fly-column layui-hide-sm layui-show-xs menuBar" style="display: none">
+    <div class="layui-container">
+        <ul class="layui-clear">
+            <li><a href='https://flymore.ga/book/future/'>科幻</a></li>
+            <li><a href='https://flymore.ga/book/modern/'>现代</a></li>
+            <li><a href='https://flymore.ga/book/antiquity/'>古代</a></li>
+            <li><a href='https://flymore.ga/book/rebirth/'>穿越</a></li>
+            <li><a href='https://flymore.ga/book/fantasy/'>玄幻</a></li>
+            <li><a href='https://flymore.ga/book/xianxia/'>仙侠</a></li>
+            <li><a href='https://flymore.ga/book/terror/'>灵异</a></li>
+            <li><a href='https://flymore.ga/book/same/'>同人</a></li>
+            <li><a href='https://flymore.ga/book/other/'>其他</a></li>
+            <li><a href="https://flymore.ga/book/emotion/">玩觅 <span class="layui-badge-dot"></span></a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="layui-container">
+    <div class="layui-col-md7" id="search-bar" style="display: none;position: fixed;background-color: #515a6e; opacity: 0.8;z-index: 10;">
+        <div class="fly-panel" style="background-color: #515a6e;padding: 20px 20px; text-align: center;">
+            <form action='https://flymore.ga/e/search/index.php' class="layui-form" method='post'>
+                <input class="layui-input" id='words' name='keyboard' placeholder="搜索其实很简单" style="width: 70%;display: inline-block" type="text">
+                <input name="show" type="hidden" value="title,writer,newstext"/>
+                <input name="tempid" type="hidden" value="1"/>
+                <button class="layui-btn" lay-filter="searchSubmit" lay-submit style="width:20%;display:inline-block">搜索</button>
+            </form>
+            <div class="fly-tags" style="margin-top: 10px"><a href="https://flymore.ga/e/tags/?tagid=413" target="_blank">穿越</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=3950" target="_blank">重生</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=1638" target="_blank">强强</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4192" target="_blank">甜文</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=2718" target="_blank">生子</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4107" target="_blank">包子</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4216" target="_blank">都市</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4187" target="_blank">修真</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4181" target="_blank">种田</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4158" target="_blank">娱乐圈</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4102" target="_blank">系统</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=1660" target="_blank">年下</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4193" target="_blank">灵异</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=25" target="_blank">同人</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=306" target="_blank">男人</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4248" target="_blank">豪门</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=2449" target="_blank">HE</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4005" target="_blank">宫廷</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4273" target="_blank">空间</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4199" target="_blank">末世</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4554" target="_blank">1V1</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=370" target="_blank">网游</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=2442" target="_blank">自由自在</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=3975" target="_blank">架空</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4285" target="_blank">励志</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4250" target="_blank">异能</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4124" target="_blank">异世</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=412" target="_blank">时空</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4318" target="_blank">快穿</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=427" target="_blank">哥哥</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=91" target="_blank">少年</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4272" target="_blank">机甲</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=385" target="_blank">游戏</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4369" target="_blank">网配</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=6883" target="_blank">长生千叶</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4105" target="_blank">莫晨欢</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=6617" target="_blank">叶忆落</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4471" target="_blank">虐恋</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=129" target="_blank">幸福</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=5082" target="_blank">颜若优雅</a></div>
+        </div>
+    </div>
+    <div class="layui-row layui-col-space15">
+
+
+    <div class="layui-col-md12">
+        <div class="home-tips">
+            <i style="float:left;line-height:17px;" class="fa fa-volume-up"></i>
+            <div class="home-tips-container">
+                                <span style="color: red;padding-left: 5px;"><a href="https://flymore.ga/book/emotion/2019-10-04/87354.html" target="_blank">舍不得说再见，但已到离别时</a></span>
+                                <span style="color: red;padding-left: 5px;"><a href="https://flymore.ga/book/emotion/2018-01-06/73604.html" target="_blank">书友必看：打开追梦网的正确姿势</a></span>
+                            </div>
+        </div>
+    </div>
+
+    <div class="layui-col-md8">
+        <!--列表开始-->
+        <div class="fly-panel">
+            <div class="fly-panel-title fly-filter">
+                <span class="layui-breadcrumb" lay-separator=">">
+                  <a href="https://flymore.ga/index.html">首页</a>&nbsp;>&nbsp;<a href="https://flymore.ga/book/">文库</a>&nbsp;>&nbsp;<a href="https://flymore.ga/book/modern/">现代都市</a>
+                </span>
+            </div>
+        </div>
+        <div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/modern/2017-02-11/24400.html">阴宅。式月（出书版妖寄都市系列七）BY该隐</a>
+        </div>
+        <div class="article-abstract">序这本是第一部的最后一本，也可以把它看作全书的终结。第一章消失的屋子深夜中，野外景象带着一种说不出来的清冷和荒芜。时不时有几丝诡异的虫鸣声，从杂草丛生的野地中传出来，更加深了清冷荒芜的感觉。这是福建省</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-02-11</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;现代</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;6</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/modern/2017-02-11/24401.html">黑暗中的男人（出书版妖寄都市系列六）BY该隐</a>
+        </div>
+        <div class="article-abstract">前言感谢各位租阅或是购买妖寄０６，有将近一年的时间没出书，同时也感谢大家没有忘记该隐。消失这么久，原因我会在论坛上向大家说明，顺便公布神州城堡新论坛的地址httpcain.getbbs.com（也欢迎加入和前来试阅该隐的</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-02-11</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;现代</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;6</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/modern/2017-02-11/24320.html">弯腰就能听见幸福（都市情缘天之骄子）中——花比作</a>
+        </div>
+        <div class="article-abstract">第 32 章敏明走进办公室时迟疑了片刻，推开门，只见谢期久正站在落地窗前，看着蓝天。听到声音，谢期久转头看向敏明，&ldquo;回来了？&rdquo;接着又继续望向无边无际的天空。敏明点点头，没有说话，坐在休息区的沙发</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-02-11</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;现代</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;7</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/modern/2017-02-11/24321.html">弯腰就能听见幸福（都市情缘天之骄子）上——花比作</a>
+        </div>
+        <div class="article-abstract">【文案】幸福有时要经历千辛万苦有时也来得容易比如稍稍弯腰弯下腰便能听见幸福当嘉陵遇见敏明，他知道幸福在哪里；当敏明遇见了嘉陵，他便知道了幸福是什么。内容标签：都市情缘 天之骄子主角：刘嘉陵，谢敏明 ┃ 配</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-02-11</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;现代</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;9</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/modern/2017-02-11/24319.html">弯腰就能听见幸福（都市情缘天之骄子）下——花比作</a>
+        </div>
+        <div class="article-abstract">第 58 章这几天，苏青忙得团团转。同茂集团工作小组对金融街的地下工程进行验收，苏青在现场整整跟了几天，得到了质量上的肯定，他又忙着找同茂的项目负责人，商谈签署地上工程合同的事情。一个地下工程干了几个月，</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-02-11</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;现代</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;7</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/modern/2017-02-11/24264.html">总裁,宅男,怎麽配？下——席海璃</a>
+        </div>
+        <div class="article-abstract">49. <br /><br />
+那天过後，席宅弟简直生不如死，那家伙每晚的需求太可怕了，可是自己如果拒绝就会得到更严厉的惩罚，所以宅弟决定了，他要开始恢复写日记的生活，将恶魔的坏事笔录做成一整本，现在没电脑所以宅弟拿了新买的笔</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-02-11</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;现代</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;8</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/modern/2017-02-11/24265.html">总裁,宅男,怎麽配？上——席海璃</a>
+        </div>
+        <div class="article-abstract">契子<br /><br />
+他是宅男。<br /><br />
+ 宅男的定义就是不出门、不整理仪容、成天埋首於电脑前，甚至收集一些假面超人，最後只吃泡面度日子。<br /><br />
+ 他不喜欢出门，总绝得浪费时间，他不喜欢走动，因为那太累人，他不喜欢吃饭，因为这样他还</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-02-11</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;现代</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;6</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/modern/2017-02-11/24202.html">吸血总裁（兄弟）——伊萱儿</a>
+        </div>
+        <div class="article-abstract">楔子我有一个哥哥，他是一家大公司的管理者，也是外人所谓的拥有绝对决策权、代表最高权力，外人称之为总裁的人。在别人的眼中，他是一名行事果断、有着聪颖头脑、赚钱能力凌驾于其他人之上的优秀人材。但这样外表出</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-02-11</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;现代</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;12</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/modern/2017-02-11/23861.html">千依百顺（现代阴间故事）第一部——Bluelu</a>
+        </div>
+        <div class="article-abstract">千依百顺 1抱歉 &gt;&lt;&rdquo; 我又开坑了 , 这是非天校的现代阴间故事 , 请支持哦 .-----------------「妈 , 不用担心我 , 这里吃好住好 , 又不用做 . 我很好 . 」苦口婆心地劝著电话的那边 , 但对方却还是一个迳的哭 .</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-02-11</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;现代</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;8</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/modern/2017-02-10/23860.html">千依百顺（现代阴间故事）第二部——Bluelu</a>
+        </div>
+        <div class="article-abstract">千依百顺 51 (第二部)这国的後宫 , 从皇上立室起 , 就没有再收宠了 , 听说是爱室不许皇上再纳宠 . 人数开始维持著不动 ... 不 , 是少许波动 . 偶然就会有人被皇的爱室『送走』 . 目标不单止是皇上的宠 , 妃 .还有这一</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-02-10</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;现代</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;8</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/modern/2017-02-09/23344.html">妖兽都市第二部般若面——小谢</a>
+        </div>
+        <div class="article-abstract">序：原来我的内心就是这样子的，充满了不安、嫉妒和怨恨啊！不，那只是个面具而已。放下它，你会阅读到你真正的内心。那会是什麽样子？何不试试。1那是一个恐怖的妖怪头，额角伸出尖尖的小角，面容狰狞，眼中透出浓烈</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-02-09</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;现代</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;6</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/modern/2017-02-09/23343.html">妖兽都市第一部鸾宣——小谢</a>
+        </div>
+        <div class="article-abstract">序我想，我还是喜欢白小花比较有保障。他的级别不够高，手底下的高级驱魔人级别也不够高，而我，是他养大的孩子，是他的超级打手，是他不可取代的肖榭。就算他结婚，生子，我也永远是他最重要的人。我喜欢这种感觉，</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-02-09</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;现代</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;8</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/modern/2017-02-09/22939.html">巨星知我心（出书版）BY凌豹姿</a>
+        </div>
+        <div class="article-abstract">[寻心系列之六] 巨星知我心（出书版） BY： 凌豹姿中永和文化--凌豹姿每个地方的历史实在是很有趣，我之前住在中、永和，稍微的研究了一下地方上的历史。永和是个非常小的地方，他被中和这个大地方给包围住，一般而言</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-02-09</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;现代</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;18</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/modern/2017-02-09/22869.html">盗爱总裁（出书版甜心恶魔之二）BY夜凌岚</a>
+        </div>
+        <div class="article-abstract">文案：如果可以选择，丁亚希真的希望人生平凡就好偏偏他先是撞坏了人家的保时捷又被半仙姑姑连哄带骗去当豪宅管理员喝！没想到保时捷苦主就住在这栋豪宅啊！多亏姑姑的神机妙算，让他遇到了他的有缘人可是对方家人</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-02-09</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;现代</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;6</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/modern/2017-02-08/22732.html">总裁的秘密恋人——疏朗</a>
+        </div>
+        <div class="article-abstract"> 文案喂！只是赶着上班而已，真的不是故意洒你一身豆浆啦！还有哦，干洗费也会赔给你，真的不要一直追着我不放啦！啊里咧，干洗费不要了？要用身体来抵债？这是哪门子的道理？我告诉你，不要太过分吼！什、什么&amp;hell</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-02-08</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;现代</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;28</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/modern/2017-02-08/21892.html">大明星之恋——聿桥</a>
+        </div>
+        <div class="article-abstract">大明星之恋（1）听说晚上娱乐频道有庄立维的独家访谈，所以安皓伊下班一回到家就迫不及待打开电视看重播。庄立维，这位时下最炙手可热的偶像明星，他的名字几乎就是高人气和高收视率的代表，只要是有他参与的节目，无</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-02-08</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;现代</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;32</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/modern/2017-02-07/21754.html">大明星小替身——其实我是一个眼圆</a>
+        </div>
+        <div class="article-abstract">1大明星第一次见到小替身的时候便觉得这个人会红。那时候大明星接了一部打戏，说是打戏，其实不过是打着武打噱头的商业爱情片。大明星顶着张正牌男主角的脸与女主展开一场既感人又老套的爱情故事。打戏，不过是调剂</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-02-07</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;现代</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;6</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/modern/2017-02-07/21643.html">明星宝贝第一、二卷（fuzi）——洺洛</a>
+        </div>
+        <div class="article-abstract">第一卷 残爱穿着火红的紧身连衣裙，身材火辣的女人翘着雪白的大腿，媚眼如丝，涂了鲜艳口红的红唇，&ldquo;给你两个选择：第一，不要他，第二，要他&rdquo;。&ldquo;不要他的话，我就把他卖给夜总会，虽然现在年龄小</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-02-07</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;现代</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;12</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/modern/2017-02-07/21642.html">明星宝贝第三卷（fuzi）+番外——洺洛</a>
+        </div>
+        <div class="article-abstract">第三卷寻找迷失的彼岸第三卷寻找迷失的彼岸第一章四年已过千月岛，岛如其名，形状犹如一轮弯弯的镰月。它的南半部由沙滩海水环绕，常年气候温暖，鸟语花香，每年游客络绎不绝，由此成为举世闻名的旅游胜地。而它的北</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-02-07</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;现代</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;12</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/modern/2017-02-07/21611.html">从幼稚园到总裁室——白鼻青猫</a>
+        </div>
+        <div class="article-abstract">1万恶根源<br /><br />
+圣．赫西卡幼稚园（St.Hoshika），已经有一个世纪的历史，发展至今，传统优良，就读的孩子不乏政要，显富之子。圣．赫西卡幼稚园从三岁到六岁共四个年级，分别用不同的事物命名班级，就目前来说，一年级4</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-02-07</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;现代</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;12</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/modern/2017-02-07/21505.html">冷情总裁‘大叔’妻上——婕妤猫猫</a>
+        </div>
+        <div class="article-abstract"> 文案：故事很简单，无非是倒霉的范之臣爱上了一个人，一个俊美多金的还比自己小了N岁的男子。可是故事又很复杂，无论范之臣如何对他好，这幸福似乎都只是一层泡沫，轻轻一戳，暴露在阳光下的就只剩他的泪水。这个平</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-02-07</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;现代</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;11</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/modern/2017-02-07/21504.html">冷情总裁‘大叔’妻下——婕妤猫猫</a>
+        </div>
+        <div class="article-abstract">第64章：兄弟恩怨&ldquo;我听说你最近都和司徒空在一起。&rdquo;范铭浩领着男人走进了大厦边的一家环境优雅的咖啡厅，刚刚坐定，就开门见山地道：&ldquo;我还听说他的宝贝妹妹司徒茵要回来了。&rdquo;&ldquo;这些事跟</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-02-07</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;现代</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;4</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/modern/2017-02-07/21327.html">我的饭票老板上——奇缘</a>
+        </div>
+        <div class="article-abstract">文案钱串子ＶＳ守财奴饭票属下与钞票老板的ＰＫ之战我的心愿就是把他&ldquo;吃穷&rdquo;，把他的钞票变成我的食物&amp;hellip;&amp;hellip;带领着我的兄弟们一起&ldquo;攻占&rdquo;老板的腰包&amp;hellip;&amp;hellip;这里的主角只</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-02-07</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;现代</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;13</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/modern/2017-02-07/21326.html">我的饭票老板中——奇缘</a>
+        </div>
+        <div class="article-abstract">第三十四话　还情债&amp;lsquo;嗯～～黑泽君，不要手指～～要你的～～我要你的～～快～～给我～～&amp;rsquo;下面的小零号正在激情的求着。&amp;lsquo;羽君，你的小菊-花真漂亮～～啊～～很爽～～嗯～～你～～舒服～～吗～～&amp;r</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-02-07</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;现代</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;12</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/modern/2017-02-07/21325.html">我的饭票老板下——奇缘</a>
+        </div>
+        <div class="article-abstract">第六十八话　邓财迷（修完）守财奴的故事是大多人都知道的，但是如果真真实实地发生在身边就变成一件非常有趣的事情。一个已经大把钞票存在银行里的人还每天死死攥着自己的钱包不撒手，心疼着自己因为生活所需而被</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-02-07</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;现代</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;8</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/modern/2017-02-06/21022.html">激情碰撞（明星强强）上——三号杨戬</a>
+        </div>
+        <div class="article-abstract">类型：私生活很乱的个性导演VS冷漠完美的影视巨星主角：冉轩扬 冥宇文案：一个是拥有绝对票房保证的当红巨星，性格冷漠到别人不敢轻易接近，他从来不用去讨好其他人，无论是导演或者是媒体，只有别人追着他屁股後面</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-02-06</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;现代</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;11</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/modern/2017-02-06/21021.html">激情碰撞（明星强强）中——三号杨戬</a>
+        </div>
+        <div class="article-abstract"> 《激情碰撞》65（明星文，强强，长篇，HE）最终冉轩扬还是留了下来，本身就不是为了故意怄气才说出那样的条件，只是想要让他多吃一些，哪怕是为了工作，多吃一些也是好的，没有胃口是一点，身体需要补充能量又是另外</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-02-06</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;现代</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;9</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/modern/2017-02-06/21020.html">激情碰撞（明星强强）下——三号杨戬</a>
+        </div>
+        <div class="article-abstract"> 《激情碰撞》123（明星文，强强，长篇HE）冥宇是天生的疯子，众人哗然，难道说DF公司恼羞成怒，准备不顾情面开始揭冥宇的伤疤？一个真正的戏疯子，看到这句，大家才了然，原来这文完全是先抑後扬，重点就在这後半句</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-02-06</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;现代</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;9</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/modern/2017-02-06/20740.html">只是一场娱乐电影——银森</a>
+        </div>
+        <div class="article-abstract"> 文案许航不甘做个小保安,回头找上了没节操小老大韩歌==发生的种种事==不算正统黑帮故事哈,因为也确实码不了这样的大背景==写着玩&gt;&lt;喜欢看吧,不会虐的~~~内容标签：平步青云 黑帮情仇搜索关键字：主角：许航,韩歌 ┃</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-02-06</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;现代</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;8</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/modern/2017-02-06/20678.html">别怕，总裁！上——烙胤</a>
+        </div>
+        <div class="article-abstract">堂堂骆氏总裁被一个莫名其妙的男人绑架了？！他强暴了同样身为男人的他，做出一系列令他耻辱的事！他疯狂的折磨他的身体，践踏他的尊严！咬着牙，他承受着他的给的所有侮辱混蛋，你等着，如果我不报复你我就不叫骆以</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-02-06</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;现代</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;10</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/modern/2017-02-06/20677.html">别怕，总裁！下——烙胤</a>
+        </div>
+        <div class="article-abstract">下卷 锁情别怕，总裁！ 下卷 锁情 第一章 烹饪两个月后，12月。开放式的厨房里，骆以濡一只手插在睡衣口袋里，一只手抓着绑的松松的头发打着呵欠。同居两个月，浅仓拓在天堂与地狱之间徘徊，无论什么时候骆以濡都能轻</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-02-06</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;现代</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;6</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/modern/2017-02-06/20568.html">明星之攻陷（出书版）byApple</a>
+        </div>
+        <div class="article-abstract">婚姻有七年之痒，而他们的相处已经是第六年......<br /><br />
+明明一切已成定局，<br /><br />
+方宁在习惯的同时，却依然在抗拒着......<br /><br />
+当卫鹏飞身边出现了青春年少的舞阳的时候，<br /><br />
+当铁血女王殷晨的手上戴着订婚戒指的时候，<br /><br />
+对自身</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-02-06</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;现代</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;13</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/modern/2017-02-06/20567.html">明星之情陷（出书版）byApple</a>
+        </div>
+        <div class="article-abstract">文案 <br /><br />
+一个荒唐的赌约，却是唯一的光明...... <br /><br />
+为了摆脱卫鹏飞的掌握，方宁在漩涡理苦苦挣扎，忍受一切的难堪羞辱，一年，只有一年，他就可以自由！ <br /><br />
+只是，他还是输了，站在那个男人面前，低声说：&quot;我求你....</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-02-06</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;现代</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;10</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/modern/2017-02-06/20182.html">收养明星小猫————龙影</a>
+        </div>
+        <div class="article-abstract">文案：<br /><br />
+明星和狗仔队，理论上应是势不两立的敌对关系，可身为堂堂大明星的穆海清，却怎么也忘不了那个失去相机的男人悲伤的表情。<br /><br />
+为了对摄影的梦想，方守勤靠着偷拍明星照片维持自己和一只猫的温饱，谁知宝贝的古</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-02-06</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;现代</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;4</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/modern/2017-02-06/20013.html">明星追爱记上————梨花烟雨</a>
+        </div>
+        <div class="article-abstract">文案：他是万众瞩目的大明星，又是大家族的太子爷，聪明睿智英俊多金，潇洒风流却不下流。谁知只不过来大陆拍了一部电视剧而已，就被这个生活闭塞思想传统的厨师张哥给吸引了全部的视线，更在回到香港后对他牵肠挂</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-02-06</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;现代</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;7</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/modern/2017-02-06/20012.html">明星追爱记下————梨花烟雨</a>
+        </div>
+        <div class="article-abstract">第二十七章&amp;ldquo;秦枫来电话了？&amp;rdquo;张谦有些奇怪，不过想一想也就释然，那小子从回了香港，每天一个电话是必不可少的，只不过他有些疑惑，如果要打电话，为什么不给自己打手机呢？他偏过头去，却见女儿又支支</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-02-06</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;现代</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;10</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/modern/2017-02-06/19543.html">唱生下部回归现代第二卷——Don'tcry</a>
+        </div>
+        <div class="article-abstract"> ++++++（第二卷：against the world）++++++第一章试营业开始，因为林氏的银湖购物广场是这一中心商务区唯一的一家购物去处，于是走全面路线，高中低档商品面面俱到，分三个展列区；食品百货家居一应而全，列五个部</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-02-06</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;现代</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;15</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/modern/2017-02-06/19544.html">唱生下部回归现代第一卷——Don'tcry</a>
+        </div>
+        <div class="article-abstract">文案：我们的爱情是深蓝色的，像大海一样的颜色。所以我们的爱情要像大海一样宽容，有纳百川的胸怀。有轮船压过去，大海依旧是大海；有炸弹丢进来，大海依旧可以平静；有礁石在阻碍，大海可以将它击碎前进。没有什</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-02-06</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;现代</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;7</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/modern/2017-02-05/19088.html">寻找同桌的你————袖刀</a>
+        </div>
+        <div class="article-abstract">　　寻找同桌的你<br /><br />
+　　一<br /><br />
+　　这是一个有关初恋的故事，这是一个明媚又忧伤的故事，但我们不以仰望天空45度角的方式讲述，我们低著头说。<br /><br />
+　　故事有关两个少年，虽然他们现在已不再年轻，并慢慢向三十岁大军挺进</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-02-05</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;现代</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;8</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/modern/2017-02-05/18529.html">巨星媳妇儿！中————蹲在墙角</a>
+        </div>
+        <div class="article-abstract">[媳妇儿之一] 巨星媳妇儿！（中） BY： 蹲在墙角<br /><br />
+　　30.有朋远方来　　舔着手中的冰激凌，商承俊拉着霍文霆的手逛遍了半个巴黎市。李修和霍文婕有另外的安排，所以没有跟来，于是跟班的任务交给了死皮赖脸硬要跟</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-02-05</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;现代</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;9</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/modern/2017-02-05/18530.html">巨星媳妇儿！上————蹲在墙角</a>
+        </div>
+        <div class="article-abstract">[媳妇儿之一] 巨星媳妇儿！（上） BY： 蹲在墙角<br /><br />
+　　一只从腹黑变成老妈子的小攻！　　一只智商不太高的小白受！　　一群唯恐天下不乱的疯狂邻居！　　他是天之骄子，他是万人崇拜的偶像，他是最当红的国际巨星，</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-02-05</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;现代</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;14</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/modern/2017-02-05/18528.html">巨星媳妇儿！下+番外————蹲在墙角</a>
+        </div>
+        <div class="article-abstract">[媳妇儿之一] 巨星媳妇儿！（下）+番外 BY： 蹲在墙角<br /><br />
+　　58.哽咽的结束曲　　这个世上什么都有的卖，唯独没有后悔药。此时的商柏曦同学十分后悔自己当时怎么就被这&amp;lsquo;人面兽心&amp;rsquo;的家伙用几句花言巧语就</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-02-05</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;现代</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;10</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/modern/2017-02-04/18332.html">老板之杀意情人（出书版）by林佩</a>
+        </div>
+        <div class="article-abstract">文案：「别怕我，瑞瑞。」为啥老板总是突然对我这么说？  啊！老板持刀浴血酷酷像恶魔，我的身我的心剉剉在颤抖。看着老板黯然离去跳海走，我却迈不出脚步来挽留&amp;hellip;&amp;hellip;  不行！不准亲亲老板丢下我！我要</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-02-04</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;现代</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;12</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/modern/2017-02-04/18251.html">别找巨星当媳妇儿下————蹲在墙角</a>
+        </div>
+        <div class="article-abstract">下部 鸡毛蒜皮46.回家正在住院治疗中的康宁，并不知道他的大姐狄安娜已经抵达本市，此时他靠在病床上与宋冉、商承俊两人一起玩&amp;lsquo;抽王八&amp;rsquo;。谁拿到单一的鬼牌，谁就是王八。原本是输了的人要在身上画&amp;lsq</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-02-04</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;现代</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;9</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/modern/2017-02-04/18252.html">别找巨星当媳妇儿上————蹲在墙角</a>
+        </div>
+        <div class="article-abstract"> 文案东边来了一根黄瓜，西边来了一朵菊花。黄瓜看上了菊花的菊花，菊花没有看上黄瓜的黄瓜。黄瓜强摘了菊花的小花，菊花一怒也摘了黄瓜的小花。于是小气的黄瓜杠上了脾气火爆的菊花！某日，天生冰山弯男&amp;lsquo;误Ｘ</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-02-04</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;现代</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;8</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/modern/2017-02-04/18120.html">明星之沦陷上————Apple</a>
+        </div>
+        <div class="article-abstract">明星之沦陷 上 BY Apple<br /><br />
+文案： <br /><br />
+方宁不过是个小人物， 也许是一时的虚荣，也许是一时的冲动，加入了造星的巨头公司。最后的阶段，为了找一个遍寻不着的洗手间，一生就此改变。 卫鹏飞是公司的太子爷，不过是学成归</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-02-04</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;现代</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;12</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/modern/2017-02-04/18119.html">明星之沦陷下————Apple</a>
+        </div>
+        <div class="article-abstract">明星之沦陷 下 BY Apple<br /><br />
+第七章没有浪费时间等他说第二句，卫鹏飞凶猛地扑了上来，几乎是撕开了他的衣服，把他狠狠压倒在床上，没头没脑的乱吻乱舔了一遍，方宁一口气憋在胸口，还没有来得及适应他的狂热，卫鹏飞抬</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-02-04</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;现代</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;8</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/modern/2017-02-04/17886.html">可爱明星与冷面老大的故事————谰梦乖乖</a>
+        </div>
+        <div class="article-abstract">内容简介<br /><br />
+性格单纯可爱的当红明星律正斌，黑帮冷面绝情的老大，两个人的甜蜜小故事。当冷酷的老大遇上可爱的小家夥时也可以很温柔哦，喜欢甜文的朋友要支持一下哦第一章   老大变保镖&amp;ldquo;什麽？！你再说一遍，</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-02-04</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;现代</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;10</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/modern/2017-02-03/17612.html">后宫诱逃（现代版）————于睫</a>
+        </div>
+        <div class="article-abstract">       题外话：写本文的动机      很坦白地讲，写这篇文的初衷是为了泄愤。 <br /><br />
+      《后宫诱逃》是莫扎特的一部歌剧作品。莫扎特的A大调第五小提琴协奏曲（又称土耳其协奏曲）第三乐章的一个主题就是源于《后宫诱逃</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-02-03</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;现代</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;10</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/modern/2017-02-03/17497.html">大明星和杀手----CocoBlue</a>
+        </div>
+        <div class="article-abstract">大明星和杀手（强攻强受）1[img]dmxhssqgqs1_1.jpg[/img]　　纯白的床单盖在冰冷的尸体上。<br /><br />
+　　米歇尔.帕克呆呆的看著，脑子麻木地不能思考，一片空白。<br /><br />
+　　那白色是那麽的纯，那麽的刺眼&amp;hellip;&amp;hellip;<br /><br />
+　</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-02-03</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;现代</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;10</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div>
+        <div id="paging"><a title="Total record">&nbsp;<b>1708</b> </a>&nbsp;&nbsp;<a href="https://flymore.ga/book/modern/index.html">首页</a>&nbsp;<a href="https://flymore.ga/book/modern/index_32.html">上一页</a>&nbsp;<a href="https://flymore.ga/book/modern/index_31.html">31</a>&nbsp;<a href="https://flymore.ga/book/modern/index_32.html">32</a>&nbsp;<b>33</b>&nbsp;<a href="https://flymore.ga/book/modern/index_34.html">34</a>&nbsp;<a href="https://flymore.ga/book/modern/index_35.html">35</a>&nbsp;<a href="https://flymore.ga/book/modern/index_34.html">下一页</a>&nbsp;<a href="https://flymore.ga/book/modern/index_35.html">尾页</a></div>
+
+
+
+    </div>
+
+    <div class="layui-col-md4">
+        <!--<div class="fly-panel" style="padding:10px;text-align: center">
+            <a href="https://qr.alipay.com/c1x0322413lubhpxsac5mcc"><img src="[!&#45;&#45;news.url&#45;&#45;]skin/default/images/hongbao.png" alt="打开支付宝领红包" style="width: 90%"></a>
+            <p style="padding: 10px"><a href="https://qr.alipay.com/c1x0322413lubhpxsac5mcc"><button class="layui-btn layui-btn-radius layui-btn-normal">打开支付宝领红包</button></p>
+        </div>-->
+
+        <div class="fly-panel" style="padding: 20px 0; text-align: center;">
+            <div class="layui-anim avatar"><a href="javascript:;"><img src="https://flymore.ga/skin/default/images/avatar.jpg" alt="再贱就再见" style="width:120px; height:120px; border-radius:100%;"></a></div>
+            <h1>
+                <a href="javascript:;" style="font-size: 24px">再贱就再见</a>
+                <i class="layui-icon icon-nan" style="font-size: 22px; color: #1E9FFF;">&#xe662;</i>
+            </h1>
+            <p style="color: #999999;margin: 8px">
+                <a target="_blank" title="email" href="mailto:iflymore@yandex.com"><i style="padding-right: 5px;" class="iconfont icon-mail"></i> <span>联系我们</span></a>
+                &nbsp;<i class="layui-icon">&#xe715;</i> <span>耽美 - 中国</span>
+            </p>
+            <p style="color: #999999;margin: 8px">为每一位到来的朋友，传递纯真的梦想！</p>
+            <hr />
+            <div>
+<!--                <a title="QQ" href="http://vac.qq.com/wallet/qrcode.htm?m=tenpay&a=1&u=157557906&ac=9807C9835FD81D271CC2C21000CDC5CD35A04ABB984CD75883955BF253C2702F&n=%E6%B5%AE%E5%A4%B8&f=wallet"><i style="font-size: 32px;padding-right: 15px;" class="iconfont icon-qq"></i></a>-->
+<!--                <a title="wechat" href="wxp://f2f0JTx6mVmCgy-JbWSx28GIxpsIP7KwHDlg"><i style="font-size: 32px;padding-right: 15px;" class="iconfont icon-wechat"></i></a>-->
+<!--                <a title="alipay" href="https://QR.ALIPAY.COM/FKX09446YBW45NR1SFI80F"><i style="font-size: 32px;padding-right: 15px;" class="iconfont icon-alipay"></i></a>-->
+                <a target="_blank" title="telegram" href="https://t.me/xbbchat"><i style="font-size: 32px;padding-right: 15px;" class="iconfont icon-line"></i></a>
+                <a target="_blank" title="paypal" href="https://paypal.me/qcold/"><i style="font-size: 32px;padding-right: 15px;" class="iconfont icon-paypal"></i></a>
+<!--                <a title="hongbao" href="https://qr.alipay.com/c1x0322413lubhpxsac5mcc"><i style="font-size: 32px;" class="iconfont icon-ai-hongbao"></i></a>-->
+            </div>
+        </div>
+
+        <dl class="fly-panel fly-list-one">
+            <dt class="fly-panel-title"><i class="layui-icon">&#xe705;</i>  最新小说</dt>
+                        <dd>[现代]<a href="https://flymore.ga/book/modern/2018-10-27/79515.html">重生娱乐圈之重塑人生（九）――八爷党</a> <span><i class="layui-icon">&#xe60e;</i> 2018-10-27</span></dd>
+                        <dd>[现代]<a href="https://flymore.ga/book/modern/2018-10-27/79514.html">重生娱乐圈之重塑人生（八）――八爷党</a> <span><i class="layui-icon">&#xe60e;</i> 2018-10-27</span></dd>
+                        <dd>[现代]<a href="https://flymore.ga/book/modern/2018-10-27/79513.html">重生娱乐圈之重塑人生（七）――八爷党</a> <span><i class="layui-icon">&#xe60e;</i> 2018-10-27</span></dd>
+                        <dd>[现代]<a href="https://flymore.ga/book/modern/2018-10-27/79512.html">重生娱乐圈之重塑人生（六）――八爷党</a> <span><i class="layui-icon">&#xe60e;</i> 2018-10-27</span></dd>
+                        <dd>[现代]<a href="https://flymore.ga/book/modern/2018-10-27/79511.html">重生娱乐圈之重塑人生（五）――八爷党</a> <span><i class="layui-icon">&#xe60e;</i> 2018-10-27</span></dd>
+                        <dd>[现代]<a href="https://flymore.ga/book/modern/2018-10-27/79510.html">重生娱乐圈之重塑人生（四）――八爷党</a> <span><i class="layui-icon">&#xe60e;</i> 2018-10-27</span></dd>
+                        <dd>[现代]<a href="https://flymore.ga/book/modern/2018-10-27/79509.html">重生娱乐圈之重塑人生（三）――八爷党</a> <span><i class="layui-icon">&#xe60e;</i> 2018-10-27</span></dd>
+                        <dd>[现代]<a href="https://flymore.ga/book/modern/2018-10-27/79508.html">重生娱乐圈之重塑人生（二）――八爷党</a> <span><i class="layui-icon">&#xe60e;</i> 2018-10-27</span></dd>
+                        <dd>[现代]<a href="https://flymore.ga/book/modern/2018-10-27/79507.html">重生娱乐圈之重塑人生（一）――八爷党</a> <span><i class="layui-icon">&#xe60e;</i> 2018-10-27</span></dd>
+                        <dd>[现代]<a href="https://flymore.ga/book/modern/2018-10-13/79226.html">娱乐圈之和男神相处的日常 下+番外――吟暮</a> <span><i class="layui-icon">&#xe60e;</i> 2018-10-13</span></dd>
+                    </dl>
+
+        <dl class="fly-panel fly-list-one">
+            <dt class="fly-panel-title"><i class="layui-icon">&#xe705;</i>  推荐小说</dt>
+                        <dd>[现代]<a href="https://flymore.ga/book/modern/2018-09-17/78657.html">娱乐圈之糖二代（糖儿子）上――莫里</a> <span><i class="layui-icon">&#xe60e;</i> 2018-09-17</span></dd>
+                        <dd>[现代]<a href="https://flymore.ga/book/modern/2018-09-16/78650.html">名草有主，冷酷总裁独宠你 上――落果儿</a> <span><i class="layui-icon">&#xe60e;</i> 2018-09-16</span></dd>
+                        <dd>[现代]<a href="https://flymore.ga/book/modern/2018-09-07/78431.html">双面总裁的傲娇情人（一)――小翅膀</a> <span><i class="layui-icon">&#xe60e;</i> 2018-09-07</span></dd>
+                        <dd>[现代]<a href="https://flymore.ga/book/modern/2018-08-20/78035.html">娱乐圈之我家老宫失忆了 上――苏景闲</a> <span><i class="layui-icon">&#xe60e;</i> 2018-08-20</span></dd>
+                        <dd>[现代]<a href="https://flymore.ga/book/modern/2018-07-10/77071.html">重生之上将，影帝要离婚（一）――绝望的萝卜</a> <span><i class="layui-icon">&#xe60e;</i> 2018-07-10</span></dd>
+                        <dd>[现代]<a href="https://flymore.ga/book/modern/2018-06-23/76763.html">重生之绝对影帝（一）――方沫</a> <span><i class="layui-icon">&#xe60e;</i> 2018-06-23</span></dd>
+                    </dl>
+
+        <dl class="fly-panel fly-list-one">
+            <dt class="fly-panel-title"><i class="layui-icon">&#xe705;</i>  热门小说</dt>
+                        <dd>[现代]<a href="https://flymore.ga/book/modern/2018-10-27/79507.html">重生娱乐圈之重塑人生（一）――八爷党</a> <span><i class="layui-icon">&#xe60e;</i> 2018-10-27</span></dd>
+                        <dd>[现代]<a href="https://flymore.ga/book/modern/2018-01-30/74026.html">带着霸道总裁好种田（包子）上――潇禾湘水</a> <span><i class="layui-icon">&#xe60e;</i> 2018-01-30</span></dd>
+                        <dd>[现代]<a href="https://flymore.ga/book/modern/2018-03-26/75068.html">离婚（包子）上――芑落</a> <span><i class="layui-icon">&#xe60e;</i> 2018-03-26</span></dd>
+                        <dd>[现代]<a href="https://flymore.ga/book/modern/2018-01-12/73693.html">现世宠妻守则 上――皇权至上</a> <span><i class="layui-icon">&#xe60e;</i> 2018-01-12</span></dd>
+                        <dd>[现代]<a href="https://flymore.ga/book/modern/2018-02-15/74331.html">宠妻狂魔正在线上（一）――雪姬芸妃</a> <span><i class="layui-icon">&#xe60e;</i> 2018-02-15</span></dd>
+                        <dd>[现代]<a href="https://flymore.ga/book/modern/2018-03-26/75069.html">离婚（包子）下――芑落</a> <span><i class="layui-icon">&#xe60e;</i> 2018-03-26</span></dd>
+                        <dd>[现代]<a href="https://flymore.ga/book/modern/2018-10-27/79509.html">重生娱乐圈之重塑人生（三）――八爷党</a> <span><i class="layui-icon">&#xe60e;</i> 2018-10-27</span></dd>
+                        <dd>[现代]<a href="https://flymore.ga/book/modern/2017-03-26/57806.html">傲娇总裁的饲养方式（包子）上——公子如兰</a> <span><i class="layui-icon">&#xe60e;</i> 2017-03-26</span></dd>
+                        <dd>[现代]<a href="https://flymore.ga/book/modern/2017-10-07/71965.html">娱乐圈之预备役奶爸的逆袭——不离语</a> <span><i class="layui-icon">&#xe60e;</i> 2017-10-07</span></dd>
+                        <dd>[现代]<a href="https://flymore.ga/book/modern/2018-04-20/75531.html">娱乐圈之星海征程 上――纸风车</a> <span><i class="layui-icon">&#xe60e;</i> 2018-04-20</span></dd>
+                    </dl>
+    </div>
+
+
+    </div>
+    </div>
+
+    <div class="fly-footer">
+    <p>Copyright &copy; 2013-<script type='text/javascript'>var creditsyear = new Date();document.write(creditsyear.getFullYear());</script> <a href="https://flymore.ga">flymore.ga</a></p>
+    <p class="layui-hide-xs">本站所有内容全部来源于互联网，版权归属于原作者，如果对作品内容、版权等方面有质疑，或对本站有意见建议请发送Email至<a href='mailto:iflymore@yandex.com'>iflymore@yandex.com</a>，感谢您的合作与支持。</p>
+</div>
+<a href="#" id="back-to-top"><i class="layui-icon" style="font-size: 36px;">&#xe604;</i></a>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/layui-src@2.5.4/dist/layui.js"></script>
+<script src='https://flymore.ga/skin/default/js/lang.js'></script>
+<script src="https://flymore.ga/skin/default/js/site.min.js"></script>
+    </body>
+</html>
