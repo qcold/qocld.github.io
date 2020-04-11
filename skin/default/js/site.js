@@ -70,10 +70,6 @@ layui.use(['layer', 'element', 'carousel', 'util', 'form'], function () {
         }
     });
 
-    /*$("a[title='hongbao']").on("click", function () {
-        hongbao();
-    });*/
-
     $(".detail-body img").attr({width: '', height: ''});
 
     //返回页首开始
@@ -90,40 +86,8 @@ layui.use(['layer', 'element', 'carousel', 'util', 'form'], function () {
         return false;
     });
 
-
-    //赞助弹窗设置
-    /*var eleHeight;
-    if ($("#pre").length > 0) {
-        eleHeight = $("#pre").offset().top;
-    } else {
-        eleHeight = 1000000000000000000000000000000000000000000000000000000000000000000000;
-    }
-    $(window).scroll(function () {
-        var cookie_zanzhu = $.cookie("zanzhu");
-        var windowHeight = $(this).scrollTop() + $(window).height();
-        if (cookie_zanzhu == null && (windowHeight > eleHeight)) {
-            $.cookie("zanzhu", "false", {expires: 1, path: '/'});
-            donate();
-        }
-    });*/
-
     //赞助按钮点击事件
-    $(".zanzhu").click(function () {
-        // window.open("https://paypal.me/qcold/", "_blank");
-        donate();
-    });
-
-    //新域名提示
-    layer.msg('欢迎来到丹乐网的备份站，请保存我们的域名www.flymore.ga', {icon: 4});
-    //支付宝红包弹窗
-/*    var cookie_hongbao = $.cookie("hongbao");
-    if(cookie_hongbao==null){
-        hongbao();
-        $.cookie("hongbao","1",{expires: 1, path: '/'});
-    }*/
-
-    //赞助弹窗方法
-    function donate() {
+    $(".donate").click(function () {
         layer.open({
             type: 2,
             title: 'PayPal',
@@ -132,7 +96,16 @@ layui.use(['layer', 'element', 'carousel', 'util', 'form'], function () {
             area: ['380px', '90%'],
             content: '感谢支持，丹乐网已关闭所有赞助方式，我们有缘再见！'
         });
-    }
+    });
+
+    //新域名提示
+    layer.msg('欢迎来到丹乐网的存档库，请保存我们的域名www.flymore.ga', {icon: 4});
+    //支付宝红包弹窗
+/*    var cookie_hongbao = $.cookie("hongbao");
+    if(cookie_hongbao==null){
+        hongbao();
+        $.cookie("hongbao","1",{expires: 1, path: '/'});
+    }*/
 
     //支付宝红包弹窗
     /*function hongbao() {
@@ -151,7 +124,7 @@ layui.use(['layer', 'element', 'carousel', 'util', 'form'], function () {
                 '        <p>每天打开支付宝首页搜索</p>\n' +
                 '    <p style="font-weight: bold;padding: 5px 0;color: #CCFF00;font-size: 32px">4458905</p>\n' +
                 '    </div>\n' +
-                '<button style="font-size: 16px;color: #FF5722;background-color: #CCFF00;border-radius:10px;padding: 2px 10px;border: hidden;" onclick="window.open(\'https://qr.alipay.com/c1x0322413lubhpxsac5mcc\')">打开支付宝领红包</button>\n' +
+                '<button style="font-size: 16px;color: #FF5722;background-color: #CCFF00;border-radius:10px;padding: 2px 10px;border: hidden;" onclick="window.open(\'https://qr.alipay.com/\')">打开支付宝领红包</button>\n' +
                 '    <p style="padding-top: 8px;font-size: 12px;color: #00FF99;">小姐姐,不能因为长得靓就不领哦,快收下您的小确幸！</p>\n' +
                 '    <p style="padding-top: 8px;font-size: 10px;color: #ffffff;">(你每领一次并使用，我们就获得0.1元援助！！！如果没有地方使用，请扫描本站收款码打赏，谢谢支持!)</p>\n' +
                 '</div>'
