@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="webkit" name="renderer">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="telephone=no" name="format-detection">
+    <title>点击率排行列表 - 丹樂文庫 - 丹樂網 - 完結耽美文珍藏書庫</title>
+    <meta content="" name="keywords">
+    <meta content="轻酷网络耽美小说总点击排行列表" name="description">
+    <link href="https://cdn.jsdelivr.net/npm/layui-src@2.5.4/dist/css/layui.css" rel="stylesheet">
+<link href="/skin/default/css/site.min.css" rel="stylesheet" />
+<link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
+<!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+<!--[if lt IE 9]>
+<script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+<script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+<div class="layui-bg-black fly-header">
+    <div class="layui-container">
+        <a class="fly-logo" href="https://flymore.ga/">
+            <img alt="qcold" src="https://flymore.ga/skin/default/images/logo-q.png">
+        </a>
+        <ul class="layui-nav fly-nav" lay-filter="">
+            <li class="layui-nav-item layui-hide-xs">
+                <a href="javascript:"><i class="layui-icon layui-icon-fire"></i> 排行榜</a>
+                <dl class="layui-nav-child"> <!-- 二级菜单 -->
+                    <dd><a href="https://flymore.ga/html/good/">推荐排行</a></dd>
+                    <dd><a href="https://flymore.ga/html/hots/">总点击榜</a></dd>
+                    <dd><a href="https://flymore.ga/html/year/">年点击榜</a></dd>
+                    <dd><a href="https://flymore.ga/html/season/">季点击榜</a></dd>
+                    <dd><a href="https://flymore.ga/book/">新鲜上线</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item layui-hide-xs">
+                <a href="https://flymore.ga/book/"><i class="layui-icon layui-icon-fire"></i> 分类</a>
+                <dl class="layui-nav-child"> <!-- 二级菜单 -->
+                    <dd><a href="https://flymore.ga/book/future/">末世机甲</a></dd>
+                    <dd><a href="https://flymore.ga/book/modern/">现代都市</a></dd>
+                    <dd><a href="https://flymore.ga/book/antiquity/">古风雅韵</a></dd>
+                    <dd><a href="https://flymore.ga/book/rebirth/">穿越重生</a></dd>
+                    <dd><a href="https://flymore.ga/book/fantasy/">玄幻网游</a></dd>
+                    <dd><a href="https://flymore.ga/book/xianxia/">仙侠修真</a></dd>
+                    <dd><a href="https://flymore.ga/book/terror/">灵异神怪</a></dd>
+                    <dd><a href="https://flymore.ga/book/same/">耽美同人</a></dd>
+                    <dd><a href="https://flymore.ga/book/other/">耽美其他</a></dd>
+                    <dd><a href="https://flymore.ga/book/emotion/">酷儿话题</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item layui-hide-xs">
+                <a class="donate" href="javascript:"><i class="layui-icon layui-icon-diamond"></i> 赞助我们</a>
+            </li>
+        </ul>
+        <ul class="layui-nav fly-nav-user">
+            <li class="layui-nav-item">
+                <a href="javascript:" id="search"><i class="layui-icon layui-icon-search" style="font-size: 24px;"></i></a>
+            </li>
+            <script src="https://flymore.ga/e/member/login/loginjs.php"></script>
+        </ul>
+    </div>
+</div>
+
+<div class="fly-panel fly-column layui-hide-sm layui-show-xs menuBar" style="display: none">
+    <div class="layui-container">
+        <ul class="layui-clear">
+            <li><a href='https://flymore.ga/book/future/'>科幻</a></li>
+            <li><a href='https://flymore.ga/book/modern/'>现代</a></li>
+            <li><a href='https://flymore.ga/book/antiquity/'>古代</a></li>
+            <li><a href='https://flymore.ga/book/rebirth/'>穿越</a></li>
+            <li><a href='https://flymore.ga/book/fantasy/'>玄幻</a></li>
+            <li><a href='https://flymore.ga/book/xianxia/'>仙侠</a></li>
+            <li><a href='https://flymore.ga/book/terror/'>灵异</a></li>
+            <li><a href='https://flymore.ga/book/same/'>同人</a></li>
+            <li><a href='https://flymore.ga/book/other/'>其他</a></li>
+            <li><a href="https://flymore.ga/book/emotion/">玩觅 <span class="layui-badge-dot"></span></a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="layui-container">
+    <div class="layui-col-md7" style="display: none;position: fixed;background-color: #515a6e; opacity: 0.8;z-index: 10;">
+        <div class="fly-panel" id="search-bar"  style="background-color: #515a6e;padding: 20px 20px; text-align: center;">
+            <form action='https://flymore.ga/e/search/index.php' class="layui-form" method='post'>
+                <input class="layui-input" id='words' name='keyboard' placeholder="檢索功能已停止使用" style="width: 70%;display: inline-block" type="text">
+                <input name="show" type="hidden" value="title,writer,newstext"/>
+                <input name="tempid" type="hidden" value="1"/>
+                <button class="layui-btn" lay-filter="searchSubmit" lay-submit style="width:20%;display:inline-block">檢索</button>
+            </form>
+            <div class="fly-tags" style="margin-top: 10px"><a href="https://flymore.ga/e/tags/?tagid=413" target="_blank">穿越</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=3950" target="_blank">重生</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=1638" target="_blank">强强</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4192" target="_blank">甜文</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=2718" target="_blank">生子</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4107" target="_blank">包子</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4216" target="_blank">都市</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4187" target="_blank">修真</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4181" target="_blank">种田</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4158" target="_blank">娱乐圈</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4102" target="_blank">系统</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=1660" target="_blank">年下</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4193" target="_blank">灵异</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=25" target="_blank">同人</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=306" target="_blank">男人</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4248" target="_blank">豪门</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=2449" target="_blank">HE</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4005" target="_blank">宫廷</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4273" target="_blank">空间</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4199" target="_blank">末世</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4554" target="_blank">1V1</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=370" target="_blank">网游</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=2442" target="_blank">自由自在</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=3975" target="_blank">架空</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4285" target="_blank">励志</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4250" target="_blank">异能</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4124" target="_blank">异世</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=412" target="_blank">时空</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4318" target="_blank">快穿</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=427" target="_blank">哥哥</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=91" target="_blank">少年</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4272" target="_blank">机甲</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=385" target="_blank">游戏</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4369" target="_blank">网配</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=6883" target="_blank">长生千叶</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4105" target="_blank">莫晨欢</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=6617" target="_blank">叶忆落</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4471" target="_blank">虐恋</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=129" target="_blank">幸福</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=5082" target="_blank">颜若优雅</a></div>
+        </div>
+    </div>
+    <div class="layui-row layui-col-space15">
+
+
+    <div class="layui-col-md12">
+        <div class="home-tips">
+            <i class="fa fa-volume-up" style="float:left;line-height:17px;"></i>
+            <div class="home-tips-container">
+                                <span style="color: red;padding-left: 5px;"><a href="https://flymore.ga/book/emotion/2019-10-04/87354.html" target="_blank">舍不得说再见，但已到离别时</a></span>
+                                <span style="color: red;padding-left: 5px;"><a href="https://flymore.ga/book/emotion/2018-01-06/73604.html" target="_blank">书友必看：打开追梦网的正确姿势</a></span>
+                            </div>
+        </div>
+    </div>
+
+    <div class="layui-col-md8">
+        <!--列表开始-->
+        <div class="fly-panel">
+            <div class="fly-panel-title fly-filter">
+                <span class="layui-breadcrumb" lay-separator=">">
+                  <a href="https://flymore.ga/index.html">首页</a>&nbsp;>&nbsp;点击率排行列表
+                </span>
+            </div>
+        </div>
+        <div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/rebirth/2017-03-25/56811.html">穿越之家有傻夫（包子）——白夜未明</a>
+        </div>
+        <div class="article-abstract">文案：穿越第一天，便是洞房花烛夜；穿越第二天，便是亲爹要分家。十两银子，一亩三分地，还有一个什么都不懂的傻娘子。陆青想，这穿越，果然是个技术活&amp;hellip;&amp;hellip;看文须知：首先，本文发生在一个男男可以生子...</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-03-25</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;穿越</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;171</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/rebirth/2018-01-19/73823.html">重生娱乐圈之最强经纪人 上――雨落轻尘</a>
+        </div>
+        <div class="article-abstract"> 文案： 带出了最年轻影帝的经纪人楚叙被人陷害致死后，方知自己原来是一本星际娱乐圈总受文中的一个炮灰。 因为，得罪了总受林轻羽而被打击报复致死，并且还连累了自己的父亲和整个家族。 重生归来，楚叙只为复仇，走上娱乐教父之路，顺便和自己的老干部前未婚夫谈谈恋爱什么的。 老...</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2018-01-19</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;穿越</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;171</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/future/2018-02-05/74149.html">末世纪（一）――谢亦</a>
+        </div>
+        <div class="article-abstract"> 文案： 末世来临。 侯颖发现自己缺少了最初两天的记忆，他始终在追寻真相&amp;hellip;&amp;hellip;后来他不务正业地去撩汉纸了。 这是一只丧尸王创造了末世最强战队的故事。 这里有升级！有激情！有战友！也有末世风云！存稿充足，更新有保障！ 主攻文！强强！足智多谋腹黑丧尸攻VS武力MAX英俊兵痞...</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2018-02-05</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;未来</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;171</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/rebirth/2018-03-30/75129.html">史前美食计划（穿越 包子）上――阿栖栖</a>
+        </div>
+        <div class="article-abstract"> 文案： 亓官临白：前面那头长毛羊可以做烧烤火锅麻辣烫红烧清蒸&amp;hellip;&amp;hellip; 易川：唧唧，别说了我去抓。 亓官临白：说了多少遍老子不叫唧唧！日！ 易川：你想我日你了吗？回家吧。 亓官临白：卧槽老子的长毛羊啊啊啊啊&amp;hellip;&amp;hellip; 亓官临白不想死，所以在末世初期，在丧尸眼皮子底下，...</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2018-03-30</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;穿越</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;171</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/xianxia/2018-04-20/75535.html">用美貌征服修真界（穿越）上――月黑疯糕</a>
+        </div>
+        <div class="article-abstract"> 文案： 这年头穿书不稀奇，穿成炮灰也不稀奇，稀奇的是穿成炮灰了，还有个了不得的系统。 使用系统提供的技能，利用自己的美貌，就能达到&ldquo;瞪谁谁脑残，瞅谁谁智障&rdquo;的作用。 听起来好牛叉。 可这技能的使用条件&amp;hellip;&amp;hellip;能别这么羞耻吗！ 江澜止：系统你出来，我要跟你谈...</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2018-04-20</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;修真</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;171</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/rebirth/2017-03-26/57527.html">重生之茶香满星空（一）——呆提欢颜</a>
+        </div>
+        <div class="article-abstract">文案：废材算什么，能活蹦乱跳就是最大的资本！重生在遥远星系、成为勋贵豪门的段家最受排挤的废物七少爷，曾经的宁康致、现在的段楚很满意。渣爹小三母女都不算事儿，废材的七少爷眼睛一亮，天降福星，他居然可以回...</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-03-26</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;穿越</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;170</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/rebirth/2017-03-26/58549.html">穿越古代讨生活——我爱大闸蟹</a>
+        </div>
+        <div class="article-abstract">文案：小受穿越到古代生活的故事吃穿不愁，就缺小攻异能一出，小攻到手！小受一见变痴汉小攻伸手：那，抱吧有金手指，慢热&amp;hellip;&amp;hellip;有cp且双洁，但是小攻会出现的较晚_（：з」&amp;ang;）_保证不坑，作者菌人品可...</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-03-26</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;穿越</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;170</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/rebirth/2017-03-27/58812.html">重生之江郎财不尽（包子）——长发女妖</a>
+        </div>
+        <div class="article-abstract">文案：江清石作为一名寒窗苦读十年的秀才，一辈子遵守仁义礼孝，却因孝字落得家破人亡、命陨荒山的下场，重活一世，江清石再不愿活在框框架架里，这一世，重要的是家人平安喜乐。PS：1.朝代架空，全部都是编的，将自...</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-03-27</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;穿越</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;170</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/future/2017-11-12/72583.html">重生之末世天灾（五）——浪花点点</a>
+        </div>
+        <div class="article-abstract">  第106章  周末的能力自从死亡重铸身体后，他的异能才显露出来强悍的能力，除了一些稀奇古怪作用的异能外，周末基本上能从异能者身上散发着的元素判断出对方的什么异能，但是面对这个一脸张狂的少年或者说青年人，周末完全探查不出来，也许是精神系特殊异能，把他的感知屏蔽掉了。 陈狂说完后突然朝着周末伸手，周末虽然看不清对方底细，但是...</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-11-12</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;未来</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;170</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/rebirth/2018-04-19/75522.html">快穿之每次都不是人（穿越 三）――涩涩儿</a>
+        </div>
+        <div class="article-abstract"> 第73章：不举仙尊：亲亲我的小炉鼎14 无渊仙尊的确是十分认真的在研究那些龙阳双修画像。 他喜欢着他的小炉鼎， 愿意在平日里尽可能的满足他的小炉鼎， 让他的小炉鼎快活恣意。 而这其中对无渊仙尊来说，最重要的一件事情，就是想方设法让他的小炉鼎在床事上快活恣意。 然而无渊仙...</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2018-04-19</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;穿越</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;170</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/antiquity/2018-08-28/78245.html">王爷，小爷要休书！（穿越 包子）上――木之</a>
+        </div>
+        <div class="article-abstract">文案：<br />
+<br />
+穿越成丞相之子的苏学，发现自己竟被赐给了坐在轮椅上的晋王，做了王妃！<br />
+<br />
+他逃出王府后，靠着前世的技能和医术活了下来。而那不到一个月的王府生活，却让他得到了一个意外之礼&mdash;&mdash;苏小哲。<br />
+<br />
+五年后，再次相遇，他不记得他的模样，而他却有意要把他追回来，尤其是他的王妃...</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2018-08-28</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;古代</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;170</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/rebirth/2017-03-25/57363.html">一日夫欺百日恩（穿越包子）上——叶默凉</a>
+        </div>
+        <div class="article-abstract">文案：美好的早晨，楚君烨赖床不起。&ldquo;嗷！&rdquo;腰间忽然一痒，楚君烨瞪向面前笑得开心的温沐言，不满，&ldquo;沐言别闹了。&rdquo;他下床洗漱，温沐言摸摸鼻子想走，怎知楚君烨一个转身将他拉入怀中，贼笑：...</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-03-25</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;穿越</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;169</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/modern/2017-10-01/71406.html">娱乐圈之美味情缘（一）——弦</a>
+        </div>
+        <div class="article-abstract">娱乐圈之美味情缘（一）——弦...</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-10-01</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;现代</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;169</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/rebirth/2017-11-23/72699.html">好一个骗婚夫郎（穿越 包子 一）――老烟圈照吹</a>
+        </div>
+        <div class="article-abstract"> 文案： 陈青千辛万苦将妹妹拉扯大，幼时担心她饿了，冷了，长大又为她竖立自信怕她长歪了。看着水灵的妹子，越加担心被贪钱的大伯娘随意贱卖，只得到处替妹子寻找良配，好不容易敲定婚事，妹子到底还是招了贼眼，被那可恶的花心贼给惦记上了。 好逸恶劳的堂弟一次次将贫穷农家拖入债台高...</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-11-23</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;穿越</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;169</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/rebirth/2018-02-01/74066.html">快穿之主神攻略 上――秦轻九</a>
+        </div>
+        <div class="article-abstract"> 文案： 本文避雷方针：杰克苏，三观低，专注日常，打怪靠边，小白甜宠风，要看三观正和不杰克苏的请点叉。 以下是故事简介： 苏河篇：自闭症少年依赖哥哥被哥哥吃掉的故事。 人鱼篇：教皇囚禁人鱼的故事。 卫清河篇：大师兄被自己救下的少年扑倒了的故事。 赵笙篇：我是鬼畜精分我骄傲哦，爱大波，...</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2018-02-01</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;穿越</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;169</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/future/2017-10-01/71288.html">听说帝国元帅要养我（机甲包子）上——落樱沾墨</a>
+        </div>
+        <div class="article-abstract">听说帝国元帅要养我（机甲 包子）上——落樱沾墨...</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-10-01</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;未来</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;168</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/rebirth/2017-11-26/72883.html">重生之我们头儿又在秀媳妇 上――语</a>
+        </div>
+        <div class="article-abstract"> 文案： 自从找了个重生媳妇，简言的人生就开了挂。 破案率节节攀升，奖金拿到手软。 这媳妇长得帅，身手好，做菜一流，破案技能满点。 如此完美，简言当然要秀秀秀！ 简言：媳妇做的菜（配图），媳妇买的衣服（配图），今天胡子是媳妇刮的（配图）&amp;hellip;&amp;hellip; 笑笑：没想到你们是这样的男神&amp;hellip;&amp;he...</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-11-26</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;穿越</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;168</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/rebirth/2017-03-25/57088.html">重生之种田不难（包子）上——千岛玉</a>
+        </div>
+        <div class="article-abstract">文案：苏青重生到了古代，虽然这里没有现代化的家用电器，没有手机电视，种种田，挣点钱。本想着这样过一辈子也不错，万万没想到&amp;hellip;&amp;hellip;内容标签：生子 布衣生活 异世大陆 种田文主角：苏青┃配角：段祺瑞，...</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-03-25</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;穿越</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;167</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/rebirth/2017-07-03/70744.html">种田之何家哥儿（穿越）上——月清冷然</a>
+        </div>
+        <div class="article-abstract">种田之何家哥儿（穿越）上——月清冷然...</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-07-03</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;穿越</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;167</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/future/2018-04-08/75266.html">星际最强联姻（伪装 机甲 ABO）上――一宅三生</a>
+        </div>
+        <div class="article-abstract"> 文案： 联邦第一男神，非周瑾莫属，作为一个Omega，他几乎是完美的化身，是所有未婚alpha心中的理想对象。 而帝国第一渣男，那肯定是二皇子奥德里奇，除了长得好看点几乎一无是处，除了声色犬马就是放浪形骸，从小到大的罪行简直罄竹难书！白白浪费了他双S级的精神力。 然而，这样的人居然要...</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2018-04-08</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;未来</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;167</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/xianxia/2018-10-13/79227.html">异界（修真 穿越）上――夜陨</a>
+        </div>
+        <div class="article-abstract">文案：<br />
+<br />
+韩夜因好奇来到这异界，又因好奇收服两大先天至宝：业火红莲和灭世黑莲。<br />
+<br />
+能力越大，责任越大。天道不公，我若得道，必手持宝剑，先灭天道，再廓清寰宇，还万民一个安定平和的世界。<br />
+<br />
+与人斗，与妖斗，与仙斗。韩夜是能坚守本心，还是会迷失本性？<br />
+<br />
+什么！我爱的人就是&amp;hellip;&amp;hellip;就是...</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2018-10-13</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;修真</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;167</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/rebirth/2017-03-25/57250.html">男配逆袭之路（穿越）+番外——残红君</a>
+        </div>
+        <div class="article-abstract">文案：洛青觉得人生很无趣，于是他自杀了。死后却没有看到奈何桥孟婆汤，他又开始了一段新的游戏。这次，似乎很有趣。内容标签：强强 重生 系统 快穿主角：洛青 ┃ 配角：温良，欧阳泽，秦楠，各种男主男配 ┃ 其它：...</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-03-25</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;穿越</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;166</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/rebirth/2017-10-26/72303.html">重生之影帝每天都在耍赖上——林不欢</a>
+        </div>
+        <div class="article-abstract"> 文案：<br />
+ <br />
+又名《影帝重生成萌新后被大牌导演包养了~~》<br />
+ <br />
+秦牧秋刚获得喜欢的角色，就被高空坠物开了瓢儿~<br />
+ <br />
+醒来后他发现自己变成了影坛萌新，<br />
+ <br />
+而且似乎和新来的神秘导演有点暧昧关系~~~<br />
+ <br />
+影帝：亲热戏我演不了~~<br />
+ <br />
+导演：我来给你做示范！<br />
+ <br />
+影帝：（我流鼻血了~~好尴尬）<br />
+ <br />
+导演：（他流鼻血了~好兴奋）<br />
+ <br />
+影帝重生成别人，却发觉自己抢了自己...</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-10-26</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;穿越</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;166</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/rebirth/2018-03-16/74872.html">重生之独宠傻瓜 上――风静流</a>
+        </div>
+        <div class="article-abstract"> 文案： 前世他顾家二少不顾家人劝阻，坚持喜欢一个不该喜欢的人，又因为太过信任他而导致云城顾家家产散尽、家破人亡，父母兄嫂冤死狱中，自己成为乞丐流落街头。没想到这世上最后还一直惦记着他的，却是被他冷落后院七年没有理会的男妻，那人为了寻找他，找遍了整个诺大的云城，成为了全...</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2018-03-16</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;穿越</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;166</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/rebirth/2018-03-16/74884.html">快穿黑化爱上白莲花（一）――琼玖谦</a>
+        </div>
+        <div class="article-abstract"> 文案： 陆乐晗被自己白莲花的弟弟害死之后，一不小心被绑定了一个系统。 据说如果在小世界内完成任务就可以回去自己的世界并且获得帮助，找那个白莲花讨回公道。 可是，可是，可是 为什么任务是让我在每个世界里扮演白莲花呢，明明我是被这种生物害死的呀。 【这是让你充分了解白莲...</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2018-03-16</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;穿越</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;166</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/future/2017-03-25/57079.html">穿越星际写文（兽人）上——红颜祸水</a>
+        </div>
+        <div class="article-abstract">文案：星系第三行星是兽人星球，科技昌盛，文化却十分落后。平均寿命500年，50岁为成年，而且随着等级越高，寿命越长。兽人由于体质太过强悍，等级越高传承越困难，高等兽人族群已经12年没有幼崽出生&amp;hellip;&amp;hellip...</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-03-25</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;未来</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;165</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/rebirth/2017-03-25/57173.html">穿越之异世大尊者（包子）上——金禾</a>
+        </div>
+        <div class="article-abstract">文案：世大陆，一个神奇而美丽的地方，这里有神秘的异能和能力属性，这里有最纯粹的原始风光，但这里没有软萌的妹子，只有兽人和亚兽人。肖亚在一次安全事故中，遭人暗算，葬身火海，再次醒来他成了异世大陆的一名亚...</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-03-25</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;穿越</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;165</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/rebirth/2017-03-26/57841.html">异世之红红火火过日子（穿越包子）上——卧晓枝</a>
+        </div>
+        <div class="article-abstract">文案：大学生程向东在上学的路上，穿越了。什么情况？野兽可以变成人 ？这个世界都是带把的男人？自己是雌性？生出三个小正太？这是一个吃货穿越到异世大陆，被腹黑兽人吃干抹尽的故事。程向东：这个世界太落后了，让...</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-03-26</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;穿越</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;165</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/rebirth/2018-09-26/78821.html">云猎户的小夫郎（穿越 包子）上――黑子哲</a>
+        </div>
+        <div class="article-abstract">文案：<br />
+<br />
+对于竹溪村的人来说云猎户是个特别的存在，<br />
+<br />
+他身材魁梧，相貌英俊不说，还打得一手好猎，<br />
+<br />
+如果不是看上去凶巴巴，还不解风情，<br />
+<br />
+不知道会有多少小姑娘争着抢着往上贴。<br />
+<br />
+李家小哥儿听完这话撇撇嘴，<br />
+<br />
+那块木头有什么好的？<br />
+<br />
+不就秋天能打猎，冬天能暖手，还不介意养上一堆小拖油瓶嘛...</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2018-09-26</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;穿越</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;165</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/future/2018-01-15/73730.html">重生之末世农家乐 上――大脸饼</a>
+        </div>
+        <div class="article-abstract"> 文案： 末世第十年，江茂修第三次被评为农业第一人 站在领奖台上 江茂修依然讲着和以前一样的得奖宣言 &ldquo;感谢我家小一，感谢我家小二，感谢我家小三&rdquo; 随后一只狗 一只猫 一只兔子 趾高气扬的走上领奖台 台下一群人沉默不语 一群动物种田比他们厉害 丢不起脸&amp;hellip;...</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2018-01-15</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;未来</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;164</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/modern/2018-01-30/74027.html">带着霸道总裁好种田（包子）下+番外――潇禾湘水</a>
+        </div>
+        <div class="article-abstract"> 第53章 赵毅煊开着车来到了一个高级会所，他的好友们早就已经订好了房间在等他，赵毅煊显然是这里的熟客，大堂经理一看到赵毅煊就走上去了，只好奇的看了一眼赵毅煊抱着的孩子和他牵着的唐佳佳，然后笑成一朵菊花，说：&ldquo;赵总，您可好久没来了，最近特别忙吗？&rdquo; 赵毅煊笑了一下，...</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2018-01-30</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;现代</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;164</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/rebirth/2018-02-20/74435.html">快穿之主神归来（一）――牧白</a>
+        </div>
+        <div class="article-abstract"> 文案： 亡国太子百里辛为求时空逆转拯救灭亡的国家，绑定了位面系统，并成为了人工智脑S419M的宿主。 从此他过着秒穿、秒变脸、秒黑化的风餐露宿的日子。 古代、现代、未来、末世，机甲、血族、神魔、仙侠&amp;hellip;&amp;hellip; 他的精神力越发强横，眼看便要达成时空逆转的条件。 却...</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2018-02-20</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;穿越</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;164</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/future/2018-04-08/75315.html">末世之厉害了我的病毒 下――任千山</a>
+        </div>
+        <div class="article-abstract"> 第79章：懵懂的小雨 找到这个房间，唯一让项烽感到比较安慰的是，那罗队长的房间和他的房间在同一条街道上，相距不过百米而已。 虽是意料之外地来到基地，江雨在自己身份这个想法上也一直有隐忧。可如今到了这里，这样的担忧反而没自己一个人在山上胡思乱想时那般严重。 也许是身边...</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2018-04-08</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;未来</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;163</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/rebirth/2018-06-23/76779.html">夫夫同心，其利断金（穿越 一）――左木茶茶君</a>
+        </div>
+        <div class="article-abstract"> 文案： 现代中医唐风穿到异世小青山村，娶了父么做主为自己冲喜的哥儿，开始了他宠夫一生的异世生活&amp;hellip;&amp;hellip; 哥儿是外来户？ 没关系！ 哥儿年龄比他大？ 没关系！ 哥儿长的像汉子一样高大？ 没关系！ 哥儿&amp;hellip;&amp;hellip;？ 你烦不烦！ 没关系！没关系！我就喜欢，我就爱这个哥儿！ 宠文一对...</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2018-06-23</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;穿越</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;163</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/rebirth/2018-10-20/79337.html">快穿之总攻来袭！上――一蔻一池</a>
+        </div>
+        <div class="article-abstract">文案：<br />
+<br />
+展放是个爹不疼娘不爱的小可怜。<br />
+<br />
+后来他有了一个&ldquo;位面之主养成系统&rdquo;，心花怒放<br />
+<br />
+过去一个晚上之后&amp;hellip;&amp;hellip;心死如灰】<br />
+<br />
+怼天怼地可冷酷可邪魅的万人迷攻<br />
+<br />
+食用指南：<br />
+<br />
+1<br />
+<br />
+第二个世界男穿女，雷者可以跳过。<br />
+<br />
+2主角总攻属性。<br />
+<br />
+3苏破天际，帅裂苍穹。...</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2018-10-20</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;穿越</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;163</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/rebirth/2017-11-19/72664.html">重生之石锦宁，滚出娱乐圈上——猫花</a>
+        </div>
+        <div class="article-abstract"> 文案：<br />
+ <br />
+石锦宁因为演了一部反派角色的戏，在戏中把国民老公施裕安虐了千百遍，于是微博刷起了热门话题#石锦宁 滚出娱乐圈#<br />
+ <br />
+#石锦宁 滚出娱乐圈#演反派演得那么像，一看就不是好东西<br />
+ <br />
+#石锦宁 滚出娱乐圈#同意楼上，虐我们男神的都没有好下场！<br />
+ <br />
+石锦宁V：#石锦宁 滚出娱乐圈#我看这小伙挺好。<br />
+ <br />
+施裕安V：我也觉得转发@石锦宁V#石锦...</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-11-19</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;穿越</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;162</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/future/2018-01-07/73614.html">星际强力联姻（穿越）下――困成熊猫</a>
+        </div>
+        <div class="article-abstract"> 第86章：舅妈生气了 &ldquo;就她那样的货色还妄想做王妃？&rdquo;索兰王子的话里带着满满的嘲讽，对着通讯器另一端的人说，&ldquo;给点钱打发了，什么东西，还真以为上了我的床就能明正言顺地和我在一起？开什么玩笑。&rdquo; &ldquo;那如果她还是要继续找您呢？&rdquo;通讯器里的人小...</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2018-01-07</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;未来</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;162</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/rebirth/2017-03-25/56848.html">种田之异世幸福（穿越包子）+番外——夏天酸菜</a>
+        </div>
+        <div class="article-abstract">文案：代平凡人，在只有哥和小子异世的幸福生活平平凡凡种田文，悠悠哉哉小日子先苦后甜 白手起家 坚持1VS1不动摇内容标签： 随身空间 种田文 布衣生活主角：李坚吴悠第1章：现代的日子李坚，现代北方二级城市普通的...</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-03-25</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;穿越</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;161</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/rebirth/2017-03-25/57330.html">系统之农家乐小包子（包子）上——幽河小子</a>
+        </div>
+        <div class="article-abstract">文案：张昊城肚子一天天的变大，村里人忽然就发现有一天张昊城瘦了下来，身边还多了两个娃！PS：本书就是猪脚带着系统承包池塘，搞搞农家乐，然后带包子的故事！金手指粗壮，爽文！强强，重点是有生XX，非喜误入！内...</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-03-25</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;穿越</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;161</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/fantasy/2017-03-26/57880.html">异界之家长里（穿越包子）上——细雨纷纷0425</a>
+        </div>
+        <div class="article-abstract">文案：只是抱怨了一下最近倒霉的人生，怎么一晃眼之间，已经身处他乡了。好不容易从农村进军到城市，这一朝回到解放前是肿么一回事？还有，这一堆仿若非洲难民的萝卜头，外加一个大肚子男人？哦，买糕的，我能不能去...</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-03-26</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;玄幻</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;161</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/rebirth/2017-04-01/63148.html">金屋藏鲛（穿越包子）上——兰拓</a>
+        </div>
+        <div class="article-abstract"> 文案： 被爱人推下海的瞬间，胡皎的内心是咆哮的：卧槽我真没想对你这样恶心的出轨渣男死缠烂打啊！至于斩草除根吗？！ 贱人你给我等着！小爷我变成鬼也不会放过你的！！！ 纳尼？！这个长着一条金色鱼尾巴的人or鱼...</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-04-01</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;穿越</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;161</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/rebirth/2018-03-13/74827.html">穿越种田之文恬武嬉（包子）上――斯源</a>
+        </div>
+        <div class="article-abstract"> 文案： 田恬瞪大眼睛，纳尼？偶和那弱受私奔？ 奚曦撇嘴皱眉，点点头 田恬头顶冒烟，要私奔，偶也是得拉个你这样的私奔吧！ 奚曦脸上有些不自然，咱&amp;hellip;&amp;hellip;咱们本就是私奔出来的。 田恬仓鼠脸：&amp;hellip;&amp;hellip; 硬汉攻&amp;没心没肺受 穿越文，男男生子，不是土着 内容标签：生子 种田文 近...</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2018-03-13</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;穿越</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;161</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/rebirth/2018-03-24/75021.html">快穿之我从不作死 上――杨乔萝</a>
+        </div>
+        <div class="article-abstract"> 文案： 顾时一在第二次穿梭的时候换了一个智能系统，任务是攻略，然后&amp;hellip;&amp;hellip; 来自系统的投诉信： 投诉！宿主每次任务都把自己作到攻君床上，还不认！ 他们卿卿我我老关我小黑屋我都忍了，攻他还总想把我送去重造！[大哭] 来自宿主的辩解书： 污蔑！明明是那个混蛋他不按剧本走！ 我能...</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2018-03-24</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;穿越</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;161</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/rebirth/2018-04-12/75387.html">快穿公平交易（包子）上――晓云千里</a>
+        </div>
+        <div class="article-abstract"> 文案： 现代大叔迫于生活压力，与神秘人达成交易，穿越十个世界找到选定之人，你们教我技能，我为你们生猴子。于是暗夜帝王，吸血鬼亲王，商场巨鳄，清朝太子&amp;hellip;&amp;hellip; 主受，生子，甜文，偶有小虐。 本文又名：技能换生子，这是你跟我的公平交易。 一切为了一百万！ 每一世的小攻都是同一灵...</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2018-04-12</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;穿越</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;161</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/terror/2018-04-19/75518.html">攻略那条锦鲤 上――暗夜光行</a>
+        </div>
+        <div class="article-abstract"> 文案： 特别注明：本文并不修仙。 周镜离，一条修炼了九千九百九十年的锦鲤，还差十年就可以成为寿与天齐的上仙，却不小心弄丢了自己的命魄元丹&amp;hellip;&amp;hellip; 为了生存下去，周镜离化身凡人，并修炼了一项技能，配音。 十年里，他成就了无数的影帝，创造了无数的经典。 即将十年期满的时...</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2018-04-19</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;灵异</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;161</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/rebirth/2017-03-26/57608.html">重生之田园风光上——落叶悲秋</a>
+        </div>
+        <div class="article-abstract">文案：夏晨重生前最后悔的事情有三件：第一件是一直死心塌地爱上一个男人，最后才发现那个男人根本不爱他。第二件是伤害了那个爱他的男人，让他不得不狠心的离他而去。第三件是没有留下那个上天赐予的宝贝。本文现代...</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-03-26</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;穿越</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;160</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/same/2018-02-05/74112.html">大老爷的逆袭之路（红楼 穿越 一）――天下皆呆</a>
+        </div>
+        <div class="article-abstract"> 文案： 穿到现代的贾赦又穿回了第一世，又活了一世，这一世，他不想再窝囊的躲在马棚旁的院子里荒唐过一辈子。 &ldquo;皇上，您不觉得这个水泥路挺好的？&rdquo; &ldquo;国库没钱&rdquo; &ldquo;皇上，您不觉得橡胶挺好的&rdquo; &ldquo;国库没钱&rdquo; &ldquo;皇上，您不觉得这个枪挺...</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2018-02-05</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;同人</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;160</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/future/2018-04-08/75274.html">病弱公子在帝国 上――水月儿月色月</a>
+        </div>
+        <div class="article-abstract"> 文案： 韦楚生来体弱，平平淡淡过了十九年，本以为撒手人寰，谁知竟托生在&ldquo;妖界&rdquo;？还变成了omega？？ 韦楚：让我静静 帝国第一将普里策在对抗虫族时受了不明物的干扰，受了重伤成了废人，从此他的地位一落千丈。拼着最后一点筹码向君主要来了omega生个小娃以求娃慰藉，谁知还是个...</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2018-04-08</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;未来</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;160</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/rebirth/2018-04-20/75539.html">小书生圈夫记（穿越）下――迎风布阵</a>
+        </div>
+        <div class="article-abstract"> 第40章 陆氏一族的下场果然震慑到了小潭村村民，陆放舟召他们重签租约的时候，大伙都是服服帖帖的，大气不敢喘一声。 尤其是那几户曾经欺负陆放舟和二妞过的，更是头都不敢抬。 陆放舟清了嗓子，说了通既往不咎，但绝不姑息养奸的台面话，然后开始重新租约，租金与其余庄子一致，未高也未...</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2018-04-20</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;穿越</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;160</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div><div class="article">
+    <div class="article-body">
+        <div class="article-title">
+            <a href="https://flymore.ga/book/future/2017-03-25/57406.html">末世重生路上——炑珧</a>
+        </div>
+        <div class="article-abstract">文案：末世重生归来，虽然有着前世的记忆，却没料到末世竟是提前降临。有空间有异能，有亲人有情人，有朋友有队友，活下去才是真道理。备注：主受，年下，1vs1。内容标签：末世 重生主角：徐杨，贺延峰  ┃ 其它：末...</div>
+    </div>
+    <div class="clear"></div>
+    <div class="article-footer">
+        <span><i class="fa fa-clock-o"></i>&nbsp;2017-03-25</span>
+        <span class="article-list"><i class="fa fa-list"></i>&nbsp;未来</span>
+        <span class="article-viewinfo"><i class="fa fa-eye"></i>&nbsp;159</span>
+        <span class="article-viewinfo"><i class="fa fa-comment"></i>&nbsp;0</span>
+    </div>
+</div>
+        <div id="paging"><a title="Total record">&nbsp;<b>1000</b> </a>&nbsp;&nbsp;<a href="https://flymore.ga/html/hots/index.html">首页</a>&nbsp;<a href="https://flymore.ga/html/hots/index_4.html">上一页</a>&nbsp;<a href="https://flymore.ga/html/hots/index_3.html">3</a>&nbsp;<a href="https://flymore.ga/html/hots/index_4.html">4</a>&nbsp;<b>5</b>&nbsp;<a href="https://flymore.ga/html/hots/index_6.html">6</a>&nbsp;<a href="https://flymore.ga/html/hots/index_7.html">7</a>&nbsp;<a href="https://flymore.ga/html/hots/index_6.html">下一页</a>&nbsp;<a href="https://flymore.ga/html/hots/index_20.html">尾页</a></div>
+
+
+
+    </div>
+
+    <div class="layui-col-md4">
+
+        <div class="fly-panel" style="padding: 20px 0; text-align: center;">
+            <div class="layui-anim avatar"><a href="javascript:"><img alt="再賤就再見" src="https://flymore.ga/skin/default/images/avatar.jpg" style="width:120px; height:120px; border-radius:100%;"></a></div>
+            <h1>
+                <a href="javascript:" style="font-size: 24px">再賤就再見</a>
+                <i class="layui-icon layui-icon-male" style="font-size: 22px; color: #1E9FFF;"></i>
+            </h1>
+            <p style="color: #999999;margin: 8px">
+                <a href="mailto:iflymore@yandex.com" target="_blank" title="email"><i class="layui-icon layui-icon-email" style="padding-right: 5px;"></i> <span>联系我们</span></a>
+                &nbsp;<i class="layui-icon layui-icon-location"></i> <span>耽美 - 中国</span>
+            </p>
+            <p style="color: #999999;margin: 8px">為每一位到來的朋友，傳遞純真的夢想！</p>
+            <hr />
+            <div>
+                <a href="https://t.me/xbbchat" target="_blank" title="telegram"><i class="layui-icon layui-icon-release"  style="font-size: 32px;padding-right: 15px;"></i></a>
+                <a href="https://paypal.me/flymore/" target="_blank" title="paypal"><i class="layui-icon layui-icon-dollar" style="font-size: 32px;padding-right: 15px;"></i></a>
+                <a href="mailto:iflymore@yandex.com" target="_blank" title="service"><i style="font-size: 32px;" class="layui-icon layui-icon-service"></i></a>
+            </div>
+        </div>
+
+        <dl class="fly-panel fly-list-one">
+            <dt class="fly-panel-title"><i class="layui-icon layui-icon-read"></i>  最新小説</dt>
+                        <dd>[其他]<a href="https://flymore.ga/book/other/2020-04-06/91693.html">穿书之怀上豪门老男人的孩子（包子）下+番外――甜腻小米粥</a> <span><i class="layui-icon">&#xe60e;</i> 2020-04-06</span></dd>
+                        <dd>[其他]<a href="https://flymore.ga/book/other/2020-04-06/91692.html">穿书之怀上豪门老男人的孩子（包子）中――甜腻小米粥</a> <span><i class="layui-icon">&#xe60e;</i> 2020-04-06</span></dd>
+                        <dd>[其他]<a href="https://flymore.ga/book/other/2020-04-06/91691.html">穿书之怀上豪门老男人的孩子（包子）上――甜腻小米粥</a> <span><i class="layui-icon">&#xe60e;</i> 2020-04-06</span></dd>
+                        <dd>[其他]<a href="https://flymore.ga/book/other/2020-04-06/91690.html">快穿之破坏者――零点风浅</a> <span><i class="layui-icon">&#xe60e;</i> 2020-04-06</span></dd>
+                        <dd>[其他]<a href="https://flymore.ga/book/other/2020-04-06/91689.html">老子今天不信鬼――鲤什么</a> <span><i class="layui-icon">&#xe60e;</i> 2020-04-06</span></dd>
+                        <dd>[其他]<a href="https://flymore.ga/book/other/2020-04-06/91688.html">末日之黑暗后的曙光（五）+番外――北冥魑</a> <span><i class="layui-icon">&#xe60e;</i> 2020-04-06</span></dd>
+                        <dd>[其他]<a href="https://flymore.ga/book/other/2020-04-06/91687.html">末日之黑暗后的曙光（四）――北冥魑</a> <span><i class="layui-icon">&#xe60e;</i> 2020-04-06</span></dd>
+                        <dd>[其他]<a href="https://flymore.ga/book/other/2020-04-06/91686.html">末日之黑暗后的曙光（三）――北冥魑</a> <span><i class="layui-icon">&#xe60e;</i> 2020-04-06</span></dd>
+                        <dd>[其他]<a href="https://flymore.ga/book/other/2020-04-06/91685.html">末日之黑暗后的曙光（二）――北冥魑</a> <span><i class="layui-icon">&#xe60e;</i> 2020-04-06</span></dd>
+                        <dd>[其他]<a href="https://flymore.ga/book/other/2020-04-06/91684.html">末日之黑暗后的曙光（一）――北冥魑</a> <span><i class="layui-icon">&#xe60e;</i> 2020-04-06</span></dd>
+                    </dl>
+
+        <dl class="fly-panel fly-list-one">
+            <dt class="fly-panel-title"><i class="layui-icon layui-icon-read"></i>  推荐小説</dt>
+                        <dd>[玩觅]<a href="https://flymore.ga/book/emotion/2019-10-04/87354.html">舍不得说再见，但已到离别时</a> <span><i class="layui-icon">&#xe60e;</i> 2019-10-04</span></dd>
+                        <dd>[未来]<a href="https://flymore.ga/book/future/2018-10-21/79389.html">星际之你婚求得太早 上――月寂烟雨</a> <span><i class="layui-icon">&#xe60e;</i> 2018-10-21</span></dd>
+                        <dd>[穿越]<a href="https://flymore.ga/book/rebirth/2018-10-20/79382.html">快穿之黑化主角的100种方法 上――煤炭里的黑猫</a> <span><i class="layui-icon">&#xe60e;</i> 2018-10-20</span></dd>
+                        <dd>[穿越]<a href="https://flymore.ga/book/rebirth/2018-10-20/79337.html">快穿之总攻来袭！上――一蔻一池</a> <span><i class="layui-icon">&#xe60e;</i> 2018-10-20</span></dd>
+                        <dd>[穿越]<a href="https://flymore.ga/book/rebirth/2018-10-20/79333.html">炮灰逆袭探案系统（穿越）上――风</a> <span><i class="layui-icon">&#xe60e;</i> 2018-10-20</span></dd>
+                        <dd>[穿越]<a href="https://flymore.ga/book/rebirth/2018-10-17/79286.html">快穿之科学修真的五好家庭 上――羽小树</a> <span><i class="layui-icon">&#xe60e;</i> 2018-10-17</span></dd>
+                        <dd>[穿越]<a href="https://flymore.ga/book/rebirth/2018-10-17/79247.html">快穿之我为主角播撒智商（一）――送君十里</a> <span><i class="layui-icon">&#xe60e;</i> 2018-10-17</span></dd>
+                        <dd>[未来]<a href="https://flymore.ga/book/future/2018-10-13/79231.html">星际最强纹章师（穿越 修真 机甲）上――醉染轻歌</a> <span><i class="layui-icon">&#xe60e;</i> 2018-10-13</span></dd>
+                        <dd>[未来]<a href="https://flymore.ga/book/future/2018-10-10/79145.html">星际修真宗师（穿越 一）――华飞白</a> <span><i class="layui-icon">&#xe60e;</i> 2018-10-10</span></dd>
+                        <dd>[穿越]<a href="https://flymore.ga/book/rebirth/2018-10-06/79064.html">快穿之我有病（一）――呼啦圈x</a> <span><i class="layui-icon">&#xe60e;</i> 2018-10-06</span></dd>
+                    </dl>
+
+        <dl class="fly-panel fly-list-one">
+            <dt class="fly-panel-title"><i class="layui-icon layui-icon-read"></i>  熱門小説</dt>
+                        <dd>[穿越]<a href="https://flymore.ga/book/rebirth/2018-01-10/73670.html">夫夫孩子热炕头（穿越 一）――初吻江湖</a> <span><i class="layui-icon">&#xe60e;</i> 2018-01-10</span></dd>
+                        <dd>[未来]<a href="https://flymore.ga/book/future/2018-04-09/75321.html">星际之元帅请淡定（穿越 一）――莫土</a> <span><i class="layui-icon">&#xe60e;</i> 2018-04-09</span></dd>
+                        <dd>[穿越]<a href="https://flymore.ga/book/rebirth/2017-11-12/72565.html">重生之一品男妻（一）——枫香</a> <span><i class="layui-icon">&#xe60e;</i> 2017-11-12</span></dd>
+                        <dd>[未来]<a href="https://flymore.ga/book/future/2017-10-07/71962.html">星际强制婚姻上——优酸乳</a> <span><i class="layui-icon">&#xe60e;</i> 2017-10-07</span></dd>
+                        <dd>[其他]<a href="https://flymore.ga/book/other/2018-01-08/73634.html">婚婚欲睡（一）――廿乱</a> <span><i class="layui-icon">&#xe60e;</i> 2018-01-08</span></dd>
+                        <dd>[穿越]<a href="https://flymore.ga/book/rebirth/2017-10-12/72023.html">重生之丑哥儿种田记上——左木茶茶君</a> <span><i class="layui-icon">&#xe60e;</i> 2017-10-12</span></dd>
+                        <dd>[穿越]<a href="https://flymore.ga/book/rebirth/2018-05-20/76130.html">快穿之炮灰成神之路（八）――沉一鱼</a> <span><i class="layui-icon">&#xe60e;</i> 2018-05-20</span></dd>
+                        <dd>[未来]<a href="https://flymore.ga/book/future/2018-05-29/76291.html">重生之帝后难追（包子 机甲）上――沈闲辞</a> <span><i class="layui-icon">&#xe60e;</i> 2018-05-29</span></dd>
+                        <dd>[未来]<a href="https://flymore.ga/book/future/2017-11-12/72580.html">重生之末世天灾（一）——浪花点点</a> <span><i class="layui-icon">&#xe60e;</i> 2017-11-12</span></dd>
+                        <dd>[未来]<a href="https://flymore.ga/book/future/2017-10-07/71949.html">重生之星际宠婚手册上——衣青箬</a> <span><i class="layui-icon">&#xe60e;</i> 2017-10-07</span></dd>
+                    </dl>
+    </div>
+
+
+    </div>
+    </div>
+
+    <div class="fly-footer">
+    <p>Copyright &copy; 2013-<script type='text/javascript'>var creditsyear = new Date();document.write(creditsyear.getFullYear());</script> <a href="https://www.flymore.ga">丹樂網</a></p>
+    <p class="layui-hide-xs">本站所有内容全部来源于互联网，版权归属于原作者，如果对作品内容、版权等方面有质疑，或对本站有意见建议请发送Email至<a href='mailto:iflymore@yandex.com'>iflymore@yandex.com</a>，感谢您的合作与支持。</p>
+</div>
+
+<a href="#" id="back-to-top"><i class="layui-icon" style="font-size: 36px;">&#xe604;</i></a>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/layui-src@2.5.4/dist/layui.js"></script>
+<script src='https://flymore.ga/skin/default/js/lang.min.js'></script>
+<script src="https://flymore.ga/skin/default/js/site.min.js"></script>
+    </body>
+</html>
