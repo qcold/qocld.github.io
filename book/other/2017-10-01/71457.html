@@ -1,0 +1,2087 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="webkit" name="renderer">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="telephone=no" name="format-detection">
+    <title>密码学的七道习题——芥末君 - 其他攻受 - 丹樂文庫 - 丹樂網 - 完結耽美文珍藏書庫</title>
+    <meta content="芥末君" name="keywords">
+    <meta content="密码学的七道习题——芥末君" name="description">
+    <link href="https://cdn.jsdelivr.net/npm/layui-src@2.5.4/dist/css/layui.css" rel="stylesheet">
+<link href="/skin/default/css/site.min.css" rel="stylesheet" />
+<link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
+<!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+<!--[if lt IE 9]>
+<script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+<script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+<div class="layui-bg-black fly-header">
+    <div class="layui-container">
+        <a class="fly-logo" href="https://flymore.ga/">
+            <img alt="qcold" src="https://flymore.ga/skin/default/images/logo-q.png">
+        </a>
+        <ul class="layui-nav fly-nav" lay-filter="">
+            <li class="layui-nav-item layui-hide-xs">
+                <a href="javascript:"><i class="layui-icon layui-icon-fire"></i> 排行榜</a>
+                <dl class="layui-nav-child"> <!-- 二级菜单 -->
+                    <dd><a href="https://flymore.ga/html/good/">推荐排行</a></dd>
+                    <dd><a href="https://flymore.ga/html/hots/">总点击榜</a></dd>
+                    <dd><a href="https://flymore.ga/html/year/">年点击榜</a></dd>
+                    <dd><a href="https://flymore.ga/html/season/">季点击榜</a></dd>
+                    <dd><a href="https://flymore.ga/book/">新鲜上线</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item layui-hide-xs">
+                <a href="https://flymore.ga/book/"><i class="layui-icon layui-icon-fire"></i> 分类</a>
+                <dl class="layui-nav-child"> <!-- 二级菜单 -->
+                    <dd><a href="https://flymore.ga/book/future/">末世机甲</a></dd>
+                    <dd><a href="https://flymore.ga/book/modern/">现代都市</a></dd>
+                    <dd><a href="https://flymore.ga/book/antiquity/">古风雅韵</a></dd>
+                    <dd><a href="https://flymore.ga/book/rebirth/">穿越重生</a></dd>
+                    <dd><a href="https://flymore.ga/book/fantasy/">玄幻网游</a></dd>
+                    <dd><a href="https://flymore.ga/book/xianxia/">仙侠修真</a></dd>
+                    <dd><a href="https://flymore.ga/book/terror/">灵异神怪</a></dd>
+                    <dd><a href="https://flymore.ga/book/same/">耽美同人</a></dd>
+                    <dd><a href="https://flymore.ga/book/other/">耽美其他</a></dd>
+                    <dd><a href="https://flymore.ga/book/emotion/">酷儿话题</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item layui-hide-xs">
+                <a class="donate" href="javascript:"><i class="layui-icon layui-icon-diamond"></i> 赞助我们</a>
+            </li>
+        </ul>
+        <ul class="layui-nav fly-nav-user">
+            <li class="layui-nav-item">
+                <a href="javascript:" id="search"><i class="layui-icon layui-icon-search" style="font-size: 24px;"></i></a>
+            </li>
+            <script src="https://flymore.ga/e/member/login/loginjs.php"></script>
+        </ul>
+    </div>
+</div>
+
+<div class="fly-panel fly-column layui-hide-sm layui-show-xs menuBar" style="display: none">
+    <div class="layui-container">
+        <ul class="layui-clear">
+            <li><a href='https://flymore.ga/book/future/'>科幻</a></li>
+            <li><a href='https://flymore.ga/book/modern/'>现代</a></li>
+            <li><a href='https://flymore.ga/book/antiquity/'>古代</a></li>
+            <li><a href='https://flymore.ga/book/rebirth/'>穿越</a></li>
+            <li><a href='https://flymore.ga/book/fantasy/'>玄幻</a></li>
+            <li><a href='https://flymore.ga/book/xianxia/'>仙侠</a></li>
+            <li><a href='https://flymore.ga/book/terror/'>灵异</a></li>
+            <li><a href='https://flymore.ga/book/same/'>同人</a></li>
+            <li><a href='https://flymore.ga/book/other/'>其他</a></li>
+            <li><a href="https://flymore.ga/book/emotion/">玩觅 <span class="layui-badge-dot"></span></a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="layui-container">
+    <div class="layui-col-md7" style="display: none;position: fixed;background-color: #515a6e; opacity: 0.8;z-index: 10;">
+        <div class="fly-panel" id="search-bar"  style="background-color: #515a6e;padding: 20px 20px; text-align: center;">
+            <form action='https://flymore.ga/e/search/index.php' class="layui-form" method='post'>
+                <input class="layui-input" id='words' name='keyboard' placeholder="檢索功能已停止使用" style="width: 70%;display: inline-block" type="text">
+                <input name="show" type="hidden" value="title,writer,newstext"/>
+                <input name="tempid" type="hidden" value="1"/>
+                <button class="layui-btn" lay-filter="searchSubmit" lay-submit style="width:20%;display:inline-block">檢索</button>
+            </form>
+            <div class="fly-tags" style="margin-top: 10px"><a href="https://flymore.ga/e/tags/?tagid=413" target="_blank">穿越</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=3950" target="_blank">重生</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=1638" target="_blank">强强</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4192" target="_blank">甜文</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=2718" target="_blank">生子</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4107" target="_blank">包子</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4216" target="_blank">都市</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4187" target="_blank">修真</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4181" target="_blank">种田</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4158" target="_blank">娱乐圈</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4102" target="_blank">系统</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=1660" target="_blank">年下</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4193" target="_blank">灵异</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=25" target="_blank">同人</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=306" target="_blank">男人</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4248" target="_blank">豪门</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=2449" target="_blank">HE</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4005" target="_blank">宫廷</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4273" target="_blank">空间</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4199" target="_blank">末世</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4554" target="_blank">1V1</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=370" target="_blank">网游</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=2442" target="_blank">自由自在</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=3975" target="_blank">架空</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4285" target="_blank">励志</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4250" target="_blank">异能</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4124" target="_blank">异世</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=412" target="_blank">时空</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4318" target="_blank">快穿</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=427" target="_blank">哥哥</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=91" target="_blank">少年</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4272" target="_blank">机甲</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=385" target="_blank">游戏</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4369" target="_blank">网配</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=6883" target="_blank">长生千叶</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4105" target="_blank">莫晨欢</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=6617" target="_blank">叶忆落</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=4471" target="_blank">虐恋</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=129" target="_blank">幸福</a> &nbsp; <a href="https://flymore.ga/e/tags/?tagid=5082" target="_blank">颜若优雅</a></div>
+        </div>
+    </div>
+    <div class="layui-row layui-col-space15">
+
+
+    <div class="layui-col-md12">
+        <div class="home-tips">
+            <i class="layui-icon" style="float:left;line-height:17px;color: #009688;font-size: 22px;">&#xe645;</i>
+            <div class="home-tips-container">
+                                <span style="color: red;padding-left: 5px;"><a href="https://flymore.ga/book/emotion/2019-10-04/87354.html" target="_blank">舍不得说再见，但已到离别时</a></span>
+                                <span style="color: red;padding-left: 5px;"><a href="https://flymore.ga/book/emotion/2018-01-06/73604.html" target="_blank">书友必看：打开追梦网的正确姿势</a></span>
+                            </div>
+        </div>
+    </div>
+
+    <div class="layui-col-md8 content detail">
+        <div class="fly-panel">
+            <div class="fly-panel-title fly-filter">
+                <span class="layui-breadcrumb" lay-separator=">">
+                  <a href="https://flymore.ga/index.html">首页</a>&nbsp;>&nbsp;<a href="https://flymore.ga/book/">文库</a>&nbsp;>&nbsp;<a href="https://flymore.ga/book/other/">其他攻受</a>                </span>
+            </div>
+        </div>
+
+        <div class="fly-panel detail-box">
+            <h1>密码学的七道习题——芥末君</h1>
+            <div class="fly-detail-info">
+                <span><i class="layui-icon">&#xe612;</i> 芥末君</span><span><i class="layui-icon layui-icon-read"></i> <script src=https://flymore.ga/e/public/ViewClick/?classid=10&id=71457&addclick=1></script></span><span><i class="layui-icon">&#xe60e;</i> 2017-10-01 21:26:31</span>
+            </div>
+            <div class="detail-about">
+                TAGS：<span><a href="https://flymore.ga/e/tags/?tagid=7732" target="_blank">芥末君</a></span>
+            </div>
+            <div class="detail-body photos"><p>&nbsp;文案:</p>
+<div>&nbsp;</div>
+<div>只是本格的傻白甜</div>
+<div>&nbsp;</div>
+<div>序</div>
+<div>&nbsp;</div>
+<div>平成18年11月初，对本州来说还是秋末，札幌却早已迎来延绵大半个月的风雪。</div>
+<div>&nbsp;</div>
+<div>这场雪刚开始的时候，庭院中的挪威枫还未落完叶。枫叶飘落在新雪上，如同雪泥鸿爪，又好像白潭赤鲤，有种时间倒错的美感。时至今日，诸位名贵的银杏红枫想必已同这株平民的挪威枫一齐被深雪埋掉了半截树干，饶是今春已然见识过枯木逢春景象的我，也忍不住怀疑明年是否还有缘与它们再会。</div>
+<div>&nbsp;</div>
+<div>绘楠拖延了小半个月的低烧就在这种天气里痊愈。好不容易恢复了活力，偏偏碰上这样的大雪，他糟糕的心情全部写在脸上。我很理解绘楠的感受，但还是毫不留情地勒令他再留在家里休养一天。</div>
+<div>&nbsp;</div>
+<div>于是今天、也就是拘禁令失效之日，清晨时分被生物钟唤醒的刹那，我刚刚睁眼，就对上了一张极度放大的、面无表情的漂亮脸蛋。</div>
+<div>&nbsp;</div>
+<div>&ldquo;&hellip;&hellip;明白了，那么，今天去立原的店看看吧。&rdquo;</div>
+<div>&nbsp;</div>
+<div>我叹了口气，慢吞吞掀开被子和趴在被子上的绘楠，爬起来整理仪容。根本不需要问绘楠为什么会难得地早起还跑来我房间偷袭。这个人任性得要命，感到无聊的时候攻击性会成倍增长。</div>
+<div>&nbsp;</div>
+<div>绘楠的真名是类似于铃木一郎的没有存在感的名字，我只在签租房协议的时候见过一次。而&ldquo;绘楠&rdquo;这个听起来有点女孩子气的昵称，其涵义则更加奇怪，是取自英文字母X的发音，在汉字里挑选了漂亮的字而得来的。</div>
+<div>&nbsp;</div>
+<div>乍一听闻会觉得这种做法简直像是不讲道理的小孩子，但仔细考虑一下，&ldquo;札幌&rdquo;也是由假名挑出来的汉字，只好苦笑着说绘楠这是入乡随俗、一脉相承的任性。</div>
+<div>&nbsp;</div>
+<div>实际上，绘楠来到札幌的理由也任性得不得了。</div>
+<div>&nbsp;</div>
+<div>前景光明的东大院生，由着兴趣便离开了大都会东京，来到札幌这种小地方，甚至仅仅因为有观景落地窗就奢侈地租赁了这栋价格很贵、状况也并不是很好的房子，还为此花去了生活费用的大半&mdash;&mdash;哪怕已经同居了半年还有多，绘楠的人生理念对我来说仍然是个谜。</div>
+<div>&nbsp;</div>
+<div>雪还在落。</div>
+<div>&nbsp;</div>
+<div>雪地上犁出的沟壑隐隐可见，想必是扫雪车清晨的工作成果，其上却又已积起了二十公分的新雪。我慢吞吞地拿出冰冷的钥匙锁好家门，深吸一口气，踏进了雪地，感觉时间都潮乎乎地漫进靴子里，吱呀作响。</div>
+<div>&nbsp;</div>
+<div>&ldquo;青浦先生又忘了今天的密码啊。&rdquo;绘楠从后面追上来，声音听起来有点不满。他因为冬天不想摘手套的缘故，打算把公寓的机械锁换成先进的电子锁，还为此特地制作了厚厚一叠据说绝对无法破译的密码表。</div>
+<div>&nbsp;</div>
+<div>&mdash;&mdash;很抱歉啦，这个提高周围社区自动化程度的计划，因为我的缘故，已经搁浅了大半年。</div>
+<div>&nbsp;</div>
+<div>&ldquo;太难了&hellip;&hellip;&rdquo;我缩了缩脖子，嘀咕道，&ldquo;饶了我吧，整整13页的密码表&mdash;&mdash;拜托稍微体谅一下正常智力水准的人类啊。&rdquo;</div>
+<div>&nbsp;</div>
+<div>话刚落音，就莫名其妙地被绘楠瞪了一眼。</div>
+<div>&nbsp;</div>
+<div>我其实有点怕冷，今天也是努力把自己裹成球；相较而言绘楠就一向穿得骚包，但毕竟是感冒初愈，在我的严厉监督下他也换上了很厚的外套和围巾，此刻正不耐烦地拽着围巾边缘试图把它扯松一点。</div>
+<div>&nbsp;</div>
+<div>&ldquo;喂&hellip;&hellip;不想戴就给我好不好？&rdquo;</div>
+<div>&nbsp;</div>
+<div>气温太低，我讲话时嘴里都会呼出白气，仔细看说不定还能发现细小的冰晶。不明来路的寒风吹得衣摆猎猎作响。札幌的这个天气真是太可怕了。</div>
+<div>&nbsp;</div>
+<div>绘楠停下了揪围巾的动作，回头看我：&ldquo;青浦先生冷吗？&rdquo;</div>
+<div>&nbsp;</div>
+<div>答案显然是肯定的。</div>
+<div>&nbsp;</div>
+<div>绘楠侧头想了想，摘掉了手套，把手伸进我的羽绒服口袋与我的手掌交握。</div>
+<div>&nbsp;</div>
+<div>虽然很想告诉他这样并不会更暖和，只会使被撑开的衣袋口变得透风，但毕竟是来自绘楠的温柔，实在是难能可贵、值得珍惜。我默默回握住他的手，翘首盼望着快点到达目的地。</div>
+<div>&nbsp;</div>
+<div>立原的店是一家中古书屋，因为老板的姓而得名。店址在北七条西六这边，离学校和绘楠的房子都很近。</div>
+<div>&nbsp;</div>
+<div>说到这里，必须要抱怨札幌毫无意趣的地名：首先行政分区就是直截了当的东西南北中，街道也是横平竖直，再加上简单粗暴的&ldquo;北X条西Y丁目&rdquo;的划分，按照绘楠的说法，简直可以就地建立一套笛卡尔坐标系。</div>
+<div>&nbsp;</div>
+<div>要我讲，这就是没有历史底蕴的城市缺憾；绘楠却认为这样的命名方式一目了然，对游客非常友好。可是游客难道不会更喜欢&ldquo;长者町&rdquo;、&ldquo;上御灵前通&rdquo;这种一听就很有故事的地名吗？果然还是因为没有历史底蕴吧&hellip;&hellip;</div>
+<div>&nbsp;</div>
+<div>立原的店主营是教辅类书籍，顾客大部分是学生。虽然招牌破破烂烂的，连店名也被岁月侵蚀得字迹模糊，店里却是名副其实的聚宝盆，各种各样的书籍都有。</div>
+<div>&nbsp;</div>
+<div>第一次被绘楠带到这家店的时候，我完全无法理解把逛中古教辅书店作为消遣的念头，还以为这是某种属于精英的专门产业，直到真正站在书架前、亲手触摸到沉淀着阅读历史的纸张，才逐渐懂得了这家店的独到之处。</div>
+<div>&nbsp;</div>
+<div>大概是来得很勤的缘故，立原的店里不论是年轻可爱的大学生兼职店员、深藏不露的中年大叔立原店长、甚至那只品种不明的傲慢猫咪，对绘楠和我都相当熟悉。立原店长亲切地介绍了说最近到了一本新书，我回头想找绘楠一起来听，却发现他已经闷不吭声地消失在了书海里。</div>
+<div>&nbsp;</div>
+<div>道过谢，我顺着立原老板指的方向，穿梭于高过视线范围的书架之间独自翻找。这边是理工类的书目，我身边围绕着的全是连书脊都看不懂的内容，一时间仿佛置身异国他乡，又是恐慌又是新奇。</div>
+<div>&nbsp;</div>
+<div>这边的中古书籍看起来普遍比较新，只有拐角的木箱子里散落着一本格格不入的陈旧纸制品，看上去至少有十年历史了。未扯尽的邮政包裹封条还残留在封面上，我捡起那本活页簿翻开，恍然道：&ldquo;是笔记啊。&rdquo;</div>
+<div>&nbsp;</div>
+<div>立原的店有时会卖一些学生笔记，甚至还有民俗学家的田野调查。那些乡野趣谈对于我这样野路子的三流作家来说是至高的福音。顺带一提，我曾经买到过一本题为《札幌消防署怪谈调查》的非官方猎奇笔记，可惜内容并不像标题那样耸人听闻。</div>
+<div>&nbsp;</div>
+<div>手上这本笔记，大概因为是理工学科的内容，书页间奇妙的罗马字和希腊字母飘得我眼睛都要花。仔细辨认之后，我在其中发现了大量意味不明的文本，看起来像是日耳曼语族的某种语言，却完全无法在那些字母排列中找到熟悉感。</div>
+<div>&nbsp;</div>
+<div>&mdash;&mdash;咳，说来不好意思，我可是周游过欧洲列国、见识过七种语言的流浪作家啊。</div>
+<div>&nbsp;</div>
+<div>&hellip;&hellip;都是入门级。</div>
+<div>&nbsp;</div>
+<div>翻开扉页，漂亮清爽的手写字体用片假名和阿拉伯数字写明了奇妙的标题。我努力拼读了半天才意识到クリプトグラフィ对应的英文是Cryptography，这样看来，标题全称是《密码学的七道习题》。</div>
+<div>&nbsp;</div>
+<div>&ldquo;&hellip;&hellip;好像很有趣。&rdquo;</div>
+<div>&nbsp;</div>
+<div>而且恰好是绘楠会喜欢的那种。</div>
+<div>&nbsp;</div>
+<div>正想着他，绘楠便从背后出现了，目前还是空手的状态。我把笔记递给他，指着扉页还来不及介绍什么，就看到了绘楠挑高的眉梢。这是他遇到感兴趣的事情时的直接反应，接下来的戏码必然是像小孩子一样、看到喜欢的东西就不撒手了。</div>
+<div>&nbsp;</div>
+<div>出乎意料地，绘楠在粗粗翻阅一遍之后，虽然表情与神色明显是在意的，却还是把笔记还给了我。</div>
+<div>&nbsp;</div>
+<div>&ldquo;不喜欢吗？&rdquo;我疑惑道。</div>
+<div>&nbsp;</div>
+<div>&ldquo;恰恰相反，非常有趣。&rdquo;绘楠毫不犹豫地给出了极高的评价。</div>
+<div>&nbsp;</div>
+<div>&ldquo;是手头拮据吗&hellip;&hellip;&rdquo;我在心底嘟哝着，把笔记本夹在腋下，掏出钱包向收银台走过去。正好绘楠久病初愈，这本笔记就当做驱邪贺礼送给他好了。</div>
+<div>&nbsp;</div>
+<div>这样想着，把笔记和一张野口英世一起递给立原店长时，我听到了绘楠仿佛松了一口气的评论：&ldquo;果然没错&hellip;&hellip;比起我，这本笔记更适合青浦先生。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;哈？&rdquo;</div>
+<div>&nbsp;</div>
+<div>于是，本来想买下作为给绘楠的病愈贺礼的笔记，就这样毫无道理地留在了我手里。</div>
+<div>&nbsp;</div>
+<div>绘楠的专业是某种数学相关的未来科学，但是兴趣内容远比专业范围广泛，每次看到有趣的材料就会钻研很久，有时候还会连续通宵直到我忍无可忍威胁要往他咖啡里放安眠药。这次的笔记怎么看都在绘楠的狩猎范围之内&hellip;&hellip;</div>
+<div>&nbsp;</div>
+<div>还没有想出究竟就到了晚饭时间，我一边煮着咖喱牛肉乌冬面一边思索的时候，绘楠万年难得一遇的好心发作，主动向我解释了笔记内容。</div>
+<div>&nbsp;</div>
+<div>&ldquo;是关于密码学的笔记。作者似乎在学习加密算法，但并不是学习作业之类的东西。&rdquo;绘楠倚在冰箱门上，一边看我煮面一边介绍，&ldquo;从活页簿里找到了七个信封，内页里分别装有七篇密文、算法提示、还有专门标注出的空白明文区域。比起习题集，我更倾向于认为那本笔记是类似于艾勒里&middot;奎因那样的读者挑战。&rdquo;</div>
+<div>&nbsp;</div>
+<div>说到这种技术领域我就像在听乱码，脑子跟手上调配的酱汁一样迷糊，直到最后一句才被勾起了兴趣：&ldquo;就像密码版的漂流瓶？&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;没错。&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠边说边若无其事地移走了辛口酱油瓶，动作如此坦然，我都不知道从何吐槽。这个人嗜甜怕辣，口味比猫还轻，又有一张惹人怜爱的漂亮脸蛋和与之完全不成正比的暴君性格，叫人心软又无奈，完全拿他没办法。</div>
+<div>&nbsp;</div>
+<div>&ldquo;七份信封都贴有90元的邮票，地址栏则全部是空白的，据我推测，作者本来是想把这些密文分别寄出，后来又放弃了。不知是有意还是无意，&rdquo;绘楠打了个响指，&ldquo;总之，最后整本笔记都被卖到了立原的店里。&rdquo;</div>
+<div>&nbsp;</div>
+<div>职业病使然，我瞬间联想起了泉镜花式的误解与宿命论，甚至开始构思其间缺失的故事，包括信封地址留白的无奈和不得不加密的来龙去脉，以及由此衍生出的诸多爱恨情仇。</div>
+<div>&nbsp;</div>
+<div>半晌，我回身郑重请求道：&ldquo;务必把信件内容解密出来，拜托了，不然我的心脏会被好奇之猫挠破的。&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠目光奇异地看着我：&ldquo;&hellip;&hellip;青浦先生心里的好奇之猫早就死掉了吧。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&hellip;&hellip;</div>
+<div>&nbsp;</div>
+<div>好有道理，无言以对。</div>
+<div>&nbsp;</div>
+<div>沉默片刻，绘楠稍微收回了苛责的口吻：&ldquo;我可以帮忙；但既然笔记归青浦先生所有，解密的事情也应该由青浦先生担起责任。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;&hellip;&hellip;你在开玩笑吗？&rdquo;</div>
+<div>&nbsp;</div>
+<div>理智与情感难得地持有相同意见，我在脑子反应过来的瞬间就开始跳脚。这种事毫无裨益。首先我对于密码学一无所知；再说了，密码学毕竟是数学分支，听起来再有趣也肯定会牵涉到大量干瘪乏味的技术细节，怎么想都是趁早拒绝的好。</div>
+<div>&nbsp;</div>
+<div>我回头刚想进一步说明，对上绘楠的视线，却什么都讲不出。袅袅的蒸汽里，他的眼神也模糊不清，有一点浅薄的期待，又有一点不知从何而来的难过。没有开通风的厨房里热得可疑，蒸汽把所有拒绝的话语都噎在了嗓子里，空气中只有面汤沸腾的咕噜咕噜声。</div>
+<div>&nbsp;</div>
+<div>明明不是什么大不了的事情，气氛却严肃得好像求婚现场。我完全搞不懂绘楠的坚持。想解密的话自己去做就好了，为什么必须拉上我？包括说笔记更加适合我的时候也是。都说了我的好奇心之猫已经在生活的洪流里淹死了啊&hellip;&hellip;</div>
+<div>&nbsp;</div>
+<div>心中陈列了一千条理由，眼神却仍然被绘楠的视线死死锁住。现在绘楠看上去更难过了，还有些不知来由的恼怒。厨房里的暖光灯下，那双漂亮的眼睛因为怒火而泛着太阳一样耀眼的光芒。</div>
+<div>&nbsp;</div>
+<div>美色误事啊&hellip;&hellip;在心底叹了口气，我清了清嗓子：&ldquo;既然你诚心邀请了&mdash;&mdash;&rdquo;</div>
+<div>&nbsp;</div>
+<div>大概是因为跟绘楠生活得太久，被岁月车轮狠狠碾压过的好奇心之猫也不自量力地复活了，我明明还差五千字的专栏没交稿，上次被退回的书稿也需要重新整理。就是这样一个疲于奔命、毫无野心的平凡专栏作家，居然答应了去解开困难的密码，还在答应的同时感到了些许的乐在其中&hellip;&hellip;</div>
+<div>&nbsp;</div>
+<div>心中念叨着关乎生计的琐事，我再次望向绘楠。刚才的难过毫无痕迹，他看着我就那样笑起来，露出了像小孩子一样、富有感染力的天真笑容。</div>
+<div>&nbsp;</div>
+<div>习题一&middot;First Time</div>
+<div>&nbsp;</div>
+<div>Affine cipher</div>
+<div>&nbsp;</div>
+<div>稍稍嫌早的围炉夜话，所幸窗外是漂亮的雪景，面前是同样漂亮的绘楠，还有可以解乏的趣味密码习题。我为什么没有做火锅呢&hellip;&hellip;</div>
+<div>&nbsp;</div>
+<div>&ldquo;青浦先生又走神了吗？&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠颇为不满地敲了敲桌子。我赶紧回神：&ldquo;哪有，只是觉得毫无头绪。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;因为青浦先生根本没有在思考。&rdquo;绘楠冷淡道。</div>
+<div>&nbsp;</div>
+<div>&ldquo;&hellip;&hellip;&rdquo;</div>
+<div>&nbsp;</div>
+<div>无法反驳。</div>
+<div>&nbsp;</div>
+<div>绘楠看起来已经有点生气了：&ldquo;不想参与就请不要随意答应下来。青浦先生每次都是这样，明明想要、却要装成一点主见也没有的样子，怎么也不肯好好努力，到底在害怕什么啊&mdash;&mdash;&rdquo;</div>
+<div>&nbsp;</div>
+<div>再说下去就是上纲上线的大批斗了，绘楠不愧是喜怒无常的小孩子脾气。为了赶紧平息风波，再怎么不愿意承认，我也只好诚实地回答了：&ldquo;不是不想参与&hellip;&hellip;是不擅长而已。&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠一直在高估我。也许是我年少时的文章给了他错觉，但事实上我只有年龄痴长绘楠三岁而已，其它的完全比不上绘楠，什么都不会、什么都不擅长。</div>
+<div>&nbsp;</div>
+<div>最初搬过来的时候，出于自尊，我还会暗地里加班补习，试图在绘楠面前伪装成见识广博的成年人；在被绘楠戳穿多次以后的现在，我已经连这点伪装都做不到了。</div>
+<div>&nbsp;</div>
+<div>被外界误认为是优秀青年作家的青浦，在未来精英绘楠面前原形毕露，实体乃是一只被戳破的河豚。</div>
+<div>&nbsp;</div>
+<div>我用咬到河豚肝一般的虚弱声音嘟哝道：&ldquo;包括刚刚讲的密文明文，科幻小说一样的算法和频域时域的奇妙词汇，都完全听不懂&hellip;&hellip;密文是什么意思？被加密的文字吗？&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠将信将疑：&ldquo;青浦先生没有学过密码学吗？&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;&hellip;&hellip;绝大部分地球人都没有学过吧。&rdquo;</div>
+<div>&nbsp;</div>
+<div>话是这样说，看绘楠的表情，很明显是在说&ldquo;你才不是那些人&rdquo;。</div>
+<div>&nbsp;</div>
+<div>真是多谢厚爱啊，可惜我只是块朽木而已。</div>
+<div>&nbsp;</div>
+<div>&ldquo;大致来讲，我们平时使用的都是&lsquo;明文&rsquo;，是摆在明面上的、所有人都能够理解的语言文字，&rdquo;发现我的确不懂密码学之后，绘楠开始了基础的解释，&ldquo;使用明文时，如果有需要保密的内容，就只能在物理上做防范措施。问题是这样也不一定保险，被窃听或者偷窥的可能性往往无法阻绝&mdash;&mdash;&rdquo;</div>
+<div>&nbsp;</div>
+<div>我很配合地端正了坐姿，像小学生一样举起手来提问：&ldquo;这样的情况，为什么不去提起告诉说侵犯隐｀私？&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;说的是提起告诉的代价比隐｀私泄露更大的情况，比如说，&rdquo;绘楠皱起眉思考了好一会儿，举例道，&ldquo;某清纯少女形象的影星艳照泄露之类的。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;&hellip;&hellip;你好懂。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;&hellip;&hellip;青浦先生脑子全都是黄色废料吗？&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;到底是谁先提起的啊！&rdquo;我笑得都坐不直了，半晌才歇下来。绘楠一向跟这种娱乐影星绝缘，忽然间讲这种话，想必是因为前几天闲聊时给他科普的某偶像女团衰落史。</div>
+<div>&nbsp;</div>
+<div>绘楠怏怏地瞪着我，我咳嗽一声：&ldquo;继续继续。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;好吧，没有清纯影星，&rdquo;绘楠换了个例子，&ldquo;战争时期，法律不起作用的时候&mdash;&mdash;就像二战时期的军队通讯，德军通讯为了防止被窃听使用的Enigma。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;唔。&rdquo;</div>
+<div>&nbsp;</div>
+<div>这个我的确听说过，强大的军用加密机器，奇妙的键盘排布与多段加密的方法使得盟军对解密一筹莫展，还是最后缴获了德军的密码本才成功破译出Ultra的。</div>
+<div>&nbsp;</div>
+<div>&ldquo;在被窃听的情况下，为了保证信息的秘密传递，发信方需要利用特定的算法将&lsquo;明文&rsquo;转变为&lsquo;密文&rsquo;，收信方再利用相应的算法将&lsquo;密文&rsquo;解密为&ldquo;明文&rdquo;。这样一来，在信息传递过程中，窃听者只能得到无法理解的&lsquo;密文&rsquo;，真正的消息不会被泄露。</div>
+<div>&nbsp;</div>
+<div>&ldquo;由于加密方法的局限性，有时候窃听者能够仅仅通过密文就拿到明文，这种过程叫做破译，也就是解密。&rdquo;</div>
+<div>&nbsp;</div>
+<div>感谢当代日本文艺作品的广泛题材与推理文学的鼎盛，我到目前为止还跟得上。为了证明这一点，我随口提问道：&ldquo;那现在，我们就相当于窃听者？&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠露出不小心吃到山葵时的微妙表情：&ldquo;请认为我们是遗失了解密方法的收信方。&rdquo;</div>
+<div>&nbsp;</div>
+<div>就像遗失了水晶鞋的王子一样啊&hellip;&hellip;我很明智地把这个过于戏剧化的比喻藏在了心里。</div>
+<div>&nbsp;</div>
+<div>&ldquo;得益于数学的发展进步，包括Enigma在内，很多曾经被认为是牢不可破的古典加密方式，现在都可以完美破解。&rdquo;绘楠说着，嘴角挑起了一个惹人厌的傲慢笑容，&ldquo;现在我们在看的这一篇，并没有用到多么复杂的加密方法。甚至可以说，只是看密文我就大概猜到了加密方式，解法也大致有了眉目。&rdquo;</div>
+<div>&nbsp;</div>
+<div>这样自信的声明让我感到意外。绘楠把散落的内页推到我面前，撑腮道：&ldquo;青浦先生能看出来吗？&rdquo;</div>
+<div>&nbsp;</div>
+<div>被这样盯着，就算看不出来也不能直接承认吧&hellip;&hellip;我将密文摊在面前，双手合十，像每次截稿期前夜一样祈祷着灵感的降临。</div>
+<div>&nbsp;</div>
+<div>仔细检阅了文字内容之后，我打消了此前认为密文是日耳曼语族某种我不认识语言的念头。所有文字都是大写的英文26字母，没有上标或引入的新标识，甚至标点符号和空格规律都很符合英语习惯。</div>
+<div>&nbsp;</div>
+<div>然而密文里仍然没有任何能辨认的句子或短语。出现得最多的一个单词是SE，在法语里是自指的人称代词，在这里却似乎全无意义。</div>
+<div>&nbsp;</div>
+<div>绘楠仍然目光灼灼地盯着这边。我偶一抬头便撞进他的目光里，半晌，才叹着气认命投降道：&ldquo;我看不出来&hellip;&hellip;从字母角度来说，这份密文应该是英文的，却缺乏有意义的单词&mdash;&mdash;包括频繁出现的SE也毫无道理。我怀疑是像间谍小说里写的那样，每个字母都被替换过了。不知道替换方法的话，我没办法解开它。&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠意味不明地应了一声。</div>
+<div>&nbsp;</div>
+<div>我知道这样的推理一定没办法让绘楠满意，心情很是低落。</div>
+<div>&nbsp;</div>
+<div>其实我本人并没有那么糟糕，好歹是出版过实体书的作家，有会给我写信的热情粉丝，也有不高不低的稿费，在世界各地都旅行过，为人更是向来被评价为亲切。</div>
+<div>&nbsp;</div>
+<div>这些经历与评价好像甲虫坚硬的外壳一样保护着我脆弱的自尊，可它们在绘楠面前，却什么都不算。</div>
+<div>&nbsp;</div>
+<div>绘楠像一辆横冲直撞的战车，不需要任何代表过去辉煌战绩的装饰品、也不需要任何社会评价维度的助力，仅凭着自身的强悍，就能轻易碾过我所有的自负。说来可笑，我最初还阴暗地怀疑过绘楠是不是故意给我难堪，现在却早已有了更深的认识。</div>
+<div>&nbsp;</div>
+<div>绘楠对我没有任何敌意，就好像大象踩过蚂蚁也只是无心之失。与之相反，绘楠待我再好不过，对我的抱怨全部局限于恨铁不成钢。绘楠好像认为只要我努力就可以拯救世界，而我的一切不如意都只是因为自己太懒散。</div>
+<div>&nbsp;</div>
+<div>因为绘楠对他自己的要求也是同等的，我连指责他双重标准都做不到，只好默默接受自己又懒又笨的设定。这样的差异太令人难受，教我心里矛盾万分。我甚至想过偷偷搬走、离开绘楠的事，最后却总是舍不得。</div>
+<div>&nbsp;</div>
+<div>&ldquo;青浦先生差不多都说对了，尤其是注意到了SE的重复出现。&rdquo;也许是察觉到我的低落，绘楠勉为其难地夸了我一句，&ldquo;从这里继续推理就能猜出加密方式。26个英文字母的确是都被替换了；而且有多次重复出现的单词，意味着字母被替换的方式在密文中从头到尾都是一致的，也就是所谓的Affine加密法。如此一来，解密就很简单了。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;哪里简单了啊，光是字母a的替换方式，随便想一想就有26种可能吧！&rdquo;饶是还在自我厌弃中，被绘楠这样自信过度的话语一激，我也忍不住吐槽了。</div>
+<div>&nbsp;</div>
+<div>&ldquo;的确如此，&rdquo;绘楠拿起水笔，煞有介事地计算起来，&ldquo;26个字母遵循一定的规律逐一替换，可能的替换方式一共有26的阶乘种，也就是10的26次方，要一种一种试过来会耗尽人的一生，但实际上，破译Affine加密法没有这么麻烦&mdash;&mdash;青浦先生觉得日文假名里最常用的是什么？英文单词呢？&rdquo;</div>
+<div>&nbsp;</div>
+<div>在这样正经的绘楠面前，我也不好继续自怨自艾了，顺着他的口风思考起来。</div>
+<div>&nbsp;</div>
+<div>&ldquo;只算非汉字的假名的话&hellip;&hellip;&rdquo;我默默回忆着平时在打字机上的写作经验，&ldquo;是の吧？英文语法跟日文不同，没有对应の的单词，那我想应该是冠词a和the，或者人称代词you和I之类的？还有介词to应该也很常见。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;完全正确，不愧是青浦先生。&rdquo;绘楠笑了起来，&ldquo;刚才举出的这些最常用的单词里，只有to是双字母的。这样一来，英文明文通过Affine加密得到的密文里多次出现了相同的双字母单词SE，其明文应该是to，从而得到字母t和o的替换规律&mdash;&mdash;也就是't'变为'S'，'o'变为'E'。&rdquo;</div>
+<div>&nbsp;</div>
+<div>起初还是一头雾水，在思考之后，却又觉得豁然开朗。我接过绘楠递过来的水笔，在草稿上画出了替换表：&ldquo;这样一来就解出来2个字母的加密方式了。接下来是要找其他常见的单词吗？&rdquo;可是you和the，a和I的字母数目是一样的。</div>
+<div>&nbsp;</div>
+<div>&ldquo;是啊，怎么办呢？&rdquo;绘楠随口应道，没有直接给出答案。</div>
+<div>&nbsp;</div>
+<div>时间逐渐流逝，我不知不觉陷入了沉思，无意识地反复书写着这几个单词，忽然意识到了一件事：&ldquo;我们已经解出来了t和o，借助它们的密文S和E在单词中的位置，就可以区分you和the。&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠轻轻一击掌：&ldquo;Bingo！&rdquo;</div>
+<div>&nbsp;</div>
+<div>仔细数过密文里的单词出现次数之后，我得到了对应EHOTUY六个字母所对应的密文，可惜依然没有I和a。我的思路在这里卡了一下壳。</div>
+<div>&nbsp;</div>
+<div>&ldquo;青浦先生不妨先把所有的常用单词都写下来。&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠收拾好桌面的餐具，边往厨房走边说道。我心不在焉地应了一声，习惯性地咬着指甲写下了能想到的10个最常用的单词，包括人称代词You， I和it；不定代词this和that；冠词the和a；介词to和of；还有连词and。</div>
+<div>&nbsp;</div>
+<div>这样一来，可以通过已知的o解出来of里的f，t和h也可以解出来this和that里的a和i&mdash;&mdash;可惜这篇文章里只出现了一个以S开头的单词&int;MPS，也就是that；而没有出现另一个可以代表this的以&int;M开头的四字单词。</div>
+<div>&nbsp;</div>
+<div>将这10个单词统统过滤一遍之后，我已经解出了adefhinotuy这11个字母的加密方法。因为都是常用字母，在密文里把这些字母全部用明文替换之后，很多单词就变得非常眼熟了。例如youK，theKe之类，很明显密文的K代表着明文的r；而endQeTT这个单词，虽然信息量尚嫌不足，我仍然以常年被绘楠嘲笑的浪漫心理认出来了其中蕴含的endless的原型。</div>
+<div>&nbsp;</div>
+<div>解出全篇的明文时，绘楠还在厨房不甘不愿地清洗着餐具。这个人任性得像小孩子一样，很讨厌做家务，平时都尽量使用自动化工具替代；实在替代不了的情况，例如现在、必须要手动清洗食物残渣才能塞进洗碗机的时候，绘楠会把很简单的工作拖延到地老天荒。</div>
+<div>&nbsp;</div>
+<div>我走到绘楠身边，不动声色地接过了他正在努力对付的咖喱锅：&ldquo;我来吧。&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠在干家务的时候明显是神游物外的，隔了半晌才迟钝地抬起头：&ldquo;青浦先生已经解出明文了？&rdquo;</div>
+<div>&nbsp;</div>
+<div>&hellip;&hellip;被看穿了。</div>
+<div>&nbsp;</div>
+<div>我没忍住嘴角的得意：&ldquo;是啊，完全解开了。明文是一首歌词和一小段日记。就是那个，The first time ever I saw your face~your face，立原的店里总是在放的曲子。你记得吗？&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠虽然反感电视娱乐，却因为小时候的乐器学习而非常擅长记忆旋律，很快回应道：&ldquo;啊，是那首歌。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;嗯，歌词后面附着一段关于初遇的英文记录，&rdquo;职业使然，我对文字的敏感度很高，也迅速察觉了这篇记录中的微妙之处&ldquo;采用了非常古典的朦胧文法，情绪却汹涌又直接。总而言之，笔记主人在与命定之人相遇时也听到了这首歌，心中感慨万千。&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠眉梢一跳：&ldquo;命定之人&mdash;&mdash;这是青浦先生浪漫主义情结的艺术加工吧？&rdquo;</div>
+<div>&nbsp;</div>
+<div>沉浸在胜利滋味里的我很宽容地无视了绘楠的嘲讽。</div>
+<div>&nbsp;</div>
+<div>说到初遇。</div>
+<div>&nbsp;</div>
+<div>我算是被绘楠捡到的。</div>
+<div>&nbsp;</div>
+<div>春天好不容易租到的房子因为火灾而不得不解约，还赔出去了大笔的补偿金。被扫地出门时，新的住所还没有找好，又流年不利地撞上了北海道的赏樱季，酒店人满为患，连暂时外宿渡过难关都做不到。</div>
+<div>&nbsp;</div>
+<div>责编松尾先生打电话来催稿件时，我正身心疲倦地拎着行李漫步在初樱乍放的林荫道上，垂着肩走进北大附近一家咖啡店，想着要先写完杂志社的短篇随笔。</div>
+<div>&nbsp;</div>
+<div>就在那个时候，我遇到了绘楠。</div>
+<div>&nbsp;</div>
+<div>不知道是那间咖啡店的布置使然，还是那时我太落魄而绘楠又帮了我太多，记忆里的绘楠自带金色的天使光环和哈利路亚背景音乐。</div>
+<div>&nbsp;</div>
+<div>绘楠出现得太突然，我从好不容易写完的稿件之中一抬头，就看到身材修长的青年毫不拘束地在对面坐下。他倒豆子一样背出了我的几本出版书目，说是之前在东大做演讲时遥遥见过一面&mdash;&mdash;说是演讲，其实像我这种边缘作家，只是在文学社学生的邀请下，在草坪上开了个小型读者见面会而已。</div>
+<div>&nbsp;</div>
+<div>到此为止还只是普通的书迷见面戏码，可是接下来绘楠居然报出了我最近问的几家地产中介和酒店的名字，害我开始怀疑遇到STK，甚至紧张地握住了口袋里的手机，一边诘问着绘楠的身份一边偷偷地试图拨出警局的号码。</div>
+<div>&nbsp;</div>
+<div>好在绘楠随即从背包里掏出了一大堆乱七八糟的证件，包括My number和驾照、东大和北大的学生证、甚至还有这家咖啡店的会员卡。</div>
+<div>&nbsp;</div>
+<div>绘楠很爽快地承认了跟踪我半天的事情，理由是难得遇见了喜欢的作家先生，还说愿意以低廉的价格把现在房子的次卧租给我&mdash;&mdash;实不相瞒，听到那么低的租金我就已经原谅了他的一切失礼、并且准备答应下来了，就算是条件很糟糕的2LK也无所谓。</div>
+<div>&nbsp;</div>
+<div>结果喝完咖啡，绘楠把我带回这幢独栋的、有观景落地窗的、看起来超舒适的、平时恐怕以双倍租金都租不到的豪华住房时，我被震撼得话都说不出，简直以为绘楠是专程来拯救我的人间天使。</div>
+<div>&nbsp;</div>
+<div>当然，房龄老设施旧还要负责做饭和家务什么的，是后来才知道的。</div>
+<div>&nbsp;</div>
+<div>&ldquo;其实是为了跟青浦先生相遇才狠心租下了这幢房子。&rdquo;</div>
+<div>&nbsp;</div>
+<div>在我某一次例行取笑绘楠任性选择这幢又旧又贵、只有好看一个优点的房子时，他如此回答。听到的瞬间，我的心跳都停了一拍。绘楠那种漫不经心的表情太犯规了，根本看不出是不是认真的。</div>
+<div>&nbsp;</div>
+<div>绘楠没有再提起过这件事，我也不好多问，显得我很在意一样。虽然作品人气不佳，作家本人的我可是向来都很受欢迎的，有大阪的高中女生每年给我寄生日贺卡，函馆的欧巴桑飞来札幌请我喝茶合照，少年时代在欧洲认识的贵妇人至今都在锲而不舍地邀请我过去度假，完全没有理由在意绘楠这种任性又傲慢的男人。</div>
+<div>&nbsp;</div>
+<div>&hellip;&hellip;但我就是很在意。</div>
+<div>&nbsp;</div>
+<div>既然话题刚好讲到初遇，我便顺水推舟地把这个问题提了出来。</div>
+<div>&nbsp;</div>
+<div>有阅历的男人，就算是问这种掉面子的问题也镇定得很。我专心致志地盯着咖啡壶，眼神丝毫没有落在绘楠身上，并且基于绘楠性格的劣根性，都做好了被无视或者被糊弄过去的准备。</div>
+<div>&nbsp;</div>
+<div>结果绘楠说：&ldquo;当然是真的。&rdquo;</div>
+<div>&nbsp;</div>
+<div>他抱着手臂站在旁边，语气略带埋怨：&ldquo;不记得了吗？两年前，青浦先生刚刚离开东京来北海道的时候，在杂志专栏《北海道的人间礼赞》写的第一篇文章：&lsquo;希望租到有落地窗的家宅，窗外是漂亮的枫树。&rsquo;&rdquo;</div>
+<div>&nbsp;</div>
+<div>&hellip;&hellip;</div>
+<div>&nbsp;</div>
+<div>被绘楠这么一说，我也渐渐回忆起来了。</div>
+<div>&nbsp;</div>
+<div>离开东京的我最初是想寻找远离喧嚣的理想乡，却因为流年不利而很快陷入了窘迫的经济困境中，不断地搬家，约稿也逐渐流失，唯一坚持下来的专栏就是短篇随笔《北海道的人间礼赞》。</div>
+<div>&nbsp;</div>
+<div>虽然在逆境里也憋着一口气不停地写作，却有将近一年都找不到稳定的时间将文字编纂成书；哪怕到后来、好不容易在一间窄小寒冷的1LK定居下来，也很快就因为火灾而焦头烂额地流落到了街头，连书稿也丢失了大半，重写稿件的时候好几次需要勉强忍住眼泪。</div>
+<div>&nbsp;</div>
+<div>生活坎坷至此，我都快要忘记最初的愿望了，没想到居然会有人替我记得。</div>
+<div>&nbsp;</div>
+<div>&ldquo;再说的话&hellip;&hellip;我可要感动到流眼泪了啊。&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠耸耸肩：&ldquo;那就不说了吧，青浦先生还是笑起来比较可爱。&rdquo;</div>
+<div>&nbsp;</div>
+<div>我咳嗽一声，捧起咖啡杯垂下了眼睛，不知为什么，连耳朵都在发烫。</div>
+<div>&nbsp;</div>
+<div>习题二&middot;Rendezvous</div>
+<div>&nbsp;</div>
+<div>Vigenere Cipher</div>
+<div>&nbsp;</div>
+<div>次日，解开第一篇密文的我深受鼓舞，立即投入了第二篇密文的破译中，却陷入了困境。</div>
+<div>&nbsp;</div>
+<div>绘楠已经去了学校，我孤掌难鸣，挣扎了一上午也毫无进展，干脆趴在电脑前写稿，却意外地文思如泉涌，敲得腰酸背痛手腕僵直，只用一天就完成了本周的全部稿件。</div>
+<div>&nbsp;</div>
+<div>连续渡过好几个毫无进展的白天后，我实在是无事可做，只好趁着傍晚出了门，美其名曰请客吃饭，其实是去找援兵。街沿的积雪已经堆得比商店看板还高，我把手揣进大衣口袋，缩着脑袋走进了写着理学部情报科学研究科的建筑。</div>
+<div>&nbsp;</div>
+<div>来这边次数太多，研究室的学生也渐渐熟识了。我在门口休息室百无聊赖地翻着少年漫画等待认识的人路过领我进去，结果先过来躲懒的是欧洲的助教先生Maurille。他帮我刷开了门禁，告诉我绘楠还在研究室。</div>
+<div>&nbsp;</div>
+<div>晚餐时间，研究室里颇为冷清，只有绘楠正在专心致志地做推导，不认识的软体界面在电脑屏幕上晃来晃去。我默不作声在他身后站了将近一刻钟，绘楠才蓦然跳起来，回头叫道：&ldquo;青浦先生！&rdquo;</div>
+<div>&nbsp;</div>
+<div>我也被他的反应吓到了，愣了片刻才想起正题：&ldquo;要、要去吃晚饭吗？我请客。&rdquo;</div>
+<div>&nbsp;</div>
+<div>以人为镜，可以明得失。</div>
+<div>&nbsp;</div>
+<div>看着绘楠的表现，我开始反省平时我是不是表现得太拮据了，才让绘楠在我提出支援请求的时候再明显不过地松了口气，就好像在害怕我会借由请客说出什么更过分的事情一样。</div>
+<div>&nbsp;</div>
+<div>&ldquo;不知道你在想些什么，&rdquo;我随口抱怨道，&ldquo;说好帮我一起解密，结果只有我在努力啊。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;因为我不像青浦先生那样无所事事。&rdquo;绘楠撇了撇嘴，&ldquo;而且青浦先生到现在都没有解出明文，说明根本没有在努力。&rdquo;</div>
+<div>&nbsp;</div>
+<div>明明我已经尽了200%的努力了&hellip;&hellip;</div>
+<div>&nbsp;</div>
+<div>毕竟有求于人，我不想在这种时候跟绘楠争辩，直接切入了重点：&ldquo;这次的密文，全篇几乎没有重复的单词，双字母单词出现了不少于20次，却只有两次是重复的，比第一篇更加杂乱无章，完全看不出来规律。&rdquo;</div>
+<div>&nbsp;</div>
+<div>越说越沮丧，我戳着盘子里的意面，实在没有吃下去的心情。</div>
+<div>&nbsp;</div>
+<div>绘楠看起来并不意外：&ldquo;之前的诀窍只适用于Affine加密法。既然是习题，没有道理全部用同一种加密方法&mdash;&mdash;就好像大学入试考试一样，卷面的题目必须要有难度区分的。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;啊，这样啊。&rdquo;我只能如此含混地回答。</div>
+<div>&nbsp;</div>
+<div>不要说大学，我连高中都没有念过，国中毕业就辍学去打工了。也是因为这个，我对学生这个身份有超乎寻常的好感，初次见面时看到绘楠拿出学生证就决定信任他；现在跟绘楠相处的时候，也偶尔会因为这个而产生一些微不足道的自卑情绪。</div>
+<div>&nbsp;</div>
+<div>绘楠皱着眉专心致志地切冰淇淋华夫饼。这个人像小孩子的地方太多，恐怕也只有嗜好甜品这一条算得上可爱。据他说是因为大脑运动量太大，需要供给能量&mdash;&mdash;在我看来就是纯粹的嘴硬而已。</div>
+<div>&nbsp;</div>
+<div>我从提包里翻出了第二篇密文想递给绘楠，见他切得认真也不好打搅，耐心地等了一会儿，却发现绘楠的动作却越来越细致。我郁闷道：&ldquo;你是要切完喂蚂蚁吗？&rdquo;</div>
+<div>&nbsp;</div>
+<div>都已经切成1/12的大小了。</div>
+<div>&nbsp;</div>
+<div>绘楠慢条斯理地叉起冰淇淋：&ldquo;等不及的话，青浦先生来喂我啊。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;哈？&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠放下叉子，撑着桌面向我压过来，表情一瞬间变得很有气势：&ldquo;我说，喂我啊，青浦先生愿意吗？&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;怎、怎么可能！&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;所以啊，青浦先生根本没有在努力。&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠恢复了懒洋洋的样子坐回原位，专心致志吃他的冰淇淋华夫饼。我的目光黏在他餐叉上融化的巧克力上，整个人茫然又尴尬。</div>
+<div>&nbsp;</div>
+<div>&ldquo;大概是某种有密钥的加密方法。&rdquo;</div>
+<div>&nbsp;</div>
+<div>终于收拾完冰淇淋，侍者送来的咖啡恰到好处地打破了尴尬的气氛，绘楠翻看着我带来的密文，给出了初步的结论。这一篇比之前篇幅长了很多，足足有三页纸，绘楠却一直只在看第一页：&ldquo;破译方法跟Affine加密不太一样，可能需要一些时间&mdash;&mdash;&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠说着，露出了惹人厌的自负笑容：&ldquo;正好待会儿我要回研究室，青浦先生有空吗？简单的题目，刚好可以拿来给青浦先生演示一下思路。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;有是有&hellip;&hellip;你觉得这一题很简单？&rdquo;</div>
+<div>&nbsp;</div>
+<div>我要被挫败感淹没了。</div>
+<div>&nbsp;</div>
+<div>&ldquo;青浦先生听我讲完也会觉得很简单的。&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠熟练地从我的提包里抽出了活页簿。我看着他行云流水的开锁动作，无奈道：&ldquo;公文包的机械密码&hellip;&hellip;这种也能破译吗？&rdquo;</div>
+<div>&nbsp;</div>
+<div>我的提包主要用来装书稿。虽然三流作家的文稿不值什么钱，包上还是依据责编松尾先生的严格要求挂上了密码锁。我从来没有告诉过绘楠的密码，他却总能很快猜出来，还出过不止一次我忘记了刚换的密码、不得不拜托绘楠帮忙打开提包的乌龙事。</div>
+<div>&nbsp;</div>
+<div>&ldquo;机械锁的确是有技巧可以破解的，不过对象是青浦先生的话，&rdquo;绘楠一耸肩，&ldquo;那些技巧根本用不上，基础的社会调查就足够了。青浦先生都懒得动脑子，密码全都是熟悉的数字，出生年月日，My number末位数，家里的邮政编号&mdash;&mdash;全部试一遍，肯定能打开。&rdquo;</div>
+<div>&nbsp;</div>
+<div>啊，啊，又来了。绘楠战车迅疾地碾过来，我的自尊心像玻璃匣子似的碎了一地，就算被嘲讽为懒得动脑子，也完全没有立场反驳。</div>
+<div>&nbsp;</div>
+<div>绘楠无视了我怨念的目光，把困扰我整整一天的&ldquo;简单题目&rdquo;塞回了活页簿。修长的手指在书页上翻过，停留在已经成功破译、被我标记了红色爱心的第一篇密文上，绘楠没头没脑地来了一句：&ldquo;青浦先生再强硬一点&hellip;&hellip;就好了。&rdquo;</div>
+<div>&nbsp;</div>
+<div>诶？</div>
+<div>&nbsp;</div>
+<div>我疑惑地看向绘楠，他却不再说话了，就那样侧着脸望着窗子上映出的倒影，嘴角微微抿起，仿佛有一点点失落。</div>
+<div>&nbsp;</div>
+<div>晚饭后，绘楠带我到了情报科学所的会客室，把稿纸放进了扫描仪：&ldquo;虽然不是很困难，但这次的密文破译步骤比较繁琐。总之，要先把笔记作者的手稿变成电子稿。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;需要我去录入吗？&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;这台扫描仪带有图像文字转换软体，对印刷体准确率有99.3%，&rdquo;绘楠摊平了纸页，&ldquo;虽然这里是手写体，应该也不会太差。青浦先生只需要稍后对照纸质版进行校正就好。&rdquo;</div>
+<div>&nbsp;</div>
+<div>话是这么说，对整整三页纸的乱码进行校对，依然是很大的工程量。</div>
+<div>&nbsp;</div>
+<div>趁着软体工作的时候，绘楠给我科普了这篇密文的加密方式：&ldquo;还不能完全确定，但我认为这篇是Vigenere、或者类似的密码替换方法加密的。跟Affine加密法略有不同的是，Vigenere加密法会使用一个密钥，这个密钥让明文与密文的字母不再是一一对应的。&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠在演草纸上写下了上一篇密文里的歌词，又在其下写出了&ldquo;青浦&rdquo;的罗马字，并且重复了好几遍：&ldquo;例如说，用青浦先生的'SEIHO'作为密钥的话，明文里'the'的t对应的密钥是&lsquo;青浦&rsquo;的'S'，那对应的密文就是t往后数18位，也就是L；而明文里'time'的t对应的密钥是&lsquo;青浦&rsquo;的'H'，对应的密文则是t往后数7位，也就是A。&rdquo;</div>
+<div>&nbsp;</div>
+<div>The first time ever I saw your face.</div>
+<div>&nbsp;</div>
+<div>SEI HOSEI HOSE IHOS E IHO SEIH OSEI.</div>
+<div>&nbsp;</div>
+<div>LLM MWJWB AWEI MCSJ M AHK QSCY TSGM.</div>
+<div>&nbsp;</div>
+<div>我看看明文里两个t与它们对应的不同的密文L和A，再看看密文里并列的两个L与它们所对应的不同的明文t和h，只觉得头都大了：&ldquo;知道密钥还好&hellip;&hellip;没有密钥的情况下，真的可以破译吗？&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;的确很难，毕竟是欧洲流传了很多年的加密方式，不会被太轻易地破译。但诀窍也不是没有，&rdquo;绘楠一边讲解一边在明文后面加了几个单词，又写下对应的密文，&ldquo;像这样，因为明文有重复的单词，重复间隔是10个字母，刚好是密钥长度的整数倍，密文就跟着重复了。&rdquo;</div>
+<div>&nbsp;</div>
+<div>The first time ever I saw your face， oh your face.</div>
+<div>&nbsp;</div>
+<div>SEI HOSEI HOSE IHOS E IHO SEIH OSEI， HO SEIH OSEI.</div>
+<div>&nbsp;</div>
+<div>LLM MWJWB AWEI MCSJ M AHK QSCY TSGM， VV QSCY TSGM.</div>
+<div>&nbsp;</div>
+<div>绘楠指着密文里对应两个your的QSCY解释道：&ldquo;虽然明文密文不是一一对应会导致同样密文对应不同的明文，就像密文开头两个L对应的是t和h两个不同的明文，但不太可能导致整个单词都重复。</div>
+<div>&nbsp;</div>
+<div>&ldquo;随便计算一下，单字母因为巧合密文重复的概率是1/26，那两个字母的单词因为巧合重复的概率就只有1/626了，更长的单词重复则更加不可能。大致可以认为这样的重复间隔就是密钥长度的整数倍，接下来只要数出重复间隔，计算约数就可以得到可能的密钥长度。&rdquo;</div>
+<div>&nbsp;</div>
+<div>我觉得有点头痛：&ldquo;但是这样，不是要去数全篇相同单词出现的次数吗？而且也不一定会这么巧有重复的单词吧？&rdquo;</div>
+<div>&nbsp;</div>
+<div>在正常的文本里我不介意做这种劳动，但是密文就好像一堆乱码，我实在没信心能正确无误地对比出所有单词；万一认真数完了却没有重复的单词，也很难知道是确实不存在还是数错了。</div>
+<div>&nbsp;</div>
+<div>&ldquo;不需要青浦先生亲自来数，&rdquo;绘楠像魔法师一样做了个摘下礼帽的动作，华丽地一鞠躬，&ldquo;好不容易到我的主场，请青浦先生安心观赏我的演出。&rdquo;</div>
+<div>&nbsp;</div>
+<div>说着叫我安心观赏，绘楠照样是把我扔去校对，自己去研究室把笔记本抱过来，开始敲敲打打。看在他勤奋编写破译算法的份上，我勉强原谅他了。</div>
+<div>&nbsp;</div>
+<div>检索软体开始运行的时候，我非常认真地拜了拜电脑。绘楠被我的动静搞得哭笑不得：&ldquo;又不是找不到就解密不了了&hellip;&hellip;只要努力写出正确的算法、使用了足够的计算力就肯定可以解出来。这种事情都是数学上的必然。&rdquo;</div>
+<div>&nbsp;</div>
+<div>我反驳道：&ldquo;虽然没有重复的单词也有办法得到明文，为了减小计算量，快点得到结果，还是能找到重复的单词最好吧。&rdquo;</div>
+<div>&nbsp;</div>
+<div>遇到绘楠之后我的运气向来不错，此前是好端端就会招惹到火灾的体质，现在去便利店居然能抽到想要的招待券了。不知道是不是这种体质使然，这次也很幸运地检索到了重复的六字母单词，之间的间隔虽然长达1070个字母，好在只有四个约数，由小到大分别是2、5、10和107。</div>
+<div>&nbsp;</div>
+<div>&ldquo;接下来要做大量的检索计算，分别以2、5、10、107和1070做循环，&rdquo;绘楠在演草纸上写下这五个数字，做了一个斩断的手势，&ldquo;把余数相同的密文字母合并，得到类似Affine加密方法的密文，在这里计算字母出现次数，就能解开暗文明文对应。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;因为单词是被密钥切开了进行加密，不能再使用以单词为单位的出现次数了啊&hellip;&hellip;&rdquo;我叹了口气，难怪昨天奋力计算了一早晨也没有得到结果。</div>
+<div>&nbsp;</div>
+<div>&ldquo;按照世界范围英文文本里字母出现的规律，&rdquo;绘楠在终端上打开了一个好像赛马竞技排名的页面，&ldquo;可以知道最频繁使用的字母是'e'，第二位是't'，再之后是'a'。&rdquo;</div>
+<div>&nbsp;</div>
+<div>我则是起身凑到绘楠的笔记本前，看他编写的检索软体输出的密文字母频率：&ldquo;嗯&hellip;&hellip;用10做循环和1070，余1的密文里，出现最多的是V，其次是X，再次是N；而用其他数字做循环的结果里，密文字母的频率差别没有很明显。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;是V， X， N对应e，t，a吗？&rdquo;绘楠在演草纸上写下这两组字母，思考片刻，打了个响指，&ldquo;密钥找到了。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;诶？&rdquo;我愣了一拍。</div>
+<div>&nbsp;</div>
+<div>绘楠在两组字母之间划上了一个减号，解释道：&ldquo;两组字母的3个顺差都刚好是R，的确是最简单的Vigene加密，基本可以肯定密钥第一位是R了。先不用管其他的可能，直接按照密钥长度是10个字母的假设，把剩下的密钥也找出来吧。&rdquo;</div>
+<div>&nbsp;</div>
+<div>之后，按照余1相同的步骤，依次计算出余2、余3、乃至余0情况下合并的密文高频字母和数据库里英文文本高频字母的顺差，绘楠和我得到了由10个字母组成的密钥：</div>
+<div>&nbsp;</div>
+<div>Rendezvous</div>
+<div>&nbsp;</div>
+<div>&ldquo;是个法语词啊，&rdquo;我摸了摸下巴，这个词还蛮常见的，&ldquo;ランデブー，译作相遇吗？好像也不太贴切&hellip;&hellip;应该说是约会。&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠微微皱起眉：&ldquo;那个词，ランデブー的原文，法语的念法好奇怪。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;Rendezvous？&rdquo;我一时没反应过来，&ldquo;还好啊，没什么特别的。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;那个R的发音，&rdquo;绘楠试着模仿了一下，&ldquo;不是假名的ラ也不是英文的r。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;啊，小舌音吗，的确对不会法语的人来说比较困难&hellip;&hellip;&rdquo;</div>
+<div>&nbsp;</div>
+<div>&hellip;&hellip;不会法语？</div>
+<div>&nbsp;</div>
+<div>大发现！全能精英绘楠的致命缺憾！</div>
+<div>&nbsp;</div>
+<div>我心中得意万分，故意模仿绘楠平时的口吻道：&ldquo;诶？绘楠都不会法语的吗？太懒散了吧。&rdquo;</div>
+<div>&nbsp;</div>
+<div>我满心期待着把绘楠呛到哑口无言，绘楠却只是怔了一下，侧头望着我，疑惑道：&ldquo;青浦先生希望我去学吗？&rdquo;</div>
+<div>&nbsp;</div>
+<div>略为停顿，绘楠的眼神沉淀下来，整个人的气场瞬间变得认真：&ldquo;只要青浦先生说是，我就去报语言班，一定能在今年内达到跟青浦先生日常会话的水准。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;等、等一下！&rdquo;我被绘楠张口就来的计划和突然变得坚定的语气打了个措手不及，&ldquo;你光是念书就每天学到晚上十点钟，真的有空去上语言班吗？还有啊，语言班很贵的，明明上个月刚刚买了新款滑雪板、已经沦落到找我借钱的程度&hellip;&hellip;&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;时间可以挤占周末，费用可以打工去挣，&rdquo;绘楠的表情一如既往地傲慢，仿佛什么都不重要，只要我答应就可以奋勇直前，&ldquo;青浦先生只要告诉我，希望我去学法语吗？&rdquo;</div>
+<div>&nbsp;</div>
+<div>不知不觉间绘楠已经绕过桌子走到我面前了。绘楠本来就比我高，现在更是居高临下地俯瞰着坐在旋转椅里的我，气魄惊人得像领地内的雄狮一样。我都快被绘楠的气势逼到墙角，在令人窒息的气氛中，迫不得已地大喊出声：</div>
+<div>&nbsp;</div>
+<div>&ldquo;不！&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠露出了果然如此的神情。</div>
+<div>&nbsp;</div>
+<div>明明是我被绘楠的演技狠狠耍了一把，不知为何却忽然有了伤害到对方心情的负罪感，我郁闷地解释道：&ldquo;我只是在开玩笑&mdash;&mdash;&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠忽然打断我：&ldquo;我没有在开玩笑。&rdquo;</div>
+<div>&nbsp;</div>
+<div>我愕然。</div>
+<div>&nbsp;</div>
+<div>绘楠却好像不想多谈，若无其事地重新问起了密钥的发音：&ldquo;刚刚那个法语词，青浦先生再念一遍吧。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;Rendezvous吗？&rdquo;不知所措的我，下意识按照绘楠的要求重复了发音，随即想起来问题的重点，&ldquo;先别管那个，刚才&mdash;&mdash;&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;R-endezvous，&rdquo;绘楠皱眉道，&ldquo;好像有哪里不对。&rdquo;</div>
+<div>&nbsp;</div>
+<div>他又重复了几次发音，越发越离谱，我只好打断道：&ldquo;r-endezvous，r发小舌音，是在喉咙里摩擦发出来的。&rdquo;</div>
+<div>&nbsp;</div>
+<div>于是话题被顺理成章地转移了。</div>
+<div>&nbsp;</div>
+<div>毕竟是没有接触过的语言，绘楠练习了好一会儿才逐渐掌握了诀窍，其间还发出了类似痰音、颤音和大舌音等诸多怪异的声响。我在旁边笑得乐不可支，突发奇想地问道：&ldquo;外语是更好的加密方式吗？&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠暂停下小舌音的练习，思索片刻，谨慎地回复道：&ldquo;不一定，自然语言是有一定规律的，虽然由于语言的不确定性，这种规律比密文的规律更加模糊，破译也更加困难，但并不是完全无法破解的。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;真的吗？&rdquo;我将信将疑，&ldquo;语言都可以破译的话，翻译官岂不是毫无用武之地了？&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠耸耸肩：&ldquo;青浦先生知道Google的机器翻译吗？今年4月上线的服务，已经可以做到英文和日文互译了，以后也会开发法语和日文的互译。&rdquo;</div>
+<div>&nbsp;</div>
+<div>也曾经帮出版社做过翻译的我，面对这种新闻，不知道该开心还是该忧虑。</div>
+<div>&nbsp;</div>
+<div>话题至此，我心中倒是冒出了一个想法：&ldquo;既然有规律和算法，那我现在写下一篇法语文章的话，绘楠能够破译成日文吗？&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;所谓的规律，都是统计意义上的，不能保证准确应用于每一个个例，&rdquo;绘楠说着，把活页簿拆下一页，连同笔一起递到了我面前，&ldquo;我不能保证成功，但可以试试。青浦先生先写下来吧。&rdquo;</div>
+<div>&nbsp;</div>
+<div>虽然是我提起的挑战，因为离开欧洲之后便极少用到法语的关系，我却一时想不到什么合适的句子。倒是在里昂流浪时的室友之一是个卖不出去诗稿的穷困潦倒的诗人，他有一首得意之作，每天都翻来覆去地在我们面前念，记得开头好像是J'veux voyager avec toi dans un autre monde...</div>
+<div>&nbsp;</div>
+<div>我一边回忆一边往下写，直到接近结尾的时候才渐渐发觉有哪里不对劲&mdash;&mdash;这是一首给爱人的告白诗，最后两句甚至出现了再直白不过的Je t'aime。就算及时弃笔停在了很普通的旅行邀请，写完之后，我仍然觉得脸上发烧，整个人都要原地爆炸。</div>
+<div>&nbsp;</div>
+<div>绘楠不懂法语，此刻正拿起我的稿纸折好装进口袋。我想趁着这个机会逃走，一边说着告辞的话语一边不动声色地往会客室门口退，却忽然被绘楠抓住了衣袖，吓得差点跳起来。</div>
+<div>&nbsp;</div>
+<div>绘楠疑惑道：&ldquo;青浦先生不要看解密之后的明文吗？&rdquo;</div>
+<div>&nbsp;</div>
+<div>&hellip;&hellip;不说我都忘了。不知为什么，我觉得解谜的过程比谜题本身有趣多了。</div>
+<div>&nbsp;</div>
+<div>绘楠编写的软体已经利用密钥解出了明文。他把打印出来的稿纸递给我，看着标题大写的密钥，若有所思：&ldquo;青浦先生，我们今天算是Rendezvous吗？&rdquo;</div>
+<div>&nbsp;</div>
+<div>我落荒而逃。</div>
+<div>&nbsp;</div>
+<div>回到家同样是坐立不安，也没有需要整理的稿子来平复心神，我随手从书架上想拿本杂书看，却拿到了《平安妖怪考》的某一卷，不由得怔了怔。</div>
+<div>&nbsp;</div>
+<div>全套六卷的《平安妖怪考》是我一见钟情的一套书，大开本的彩印翻阅起来幸福无比，价格也是对应幸福感的昂贵。</div>
+<div>&nbsp;</div>
+<div>在立原的店里看到这套书的时候，我才搬到绘楠的家里不久。虽然绘楠不动声色地免掉了我的礼金和敷金，付过上一间房子的违约金和火灾赔偿之后，我的经济仍然非常紧张。</div>
+<div>&nbsp;</div>
+<div>离合同上的结清时限还远，出版社的稿酬指望不上，我于是拼命写稿给杂志社，开天窗的同事的稿也一起供下来，只希望周刊稿费再多一点，让我能赶紧去买书。不幸的是，我很快就接到责编松尾先生的通知，因为新财年的财务计算问题，稿费要迟发。</div>
+<div>&nbsp;</div>
+<div>正当我以为要跟这套书失之交臂、连续几天缩在房间里四处打电话询问外快途径的时候，绘楠好像天降奇兵一样踹开了我的房门。他问清事情缘由之后，一边埋怨着我的死脑筋，一边毫不犹豫地把我拉去了立原的店，把当月剩余的生活费全部凑起来，买下了这套书。</div>
+<div>&nbsp;</div>
+<div>面无表情地宣告说接下来整个月要靠我养家的绘楠，真的太可爱了。</div>
+<div>&nbsp;</div>
+<div>想到这里就有点郁闷。</div>
+<div>&nbsp;</div>
+<div>最开始明明是惹人怜爱的体贴形象，可惜认识越久，绘楠傲慢的性格就越展露｀无遗。倒也没有傲慢到无法忍受啦，仍然是耀眼到我移不开眼的精英青年。只是，如果绘楠不那么热衷于打击我脆弱的自尊心，就更好了。</div>
+<div>&nbsp;</div>
+<div>不知道绘楠能不能解开那首法语诗啊&hellip;&hellip;</div>
+<div>&nbsp;</div>
+<div>抱着这样的疑问，我渐渐沉入梦乡。</div>
+<div>&nbsp;</div>
+<div>课间的2.718281828&middot;想去利尻山</div>
+<div>&nbsp;</div>
+<div>要有怎样等级的美貌，才能够抵消掉地狱级任性的性格缺陷呢？</div>
+<div>&nbsp;</div>
+<div>&mdash;&mdash;刚入睡不久就被绘楠从温暖的被窝里强行拖出来、睡意和怒气都接近满格的我，陷入了如上的哲学思考中。</div>
+<div>&nbsp;</div>
+<div>&ldquo;想去利尻山。&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠蹲在我的被褥旁边，声音听起来万分无辜。</div>
+<div>&nbsp;</div>
+<div>楼梯的光线透过障子隐约照过来，我睡意惺忪地翻了个身，随口应付道：&ldquo;快睡，梦里就可以去了。&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠明显没料到我这个答复，愣了半晌，不满地啧了一声，随即房间里传来一阵窸窣的响动。半梦半醒间，我感觉到一双手抱在了我肋下，吓得赶紧睁眼，还来不及反应就一阵天旋地转，被绘楠整个从被子里拖了出来。</div>
+<div>&nbsp;</div>
+<div>&ldquo;喂、你在干嘛！&rdquo;</div>
+<div>&nbsp;</div>
+<div>我惊叫道，可惜绘楠充耳不闻。因为没睡醒而力道不足的挣扎被体格差尽数镇压，绘楠盘腿坐下，像抱等身人偶一样把我拢在了膝盖之间，为了防止我滑下去继续睡，还拿双手扶住了我的脸。</div>
+<div>&nbsp;</div>
+<div>那双手冷得好像豊平川的河冰。</div>
+<div>&nbsp;</div>
+<div>我被冻得一个激灵，整个人迅速恢复了清醒，手脚并用地从绘楠怀抱里挣脱出来，赤着脚跑去把暖气开到了最高，又打开了房间的照明。</div>
+<div>&nbsp;</div>
+<div>灯光下，被甩到角落的绘楠的大衣上全是细小的雪花，在木地板上晕开了一小团水渍。我看着脸颊都冻得失去血色的绘楠，还没完全消气就已经感受到了心疼，无奈道：&ldquo;你发什么疯啊。&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠发梢都是融化的雪水，我从衣橱里拿了毛巾扔给他，把人赶去了暖气旁边。绘楠全程都表现得很乖巧，却在我转身的瞬间抓住了我的手，面无表情地重复道：&ldquo;想去利尻山。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;那你去啊，&rdquo;这句话立刻激起了我没睡饱的怒火，我不假思索地顶嘴道，&ldquo;跟我说干什么，半夜扰人清梦，又不是我邀请你的&mdash;&mdash;&rdquo;</div>
+<div>&nbsp;</div>
+<div>&hellip;&hellip;等下。</div>
+<div>&nbsp;</div>
+<div>被绘楠的夜袭惊吓到罢工的大脑终于开始运转，一首法语情诗缓缓从记忆里浮起来：</div>
+<div>&nbsp;</div>
+<div>J'veux voyager avec toi dans un autre monde...</div>
+<div>&nbsp;</div>
+<div>默默叹了口气，我整理好睡衣的绊扣，蜷进了尚有余温的被子里，没话找话道：&ldquo;那首法语诗&hellip;&hellip;你解开了啊？&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠端端正正跪坐在暖气旁边，仍然是面无表情的一张脸，我却不知怎么地从中读出了委屈的情绪：&ldquo;解开了，而且是被那首诗勾起了想去利尻山的念头。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&hellip;&hellip;怪我咯？</div>
+<div>&nbsp;</div>
+<div>老实说，我还蛮喜欢与绘楠一起去旅行的，这也是当时我下意识选择了那首诗的原因之一。</div>
+<div>&nbsp;</div>
+<div>最初一次是在五月底的周末，刚刚渡过财政危机的我想出门去买音箱，绘楠自告奋勇要做参谋。</div>
+<div>&nbsp;</div>
+<div>明明是再简单不过的行程，却因为车开到铁道口时刚好遇上火车通过这样的偶然因素，在那短短90秒内迅疾地改变了历史进程，最后莫名其妙地变成了驾着轻型车去到日高郡赏樱的旅行。两人还突发奇想地外宿了。绘楠的睡姿跟小孩子一样糟糕，次日早晨我完全是被他勒醒的。</div>
+<div>&nbsp;</div>
+<div>&mdash;&mdash;不用说，音箱的经费已经完全变成油费、住宿费和两人份的豪华餐费了。</div>
+<div>&nbsp;</div>
+<div>类似的短途旅行之后也屡屡发生，事后回想完全说不清出行的理由，却丝毫不觉得后悔。除此之外，唯一的远途旅行是在今年九月初，刚好收到了出版社稿费的我，在夏天的尾巴上邀请绘楠去了冲绳旅行。</div>
+<div>&nbsp;</div>
+<div>澄清的天空，蓝得不像话的大海，热带鱼和潜水镜，还有讨厌晒太阳、涂了满身防晒霜也坚持待在太阳伞下、像尾生抱柱一样好笑又可爱的绘楠&mdash;&mdash;美好回忆至今还存在我的相簿里。</div>
+<div>&nbsp;</div>
+<div>不过在那之后我就陷入了疯狂追赶书稿截止日期的工作中，好不容易交掉了稿件，绘楠又开始生病，一直折腾到现在。</div>
+<div>&nbsp;</div>
+<div>算起来，我们都有快两个月没有出去旅行了。</div>
+<div>&nbsp;</div>
+<div>平复好起床气之后，我正准备爽快答应绘楠的请求，却忽然意识到了不对劲：&ldquo;利尻山？&rdquo;</div>
+<div>&nbsp;</div>
+<div>北海道最北端有两座离岛：礼文岛和利尻岛。利尻山就在利尻岛上，是北海道的名山之一，平时可以通过札幌和利尻机场之间的航线到达，而更具观赏性的路线则是飞抵礼文岛，环岛自驾的同时，隔着海峡欣赏利尻山的全景。</div>
+<div>&nbsp;</div>
+<div>札幌离礼文只有短短一个小时的飞行航程，我甚至有计划过邀请绘楠去礼文赏花观山，可那至少要是开春的事情，而现在&mdash;&mdash;</div>
+<div>&nbsp;</div>
+<div>&ldquo;利尻机场已经雪封了哦。&rdquo;我想起了前几天看到的新闻。</div>
+<div>&nbsp;</div>
+<div>&mdash;&mdash;其实利尻机场雪封倒无所谓，只要能去到礼文岛就好。可是查过网路之后发现，就连礼文机场的客运航线也已经彻底休航了。</div>
+<div>&nbsp;</div>
+<div>绘楠点点头示意他知道这件事，却仍然一脸死性不改：&ldquo;想去利尻山。&rdquo;</div>
+<div>&nbsp;</div>
+<div>我只好劝阻道：&ldquo;这个季节的利尻山又冷又阴森，还是等到开春去更好吧。&rdquo;</div>
+<div>&nbsp;</div>
+<div>其实按照旅游杂志上的描述，冬天的利尻山才是真的盛景，但是没办法抵达的时候果然也只好昧着良心诋毁一下了。</div>
+<div>&nbsp;</div>
+<div>绘楠把毛巾从脑袋上摘下来扔进了洗衣篮，回身默不作声地看着我，眼睛里是满满的不同意。</div>
+<div>&nbsp;</div>
+<div>完全对绘楠的固执没办法，我退而求其次，提议了更好的旅行目的地：&ldquo;&hellip;&hellip;不然去富士山好了。&rdquo;</div>
+<div>&nbsp;</div>
+<div>虽然富士山的交通和住宿肯定都贵得要命。</div>
+<div>&nbsp;</div>
+<div>啧，为了不让绘楠失望，我真是什么都说得出来。</div>
+<div>&nbsp;</div>
+<div>&ldquo;想去利尻山。&rdquo;</div>
+<div>&nbsp;</div>
+<div>我本以为我已经做出了最大程度的让步，但是当绘楠蹲到我身边，万分认真地如此重复的时候&mdash;&mdash;</div>
+<div>&nbsp;</div>
+<div>&ldquo;好啦，只要你有办法过去，我就陪你。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&hellip;&hellip;毫无意外地再度屈服了。</div>
+<div>&nbsp;</div>
+<div>话是那样说，我心里其实不相信绘楠有办法在雪封季节去到礼文岛。</div>
+<div>&nbsp;</div>
+<div>因为计划过去礼文旅行的事情，我查阅了许多旅行杂志，还给稚内的代理商打过电话。现在已经不是旅游季，利尻礼文航空全线休航；而从陆路海路考虑，从札幌到稚内有JR没错，可是稚内到礼文或者利尻，雪封季只有一周两班的渡船。</div>
+<div>&nbsp;</div>
+<div>最近气候糟糕，渡船的出行也变得不稳定，代理商说连50%的出航率都达不到。也就是说，平均要在稚内待一周，才有希望到达礼文，而回程也是同样。</div>
+<div>&nbsp;</div>
+<div>两周的避世之旅，我这样闲暇时间充裕的三流作家而言是毫无压力，对连假日都偶尔需要去研究室加班的未来精英绘楠来说，却是完全不可能做到的。就算刚好有劳动之日的假期，再加上事假，拼拼凑凑，也最多能拿到5天的空闲，根本不可能完成旅程。</div>
+<div>&nbsp;</div>
+<div>绘楠自夜袭之后已经整整6天没有动静，我都以为他已经放弃了。第7天的中午，本该失意沮丧的同居人却忽然从研究所赶了回来，兴致勃勃地塞给了我两张车票，向着还完全搞不清楚状况的我微笑道：&ldquo;青浦先生，你有15分钟收拾行李，我们要去赶JR了哦。&rdquo;</div>
+<div>&nbsp;</div>
+<div>就这样，我们匆匆忙忙地出发，搭乘像破冰舰一样冲开冰雪勇往直前的JR到了稚内站，又换乘巴士到稚内渡口，在附近的民宿住了一夜，次日凌晨搭上了3个小时的渡船，经过整整两天的长途跋涉之后，终于看到了利尻山和礼文岛在晨曦中的影子。</div>
+<div>&nbsp;</div>
+<div>如果一切顺利，后天回到稚内的话，刚好能够在5天内结束行程。</div>
+<div>&nbsp;</div>
+<div>我哆哆嗦嗦地跟着绘楠站上了甲板，眺望着远处美得梦幻的岛屿的轮廓。晴朗天空下，利尻山有着不逊于凯风时晴的魅力，分辨不出是海雾还是云朵的湿气如情人低喃萦绕在山体。</div>
+<div>&nbsp;</div>
+<div>我看得心醉神迷，不禁感慨道：&ldquo;居然还真的做到了，简直像梦一样&hellip;&hellip;到底为什么知道今天会有渡船？&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠很体贴地站到了迎风的方向，侧身朝我解释道：&ldquo;我去气象学的研究室要来了云图，拜托那边的同事帮我单独做了次日出航概率的统计。前几天一直结果低于50%，直到昨天才忽然升到85%，就匆忙地拉着青浦先生出门了。&rdquo;</div>
+<div>&nbsp;</div>
+<div>的确很匆忙，我差点把鞋油当做牙膏打包进行李。果真如此，就算是战车一样横冲直撞的绘楠，也会遭遇到尴尬吧？况且这次并不是绘楠所喜爱的必然情况。这样想着，我嘟哝道：&ldquo;只有85%而已&hellip;&hellip;&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;还有青浦先生的好运啊，&rdquo;绘楠双手插袋，很帅气地笑起来：&ldquo;呐，青浦先生，就算没能出航也没关系，继续等，总会有出航的一天。只要下定决心去努力，没有什么是做不到的。旅行也是，破译也是&mdash;&mdash;&rdquo;</div>
+<div>&nbsp;</div>
+<div>他似乎还想说什么，眼睛明亮得像是启明星，最后却只是微笑着搂住了我冻得发抖的肩膀，回到了温暖的船舱。</div>
+<div>&nbsp;</div>
+<div>渡船上冷清得要命，几乎都是当地人。我本来以为只有笨蛋绘楠和沉迷美色的我会在这种天气来游玩，结果船上还有一对法国的游客夫妇，背着超专业的登山包和手杖，笑嘻嘻跟我们打招呼。</div>
+<div>&nbsp;</div>
+<div>看到他们之后，我忽然想起来绘楠神乎其技的文法破译。</div>
+<div>&nbsp;</div>
+<div>只要努力就做到了&mdash;&mdash;这种少年漫画般的宣言听起来实在太过玄奇，我不禁好奇道：&ldquo;那首诗，你是怎么破译出来的？像之前破译Affine密码或者Vigene密码一样吗？&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;不，那样的分析需要足够大的单词统计量与足够优化的算法才能做出；我只是拿青浦先生的手稿去请教了研究室的Maurille先生而已。&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠耸耸肩，无比坦然地承认了。</div>
+<div>&nbsp;</div>
+<div>习题三&middot;Sarai</div>
+<div>&nbsp;</div>
+<div>Null cipher</div>
+<div>&nbsp;</div>
+<div>暮色中的利尻山美得耀眼。</div>
+<div>&nbsp;</div>
+<div>被斜照的夕阳染成青绿色的海水清净无瑕。黝黑的、仿佛自远古时期便屹立在海上坚定的山峰，与其上冰雪覆盖、圣洁无暇的峰顶，是用怎样艳丽的言辞形容也不显夸张的绝妙景致。</div>
+<div>&nbsp;</div>
+<div>&ldquo;青浦先生。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;嗯？&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;就算在这种地方看整整一夜也没有关系吧，利尻山这么美。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;你是镭射眼吗？&rdquo;我困倦地打了个呵欠，吐槽道，&ldquo;现在已经明明黑到什么都看不清了。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;青浦先生困了？&rdquo;绘楠若无其事地说出了自恋又羞耻的台词，&ldquo;副驾驶不够舒服的话可以躺过来，膝枕也没关系哦。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;&hellip;&hellip;万分感谢，我更偏好后座老板倾情附赠的轻松熊靠枕。&rdquo;</div>
+<div>&nbsp;</div>
+<div>话是这么说，我已经被绘楠超暧昧的提议刺激到睡意全无了。</div>
+<div>&nbsp;</div>
+<div>救援要什么时候才能到呢&hellip;&hellip;</div>
+<div>&nbsp;</div>
+<div>事情要从我们到达礼文说起。</div>
+<div>&nbsp;</div>
+<div>刚一下船绘楠就轻车熟路地找到了岛上唯一的租车行，口音浓重的老板很热心地接待了我们。可惜已经过了旅游季，车行里车子的状况都不太好，老板一边道歉一边劝我们等明天检修好再出发，绘楠却全程无声地散发着想去看夕阳中的利尻山的怨念情绪。</div>
+<div>&nbsp;</div>
+<div>对上绘楠暴君，不要说我，就是淳朴的租车行老板都毫无胜算。于是绘楠和我以均一价租到了一辆看起来最帅气结实的大切诺基，换好了雪胎，趁着下午时分顺利地出发了。</div>
+<div>&nbsp;</div>
+<div>我们先是绕礼文岛环游了一周，然后因为我的坚持去参拜了完全没有人也没有狐狸的稻荷神社，最后把车子停在了会津海角附近。两人心满意足地窝在车里欣赏着火焰冰淇淋一般瑰丽又奇特的暮色利尻，心情浪漫得好像电视剧大团圆结局。</div>
+<div>&nbsp;</div>
+<div>世事无常、盛极必衰，今天份的好运就是在这个瞬间用完的。</div>
+<div>&nbsp;</div>
+<div>夕阳最后一缕光沉到海平面以下的时候，绘楠打开了车前灯。前方是十来米白茫茫的雪地，生长着零星枯黄的野草；再往前是礁石与流冰，夜色里的海水直通向恶魔的深渊，唯有发动机低沉的轰鸣声提醒着此处尚属人间。</div>
+<div>&nbsp;</div>
+<div>&ldquo;租车行的拖车好像出故障了，说是很快能修好，午夜之前一定能赶过来。&rdquo;我挂掉了电话，向绘楠转述道，&ldquo;也去问了驻在所的紧急救援，说是可以立即出动，但因为是休息日的加班时间，要付三倍的救援费。我想我们还是等拖车吧。&rdquo;</div>
+<div>&nbsp;</div>
+<div>靠奖学金生活的院生与没人气的三流专栏作家，生活就是这么贫困清苦。</div>
+<div>&nbsp;</div>
+<div>背包里好像有两罐冰啤酒，虽然现在没有配菜，也只好将就了。我扔给绘楠一罐，看着他仰头喝掉一口之后拿手背擦嘴角的动作，视线聚焦在昏黄灯光下、绘楠泛着水色的湿润嘴唇上。</div>
+<div>&nbsp;</div>
+<div>绘楠唇形很好看，要挑哪里有缺陷，大概是上唇略薄，不笑的时候显得傲慢又冷酷，再加上很有压迫感的身高优势，有时会被不认识的人评价为&ldquo;看起来很凶&rdquo;，实际上只是个臭屁又任性的小鬼。</div>
+<div>&nbsp;</div>
+<div>单单这样说好像也不符合事实。非常偶尔的时候，绘楠会莫名地固执与正经，一双漂亮的眼睛似笑非笑地望过来，乍看冷清清全无动静，要靠近到贴面相拥的距离才能看到春日流冰下、最深沉的温柔幻影。</div>
+<div>&nbsp;</div>
+<div>&mdash;&mdash;明明只认识了半年多一点点，不知道怎么就熟悉至此，甚至想起明年春假绘楠要返回东京的事情，内心就难过得要命，眼眶也会莫名其妙地泛酸。太糟糕了，这把年纪还没能彻底地告别感伤，根本不能算合格的社会人啊。</div>
+<div>&nbsp;</div>
+<div>陷入思索的我，连手里的啤酒也忘了打开。</div>
+<div>&nbsp;</div>
+<div>绘楠好像察觉了我的目光，侧头看过来：&ldquo;青浦先生无聊吗？&rdquo;</div>
+<div>&nbsp;</div>
+<div>&mdash;&mdash;不，我可以这样看着你整整一天。</div>
+<div>&nbsp;</div>
+<div>这当然是不能出口的禁忌话语。实际上，我只是简洁地回答说：&ldquo;还好。&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠却完全不理会我的回应，径自邀请道：&ldquo;趁着拖车到来之前，一起来解谜怎么样？第三篇密文，青浦先生有带过来吧？&rdquo;</div>
+<div>&nbsp;</div>
+<div>&hellip;&hellip;明显是绘楠自己无聊了而已，何必拿我做幌子。这样想着，我慢慢回忆起来。的确，我出发的时候顺手把整本活页簿都打包进了行李，可是&mdash;&mdash;</div>
+<div>&nbsp;</div>
+<div>&ldquo;没有计算工具啊。&rdquo;我茫然道。</div>
+<div>&nbsp;</div>
+<div>第二篇密文相较第一篇密文，计算量飙升了不知多少倍。按照绘楠的&ldquo;难度区分&rdquo;理论，第三篇密文计算量只会更大。因为是旅行，绘楠和我都没有带笔记本，手机上的计算器只能完成简单的计算，根本不可能像在绘楠的研究室那样轻松破译吧。</div>
+<div>&nbsp;</div>
+<div>&ldquo;不需要额外的计算工具，&rdquo;绘楠一脸理所当然地答道，&ldquo;有我就够了。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&hellip;&hellip;</div>
+<div>&nbsp;</div>
+<div>我想绘楠很快就会后悔的。</div>
+<div>&nbsp;</div>
+<div>在出发前我就将所有密文分别归类整理好了，第三篇密文占据了整整24页稿纸，这个数目比之前之后任何一篇密文都要长。</div>
+<div>&nbsp;</div>
+<div>&ldquo;就算用第一篇的Affine加密方式，也不是能够徒手解出来的计算量了哦。&rdquo;我警告道。</div>
+<div>&nbsp;</div>
+<div>绘楠在刚刚看到页数的时候明显吃了一惊，现下却只是漫不经心地应了一句，依旧从容地翻阅着稿纸。</div>
+<div>&nbsp;</div>
+<div>&ldquo;仍然是毫无意义的信息，&rdquo;我回忆着之前通过阅读得到的信息，&ldquo;但奇怪的是，这次不再是全文大写英文字母了，反而是大小写间杂着，空格也非常不规律，还出现了非常多的连续的字母&mdash;&mdash;在之前的Affine加密或者Vigene加密法里，这种连续重复怎么想都是不会出现的。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;的确，&rdquo;绘楠颔首认可了我的判断，将稿纸交到我手上，&ldquo;青浦先生，请离我稍微远一点的地方举起这张稿纸。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;哎？&rdquo;</div>
+<div>&nbsp;</div>
+<div>虽然不解其意，还是下意识照做了。我仿佛已经被绘楠培养成了思维定式，因为全然的信任，完全不觉得这种令行禁止的举动有哪里奇怪。</div>
+<div>&nbsp;</div>
+<div>绘楠眯起眼睛瞧了一会儿，若有所思道：&ldquo;字母排布太整齐了，形式感强烈到不像是文字。&rdquo;</div>
+<div>&nbsp;</div>
+<div>听绘楠这么一说，我也尽力把脑袋伸到远处再去看，每两排文字之间都有一种形式上的规整感：&ldquo;很像具象诗啊&hellip;&hellip;&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;那是什么？&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;诗的断句是比较随意的，&rdquo;我解释道，&ldquo;那刻意调整排版之后，一首诗在视觉上可以呈现出特别的形状以帮助表意。比如说，我要写一首关于时间的诗，特地排版成沙漏的样子，就变成了一首具象诗。&rdquo;</div>
+<div>&nbsp;</div>
+<div>说起来，如果要写一首关于绘楠的诗，应该排版成什么样子呢？大概是桂冠、王座和战车的形状吧；而我，恐怕连战车之后谨小慎微的士兵都算不上，只是王国里一个平凡的纳税人。</div>
+<div>&nbsp;</div>
+<div>&ldquo;形状吗&hellip;&hellip;&rdquo;绘楠倾身靠过来，用食指遮掉了上下两行重合的连续字母，&ldquo;把所有的连续字母认为是空格再看，青浦先生能联想到什么吗？&rdquo;</div>
+<div>&nbsp;</div>
+<div>靠得这么近，根本空不出脑子来联想啊&hellip;&hellip;赶紧把人推到驾驶座上坐好，我拿着稿纸沉思起来。</div>
+<div>&nbsp;</div>
+<div>形状上并没有特别相似的现实物件，但是观察格式排布，在认为连续字母是空格、或者说是分隔符的情况下，每两行的仿佛都出现了相似的规律。除此之外，大小写字母的排列也似乎颇为眼熟，尤其是大写字母有限的范围&hellip;&hellip;</div>
+<div>&nbsp;</div>
+<div>&ldquo;是乐谱。&rdquo;</div>
+<div>&nbsp;</div>
+<div>我给出了答案。</div>
+<div>&nbsp;</div>
+<div>&ldquo;除去连续字母以后，大写字母只剩下A~G的七个，代表音高；小写的s和b分别代表升半音和降半音；其余的小写字母代表情绪、力度之类的。&rdquo;我一边讲一边整理着思路，&ldquo;上下两行对应分别是高音谱和低音谱，也就是钢琴的左右手乐谱。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;啊，钢琴谱吗？&rdquo;绘楠轻易跟上了我的思路，补充道，&ldquo;那连续的字母就是时值了。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;诶？可是空格后面也有连续字母&mdash;&mdash;&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;空格代表休止符，其后的连续字母是休止符的时值，&rdquo;绘楠解释道，&ldquo;这份钢琴谱开头没有拍号标记，我想连续的字母每一个代表的时值应该很短，可能是六十四分之一或者一百二十八分之一音符，这样才把整份乐谱拉长到24页的水平。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;&hellip;&hellip;真是浪费纸张。&rdquo;穷酸地感慨过后，我疑惑道，&ldquo;这也是什么专业的加密手法吗？&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;算是Null加密法的一种吧，&rdquo;绘楠难得地给出了不太确定的回答，&ldquo;类似藏头诗的感觉，把重要的信息放在一大堆毫无意义的文字里来瞒天过海。中世纪也有炼金术师利用这种方法在信件里传递炼金秘方。是非常古典的加密方法。&rdquo;</div>
+<div>&nbsp;</div>
+<div>即便是看出规律之后，阅读乐谱也并不是什么容易的事情，更不要说时值还是用字母长度标注的。我花了整整五分钟才磕磕绊绊地读完一行，只好认命地放弃、把任务交给了绘楠。</div>
+<div>&nbsp;</div>
+<div>虽然对音乐完全不感冒，绘楠因为小时候被家庭逼迫学习了小提琴的关系，不管是乐理还是乐感都比我这国中毕业才真正见识到五线谱的半吊子强多了，很快便以乐句为单位地哼唱起来。</div>
+<div>&nbsp;</div>
+<div>绘楠的音色低沉温暖，跟本人性格完全不相符，我渐渐沉浸到音乐中，甚至下意识地在前奏之后唱出了歌词：&ldquo;远い梦すてきれずに&hellip;&hellip;&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;青浦先生听过这首曲子？&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠忽然停下了哼唱，我恍惚片刻才回过神，笑道：&ldquo;是我国中时候的毕业曲哦，谷村新司的サライ。歌名原文是波斯语的srai，故乡的意思。绘楠没有听过吧。&rdquo;</div>
+<div>&nbsp;</div>
+<div>虽然年龄只相差三岁，从小在城市长大的绘楠和家在乡村的我，实际上的时代差距可能已经达到十岁左右。这首サライ，应该是绘楠的父辈会喜欢的曲目才对。</div>
+<div>&nbsp;</div>
+<div>&ldquo;的确没有听过&hellip;&hellip;&rdquo;绘楠说着，转头注视着我，&ldquo;青浦先生想听吗？这里有曲谱，我可以现在开始学。&rdquo;</div>
+<div>&nbsp;</div>
+<div>我心中一动。要说不想听是假的，绘楠的声音太适合唱这首歌，刚刚随意哼唱的时候都能够轻易教我代入到情境中。但是&mdash;&mdash;</div>
+<div>&nbsp;</div>
+<div>&ldquo;太麻烦了吧。&rdquo;依旧这样略感不自在地拒绝了。</div>
+<div>&nbsp;</div>
+<div>绘楠于是不再说话，侧脸看起来是熟悉的烦闷，又在任性地生气了。</div>
+<div>&nbsp;</div>
+<div>租车行在午夜时分打来了电话，说好的拖车仍然没能修好，工人已经回家休息了。老板连连道歉之余，又提供说把大切诺基留在原地，他自己开车来接我们回旅馆。我看向绘楠，用嘴型问他意见，而暴君绘楠理所当然地给出了否定的答复：</div>
+<div>&nbsp;</div>
+<div>&ldquo;青浦先生不想留下来看利尻日出吗？&rdquo;</div>
+<div>&nbsp;</div>
+<div>于是我们继续在温暖的车子里相对无言。</div>
+<div>&nbsp;</div>
+<div>凌晨时分就起床登船，到现在也完全没有休息过，我其实有点困了，不知不觉就睡了过去，做了许多乱糟糟的梦，还有从悬崖掉落的情景，惊醒时背后一身的冷汗，额头上也有些微的凉意。</div>
+<div>&nbsp;</div>
+<div>明明开着空调暖风&hellip;&hellip;</div>
+<div>&nbsp;</div>
+<div>我望向驾驶座的方向。绘楠也在睡，嘴唇微微抿起，是生动又可爱的形象。车窗留了一丝空隙通风，寒流从那里袭来，我伸手探了探绘楠的脸颊，发觉触手冰凉，便探身过去想替他关掉车窗。</div>
+<div>&nbsp;</div>
+<div>&ldquo;&hellip;&hellip;青浦先生？&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠的声音模模糊糊的，像是还没睡醒。我把动作放得更轻：&ldquo;没事，接着睡吧。&rdquo;绘楠却一把握住了我的手腕，打了个呵欠，彻底清醒过来。</div>
+<div>&nbsp;</div>
+<div>为了省油，汽车大灯已经关掉了，对比车内温暖的光亮，窗外是冷峻的青黑色。绘楠下车抻了个懒腰，回身叫我：&ldquo;青浦先生也下来看看吧，天已经有些亮了。&rdquo;</div>
+<div>&nbsp;</div>
+<div>我便穿上了外套，装备好围巾长耳帽，裹得严严实实地下了车，与绘楠一起靠在温热的发动机上，观赏着夜色里若隐若现的利尻山。</div>
+<div>&nbsp;</div>
+<div>今夜天气不算好，星辰被云雾裹住，一轮月倚着利尻山的雪顶，好像贵妇人一般丰腴雍容，却也有同等程度的孤独。</div>
+<div>&nbsp;</div>
+<div>&ldquo;青浦先生的家乡在哪里呢？&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠忽然开启了话题。他呼出的白气凝成冰晶，慢而不可逆转地消散着。</div>
+<div>&nbsp;</div>
+<div>&ldquo;啊，乡下地方啦，&rdquo;我下意识地给出惯用的回答，再侧头望过去的时候，却对上了绘楠不满意的目光，只好默默在心里叹了口气，进一步说明道，&ldquo;在高山的一个小镇。&rdquo;</div>
+<div>&nbsp;</div>
+<div>说是在小镇，其实家安在了更偏僻的位山，时常来往于叫做久久野的小镇，就学也在那里。</div>
+<div>&nbsp;</div>
+<div>位山与久久野之间大约有12公里的路程，先是一小段山路，然后是沿着山岭与无数河川起起伏伏的455县道。</div>
+<div>&nbsp;</div>
+<div>没有雪时，位山的山壁是毛茸茸的，枯枝自泥土中伸展出来，群山像一群埋伏好的草原动物。而凌晨开始的细雪将无数河川的溪谷覆盖了，整个世界拢上深浅不一的灰白，晨曦会在山的另一面蒙蒙苏醒。</div>
+<div>&nbsp;</div>
+<div>久久野唯一的小学校就在县道尽头。空荡的巡回巴士离开时更加空荡，泥泞的草坪上穿着白色及膝长袜的孩子们在飞奔。一场棒球对抗赛需要出动三个年级的全部学生，兼职附近职高、国中和小学校所有英语课程的语言老师担任教练与裁判，站在场外抱着手臂懒洋洋地笑。</div>
+<div>&nbsp;</div>
+<div>以上内容，我曾在平成13年出版的《乡愁记》初稿中提及，最后却又删去了。每个作家的写作生涯都会牵涉到故乡，就好像把自己解剖换观众鼓掌。我偶尔回去高山，也会陷入一种错乱的情绪，分不清该以哪边作为时间的判据。</div>
+<div>&nbsp;</div>
+<div>我笔下、我心中、我眼前，都是不一样的高山。</div>
+<div>&nbsp;</div>
+<div>因为这一点矛盾的情绪，我将涉及到久久野的真实内容都做了模糊处理，本来是想着要体现一种更普世的乡愁情节，我的责编松尾先生却很不客气地揭穿我说太不坦诚了。</div>
+<div>&nbsp;</div>
+<div>面对这样的指责，我也只好苦笑着接受。上一本游记的三千册销量，已经超过了我能够面对的极限&mdash;&mdash;实际上，我甚至不敢将自己解剖给最亲近的人看。那有什么意义呢？被全情需要着的，乃是能够满足他们未发掘欲｀望的作家，而不是一个坦诚却毫无趣味的写作者。</div>
+<div>&nbsp;</div>
+<div>不知道该怎样将这些想法传达给绘楠，我颠三倒四说了很久，喉咙都开始发痛了。绘楠一直静静看着我，漂亮的眼睛在夜色里深沉得像大海。</div>
+<div>&nbsp;</div>
+<div>&ldquo;青浦先生，觉得自己毫无趣味吗？&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠这样问道。我不知道该怎么回答，低头打开一直捏在手掌被捂成温热、又被夜风吹得冰凉的啤酒罐，咕噜咕噜地喝掉了大半。</div>
+<div>&nbsp;</div>
+<div>&ldquo;然而啊，青浦先生，你已经成为某些人生命里极其重要的趣味了。&rdquo;</div>
+<div>&nbsp;</div>
+<div>给出了这样说不好是褒是贬的论断，绘楠却若无其事地转换了话题，&ldquo;作为交换，想给青浦先生看看我同样无趣的童年。&rdquo;</div>
+<div>&nbsp;</div>
+<div>他说着，从钱包里My number卡片之后抽出了一张泛黄的家庭照。我没想到技术精英绘楠居然会用这样老旧的方式保存照片，愣了半秒才伸手接了过来。</div>
+<div>&nbsp;</div>
+<div>大概是绘楠刚念高中时期的照片，右下角写着褪色了的日期。照片正中是站在花园里的威严中年人，板着脸看向镜头，表情很严肃；母亲是优雅的美人，样貌与绘楠有七分相似，坐在藤椅上很温柔地微笑。仍是少年的绘楠站在两人之间，怀里抱着一本书，嘴角微微下抿。</div>
+<div>&nbsp;</div>
+<div>&ldquo;那是&mdash;&mdash;&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;《我见到了海》，青浦先生的第一部出版作品。&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠很平静地做了说明，我却无论如何也平静不下来，发出了万分难堪的声音，&ldquo;那样糟糕的&mdash;&mdash;&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;是吗？&rdquo;绘楠打断道。他的唇角衔着一个冷淡又温柔的微笑。</div>
+<div>&nbsp;</div>
+<div>于是一切自我厌弃都被我忘在脑后。我心里想着，啊，绘楠偏薄的唇形也那样适合微笑。</div>
+<div>&nbsp;</div>
+<div>海上的日出仿佛格外早。凌晨四点钟刚过，远处的利尻山已开始显露出形象。</div>
+<div>&nbsp;</div>
+<div>说来万分不好意思，晨曦里利尻山泛着红霞的瑰丽景象，在我眼里，恐怕还比不上绘楠此刻微笑着的嘴唇。</div>
+<div>&nbsp;</div>
+<div>习题四&middot;Death</div>
+<div>&nbsp;</div>
+<div>Scytale cipher</div>
+<div>&nbsp;</div>
+<div>从礼文利尻返回札幌的第二天，我接到了责编松尾先生说不好是贺喜还是威胁的通知电话。</div>
+<div>&nbsp;</div>
+<div>此前在专栏里提到的、对某部北海道时下热播的系列室内情景剧的喜爱，被热心读者中岛小姐注意到了，并介绍给了身为该剧制片人的老爸。事有巧合，长年创作该剧SP剧本的某知名作家带着同居多年的女友一起不管不顾地飞去了夏威夷度假结婚，眼看着今年份的新年SP就要开天窗，制片人中岛先生决定临时找我顶缸。</div>
+<div>&nbsp;</div>
+<div>松尾先生认为这是再好不过的机遇，我却只想惊恐地模仿爱德华&middot;蒙克那幅呐喊来表达自己的绝望。</div>
+<div>&nbsp;</div>
+<div>按照中岛先生的说法，虽然是相对简单的室内情景剧，75分钟的新年SP也需要至少两周的时间拍摄和后期处理，留给我的剧本创作时间连一周都不到。这样短的时间接手一部已经树立起风格的电视剧的剧本创作，对于知名的剧作家来说都是莫大的挑战，更何况是我这样连剧情小说都没有写过几篇的三流专栏作家？</div>
+<div>&nbsp;</div>
+<div>听完我的意见之后，松尾先生毫不客气地教训道：&ldquo;青浦先生看过电视剧，这就是中岛先生选择你的最大理由。如果有足够的时间让替换的剧作家去揣摩构思，制片方为什么要选择你而不选择伊坂？&rdquo;</div>
+<div>&nbsp;</div>
+<div>&mdash;&mdash;顺便一说，那个伊坂也是松尾先生负责的作家。虽然身为我的后辈，却凭着出道作就获得了全国大赏的提名，目前是炙手可热的新锐作家。</div>
+<div>&nbsp;</div>
+<div>被这样辛辣地刺激了，我再没朝气也会仗着一时意气决定进取；而绘楠听说的时候，虽然一脸不以为意，却也是别扭地表达了想看到我的剧本在电视上被演绎的念头。</div>
+<div>&nbsp;</div>
+<div>想着要写出优异的作品让松尾先生与绘楠刮目相看，我把自己关在房间整整三天，提前写完了一部集本剧历年SP英萃的完美剧本。我沾沾自喜地将剧本交到讨论会上，却被责编松尾先生、制片人中岛先生以及热心读者中岛小姐一起严肃地批评了。</div>
+<div>&nbsp;</div>
+<div>&ldquo;毫无新意&rdquo;、&ldquo;观众会无聊到睡着&rdquo;、&ldquo;完全不是青浦先生的风格&rdquo;&hellip;&hellip;负面意见如浪涌来，回到家，我什么都来不及做就整个人栽在暖炉前，双目无神地思索着改进方法，连绘楠走到我身边都没有注意。</div>
+<div>&nbsp;</div>
+<div>&ldquo;青浦先生怎么了？&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠在暖炉一角蹲下来观察我，左手谨慎地悬在我脸侧，仿佛准备随时来测试我的呼吸心跳。</div>
+<div>&nbsp;</div>
+<div>我的心情已然跌破冰点，被绘楠体贴询问也完全不想理会，见那只手再三凑到我的视野里，心中很是烦闷，不知怎么想的，忽然凑过去，在修长的手指上不轻不重地咬了一口。</div>
+<div>&nbsp;</div>
+<div>&ldquo;&hellip;&hellip;&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;&hellip;&hellip;&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠起身进了洗手间。</div>
+<div>&nbsp;</div>
+<div>水声已经响了接近十分钟，我怀疑绘楠快要把手指洗破皮了。灰溜溜地道歉认错也没有得到响应，我只好插科打诨试图缓解尴尬：&ldquo;呐，绘楠你知道吗？口水也是有治愈作用的。古人很多时候靠它来医治伤口。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;所以青浦先生还是茹毛饮血的猿人吗？&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠终于舍得拉开了洗手间的门，边走边嘲讽道。果然是万分嫌弃他人体液，手指洗到泛红不说，连额发都淋得湿乎乎的。</div>
+<div>&nbsp;</div>
+<div>&ldquo;如果是就好了&hellip;&hellip;&rdquo;我想起剧本的事情，完全没了反唇相讥的心思，怨念道，&ldquo;猿人没有电视剧本要写。&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠知道我今天去交稿件的事情，推论道：&ldquo;被打回了？&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;以类似于&lsquo;毫不客气地把稿件踩到泥水里&rsquo;的方式，被打回了。&rdquo;我面无表情地补充道。</div>
+<div>&nbsp;</div>
+<div>&ldquo;已经拍出来的SP，参考价值是有限的。&rdquo;听完我关于&ldquo;集历年来SP精粹剧本&rdquo;的介绍，绘楠露出了思索的表情，&ldquo;青浦先生或许可以想象，自己想看到什么样的SP呢？&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;想看到？&rdquo;乍一听闻这样的观点，我有些惊讶，&ldquo;作为剧作者，没有立场谈&lsquo;想看到&rsquo;的情节吧。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;但青浦也是这部剧一直以来忠诚的观众，&rdquo;绘楠耸耸肩，&ldquo;要拍出观众想看的作品&mdash;&mdash;这是大众传媒的核心不是吗？&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;哪有那么简单啦&hellip;&hellip;&rdquo;我挥挥手想要打消绘楠幼稚的想法，&ldquo;观众对自己的需求也只有模模糊糊的概念，根本不可能准确地传递给创作者。</div>
+<div>&nbsp;</div>
+<div>&ldquo;比如说吧，这部剧第三季的时候，做过一次杂志的人气调查，结果出人意料，除开四位主角之外，人气最高的居然是女主角的弟弟，从头到尾都只有背影进过镜头的边缘角色。于是第四季的时候，编剧特地加重了弟弟的戏份，可是下次调查时弟弟的人气排名又意外地大跳水，连前20都没能进入。</div>
+<div>&nbsp;</div>
+<div>&ldquo;编剧在访谈里特意去采访了现场观众，结果得到了&lsquo;看背影觉得非常帅气，正面却好像没那么可爱&rsquo;这样模棱两可的回答。明明已经请到了超人气的少年偶像，没道理人气跌落只是因为样貌。编剧感到不可思议，又仔细询问了许多人，大家意见都不统一，只有违和感是确实感受到的。</div>
+<div>&nbsp;</div>
+<div>&ldquo;最后还是一名高校生道破了真相，赢得了大部分在场观众的赞同。他说：&lsquo;那个背影，应该是帅气的女孩子啊&rsquo;。</div>
+<div>&nbsp;</div>
+<div>&ldquo;观众在那名高校生说出之前，只是觉得少年的正面与背影有违和之处，自己都不知道有这样性别误解的念头，又要怎么传递给创作者？实际上，是优秀的作品主动发觉并触碰到观众的内心，而不是观众呐喊着内心的需求等待作品填满。让观众做决定绝对是最错误的创作路线，绘楠，不要对人类的平均审美水准抱有太高期望啊。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;我没有对观众抱有期望，&rdquo;绘楠认真听完了我全部的长篇大论，只在最后做出了纠正，&ldquo;实际上，刚刚讲的那些都跟平常意义上的观众没有关系。我在谈论的是青浦先生。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;&hellip;&hellip;我？&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠微一点头：&ldquo;虽然观众不懂得自己的需求，但是青浦先生，我希望你至少可以向内心询问、了解自己的需求。不需要词不达意地传达给任何人，青浦先生只要把剧本写成自己想看的内容就够了。&rdquo;</div>
+<div>&nbsp;</div>
+<div>轻描淡写地说出了&ldquo;只要写成自己想看的内容就够了&rdquo;这样万分任性却又莫名有道理的台词，不愧是绘楠战车&hellip;&hellip;我在心里暗暗敬佩的同时，也不禁思索起了我想看的内容。</div>
+<div>&nbsp;</div>
+<div>虽然说是情景喜剧，由于系列剧的劣根性，主角之间的爱恨纠葛已经织成了蜘蛛网，光是角色间的情感张力就足够可观了。而要表现这种情感关系，最直截了当的方法必定是&ldquo;那个&rdquo;。</div>
+<div>&nbsp;</div>
+<div>说起来，我的确是有一个观剧以来发酵了很久的脑洞&mdash;&mdash;</div>
+<div>&nbsp;</div>
+<div>&ldquo;谋杀与推理，我很想看的这种剧情&hellip;&hellip;&rdquo;我一撇嘴，&ldquo;完全是情景喜剧的禁区吧。&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠不以为意：&ldquo;制片方的邀请已经是对最高的认可，青浦先生不必有太多负担。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;我可没有获得什么至高的认可，只是个临阵登场的无名替身而已。&rdquo;自暴自弃地点明了替身的身份，我心中却忽然放松了许多，&ldquo;啊，替身而已，就算写出了怪异的情节，也是可以原谅的&mdash;&mdash;总不会比临阵逃脱更糟糕。&rdquo;</div>
+<div>&nbsp;</div>
+<div>不知为什么，听到这句话的绘楠毫无道理地瞪了我一眼。</div>
+<div>&nbsp;</div>
+<div>确定写作题材之后就开始了闭关创作剧本的奋斗。</div>
+<div>&nbsp;</div>
+<div>因为是新春SP，又是一直以喜剧形象出现在电视机上的剧目，主要角色是不能轻易死去的。在引入慷慨赴死的新角色和主要角色假死然后反转的设置之间，我斟酌许久，最终决定采用后者。</div>
+<div>&nbsp;</div>
+<div>主要剧情与对话都是为了表现假死后角色间的情感变化而存在，尽量轻描淡写又要隐约透出深情与思考，还必须考虑在反转时能得到的最佳喜剧效果。我殚精竭虑地熬了一个通宵、终于写出初稿，却又遇上了大麻烦。</div>
+<div>&nbsp;</div>
+<div>&ldquo;Dying message.&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠一把扯下我刚刚摁上去的冰箱贴，不满道：&ldquo;哪有人把自己写的贴纸叫做死亡讯息的啊？&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;如果不处理好这个问题，我就真的要牺牲在死线前了，&rdquo;我有气无力地答道，&ldquo;说是dying message也没差。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;这种东西随便就可以编出来二十条，&rdquo;绘楠随口就给出了傲慢的论述，&ldquo;普通的dying message自不必说，需要躲开凶手耳目的Dying message也不过是在死者和侦探间传递的一种密码而已。青浦先生，之前的Affine加密、Vigene加密和Null加密，难道不能用吗？&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;说是密码也没错，可是，&rdquo;我怀疑地挑起眉，&ldquo;数字母出现频率、算假名排列概率这样复杂的解密方法用在电视剧里，真的能吸引观众吗？再说那个Null密码，光从加密方式来说就已经复杂到超现实了吧。正常人死前是没办法一边唱着亡灵赞歌一边把凶手的名字记成乐谱的。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;是吗？&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;&hellip;&hellip;绘楠你不算正常人。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;总而言之，需要更简单、更直观的实现方式对吧。&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠说着，翻开了因为我太忙而寄存在他那边的关于密码学的活页簿。他从中取出了第四篇密文的信封，好像浮士德一样诱惑地微笑起来，将它递到我面前：&ldquo;这个，很合适哦。&rdquo;</div>
+<div>&nbsp;</div>
+<div>实不相瞒，我对绘楠的请求完全没有办法。彻底被这个微笑迷惑的我，就算知道其中一定是更加困难的密码习题，在这样只剩不到48小时就要面临剧本死线的关键时刻，也义无反顾地接过了信封。</div>
+<div>&nbsp;</div>
+<div>&ldquo;青浦先生听说过转置式排版吗？明明是竖排的书籍，却忽然把假名印刷成横排，人为地制造阅读停顿，迫使读者转换思路。&rdquo;绘楠单手撑腮，是胸有成竹的样子，想必已经提前钻研过材料，却非要在凡人面前炫耀他的智识。</div>
+<div>&nbsp;</div>
+<div>凡人如我只好绞尽脑汁地想办法捧场：&ldquo;没有&hellip;&hellip;但这跟密码学有什么关系？&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;竖排的书籍忽然变成横排，还按照竖排的规律去阅读，就会觉得佶屈聱牙，完全是密文了。&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠在纸上写下了整行&ldquo;我是青浦&rdquo;的假名，又换成竖排两行的排列，再将两行合并起来，就完全看不出本意了。</div>
+<div>&nbsp;</div>
+<div>1. わたしはせいほです</div>
+<div>&nbsp;</div>
+<div>2. すほせしわ</div>
+<div>&nbsp;</div>
+<div>&amp;nbsp； &amp;nbsp；でいはた</div>
+<div>&nbsp;</div>
+<div>3. すほせしわでいはた</div>
+<div>&nbsp;</div>
+<div>&ldquo;所以排版与阅读习惯是很重要的解密参考，&rdquo;绘楠说，&ldquo;第四篇密文里使用的Scytale加密法，就是利用了这样的方式。加密过程简单清晰；而解密过程，只要明白了加密原理，笨蛋也能轻易地破译明文。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;&hellip;&hellip;&rdquo;</div>
+<div>&nbsp;</div>
+<div>不知为什么，我很有身为那个&ldquo;笨蛋&rdquo;的自觉。</div>
+<div>&nbsp;</div>
+<div>&ldquo;的确是简单又可行的加密方式，&rdquo;搞清楚加密方法之后，我提出了新的问题，&ldquo;但是侦探破译的时候要怎么知道死者加密所采用的排布方法？&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠自信满满地回答道：&ldquo;非常简单，通过字母频率分布可以确认被使用的是转置式加密，而具体的转置方式，比如说，是两行交替，还是像第四篇密文那样使用了Scytale加密法，可以通过字母组合出现的概率分布测试确认。当然，每层字数都不规律的Scytale是无法破解的，那种情况下的Scytale本身就相当于一个one-time pad...&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;停！&rdquo;</div>
+<div>&nbsp;</div>
+<div>我终于被绘楠喋喋不休的科普绕晕了，扶额道：&ldquo;绘楠，我只想知道，&lsquo;身为正常人&rsquo;的侦探要怎么能在&lsquo;75分钟内&rsquo;向&lsquo;跟我一样不愿意努力&rsquo;的电视观众解释清楚他的破译。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;哦。&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠的眼神就好像在说成年人的世界真无趣&mdash;&mdash;顺带一提，今年23岁的绘楠，虽然比我更年轻一点点，也已经成年整整3年了，&ldquo;就像青浦先生所说的，&lsquo;正常人&rsquo;受害者来得及留下的死亡讯息，最多也只有十几个字母，&lsquo;正常人&rsquo;侦探每种排列方式都尝试一遍，就能够找到明文了。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&hellip;&hellip;</div>
+<div>&nbsp;</div>
+<div>最终的剧本里，连绘楠这样简化的穷举法都没有用上，我让&ldquo;死者&rdquo;在地板上对着镜子写下了竖排成三列的9个假名，而侦探破译，也只是因为站对了角度看进镜子里这样常规的&ldquo;巧合性&rdquo;解法。</div>
+<div>&nbsp;</div>
+<div>交上剧本后，责编松尾先生毫不意外地斥责了我的任性，制片人中岛先生却似乎很有兴趣，与被我写&ldquo;死&rdquo;的男性主演商量之后，很轻易就通过了剧本的审查。</div>
+<div>&nbsp;</div>
+<div>紧张的赶稿生活就此松懈下来，我甚至有点不适应，每天的乐趣变成了逗一逗因为年末发表而忙成喷火巨龙战车的绘楠，惹到他生气便去北大实验室送便当说软话。绘楠是麻烦又可爱的小孩子脾气，怒火来得快去得也快，很快就与我和好了。</div>
+<div>&nbsp;</div>
+<div>平成19年1月3日，我清晨就强行把绘楠从被窝挖出来参拜，之后又去市场无所事事地闲逛了很久，还健忘般地把秋田火锅的材料买重复了，紧张期待的心情展露｀无遗，被绘楠嘲笑了一整天。</div>
+<div>&nbsp;</div>
+<div>那部连续剧的SP定档在晚上7点。与我想象中现实刑侦的摄影风格不同，剧本里的凶杀案被导演处理成了阴森恐怖仿佛午夜凶铃般的气氛，明明是自己创作的剧情，我仍然差点被那具装死的尸体吓到。</div>
+<div>&nbsp;</div>
+<div>之后的感情戏也完成得相当漂亮，各个角色面对死亡的情绪、与对其他角色的感情，其脉络都来自于平时的剧集里，却因为面对死亡这样永恒的话题而被放大到纤毫毕露，我看得紧张又兴奋，中途甚至毫无自觉地抓住了绘楠的肩膀。</div>
+<div>&nbsp;</div>
+<div>随着时间的流逝，我心中逐渐涌起惊讶与不安。原本被安排在第60分钟的反转始终没有出现，电视剧的打光越来越阴森，我抓在绘楠肩膀的手掌也越收越紧。到了第72分钟，眼看着剧本里完全没有写到的配角仿佛要丧命当场，背景音乐却骤然一变，为这集SP专门撰写的恐怖音效骤然消失，换成了系列剧里已然成为经典的BGM，所有主创齐集荧幕，讲出了关键的反转台词。</div>
+<div>&nbsp;</div>
+<div>&ldquo;呼&mdash;&mdash;&rdquo;</div>
+<div>&nbsp;</div>
+<div>一直噎在胸口那难以言喻的紧张、惶恐与期待，终于缓缓消弭在空气中。</div>
+<div>&nbsp;</div>
+<div>&ldquo;青浦先生？&rdquo;</div>
+<div>&nbsp;</div>
+<div>听到绘楠的声音，意识才真正回到现实中。绘楠仍然是规矩地端坐着，因为我一直抓着他肩膀的缘故，上半身的家居服已经被我揉皱，此刻正微微皱着眉侧头看我：&ldquo;是被吓到了吗？&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;&hellip;&hellip;并没有。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&hellip;&hellip;有也不可能明说吧。</div>
+<div>&nbsp;</div>
+<div>&ldquo;青浦先生果然很有创作才能。&rdquo;</div>
+<div>&nbsp;</div>
+<div>SP放映结束后，懒洋洋帮忙收拾着餐具的绘楠忽然说出这种赞扬的话，我在感到害羞之余，也不禁吐槽道：&ldquo;夸我也不能免除家务啊。&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠却仿佛完全没收到我的嘲讽信号似的流畅地接了下去：&ldquo;我在想，青浦先生死去的话，我会像电视里的哪位人物一样反应呢？&rdquo;</div>
+<div>&nbsp;</div>
+<div>居然假设我死掉&hellip;&hellip;默默腹诽着，我对结果却也生出了些许好奇。</div>
+<div>&nbsp;</div>
+<div>倘使我死去的话，绘楠将怎么做呢？是像女主角霜子小姐那样、在天台与人谈论到清晨，像男主角木野先生那样、把同伴的死去当做奋斗的理由，还是像女配角立花小姐那样、怔怔流泪，写下感动全市的散文？好像都不太可能啊&hellip;&hellip;</div>
+<div>&nbsp;</div>
+<div>我不禁催促道：&ldquo;快说！&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;谁都不像。&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠斩钉截铁地宣告道。</div>
+<div>&nbsp;</div>
+<div>&ldquo;哈？&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;我不会跟人谈论青浦先生，不会写悼念散文，也不会在墓前默默流泪，&rdquo;绘楠放下手里的抹布，露出了颇为残酷的微笑，&ldquo;我会离开这里。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&hellip;&hellip;</div>
+<div>&nbsp;</div>
+<div>老实讲，这种说法我根本无法理解，只能尴尬地评价道：&ldquo;太、太无情了吧？&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;不是那样的，&rdquo;绘楠垂下眼，&ldquo;不是无情，应该说，是完全相反。&rdquo;</div>
+<div>&nbsp;</div>
+<div>我还没有理清思绪，绘楠便继续说了下去：&ldquo;那么，要是我死去，青浦先生会如何想呢？就像青浦先生经常讲的，我总是横冲直撞，任性得像小孩子一样。这些都是很容易死去的性格特征。假使我明天死去，青浦先生会如何呢？&rdquo;</div>
+<div>&nbsp;</div>
+<div>直到蜷进被褥里关灯准备入睡的时刻，绘楠的话都一直萦绕在耳畔。</div>
+<div>&nbsp;</div>
+<div>我时常抱怨绘楠的任性，却从未将这个词与&ldquo;容易死去的性格特征&rdquo;联想在一起。应该说，绘楠在我心目中是无敌神勇的战车形象，他的前途光明无量，好像一轮旭日悬挂在向日葵田上，拒绝一切伤害与侵犯。</div>
+<div>&nbsp;</div>
+<div>电视剧SP里那具仿佛楼宇倾塌般轰然软倒的尸体，倘使那失去血色的嘴唇乃是绘楠微薄的唇形，那浑浊的瞳孔曾如同海水般深沉也曾如玻璃般傲慢，那僵直的手指原本修长白皙、惯于敲击键盘与使用铅笔，那冰凉的身躯不能继续支撑起名为&ldquo;绘楠&rdquo;的、傲慢又迷人的形象&mdash;&mdash;</div>
+<div>&nbsp;</div>
+<div>我再也睡不着了。</div>
+<div>&nbsp;</div>
+<div>整个人后怕得要命，一闭眼就是绘楠在我面前失去呼吸的情景，明明平躺着想要安稳入睡，冷汗却一股脑地往外冒，睡衣的背后湿掉大半，心慌到连手指都在打颤。</div>
+<div>&nbsp;</div>
+<div>想要立即见到绘楠，想要拥抱他以确认体温、亲吻他以确认呼吸&mdash;&mdash;被这样的恐惧与渴望所攫获，我在黑暗中猛地坐起，匆忙地抱住被子、就这样赤着脚跑出了房间。</div>
+<div>&nbsp;</div>
+<div>次日清晨，在绘楠房间门口的沙发上睡到腰酸背痛还浑然不觉的我，是被绘楠本人给叫醒的：&ldquo;青浦先生！为什么要睡在客厅沙发上？&rdquo;</div>
+<div>&nbsp;</div>
+<div>&hellip;&hellip;</div>
+<div>&nbsp;</div>
+<div>要怎么样才能在保住面子的基础上告诉绘楠，我被自己编写剧本的电视剧SP、和绘楠一个简单的假设问句，吓到几乎彻夜无眠？</div>
+<div>&nbsp;</div>
+<div>还是让这件事成为永恒的秘密吧。</div>
+<div>&nbsp;</div>
+<div>习题五&middot;Depart</div>
+<div>&nbsp;</div>
+<div>Rotor Machine</div>
+<div>&nbsp;</div>
+<div>北大学生的春假开始于2月7日。名为春假，这个季节的北海道却连春天的影子都无处可寻。</div>
+<div>&nbsp;</div>
+<div>距离太近，绘楠平时都是步行去学校，家里的轻型车早就变成我采购专用了。在严冬酷寒把我锁在被窝结界这一周多一点的时间里，车棚前的雪已经堆得与顶棚一样高。望着与视线平齐的深雪，我认命地操起从邻居家借过来的铲雪机，开始了艰难的除雪工作。</div>
+<div>&nbsp;</div>
+<div>绘楠回来的时候，我刚刚从满院的积雪中铲出来一条足够宽的车道。</div>
+<div>&nbsp;</div>
+<div>&ldquo;青浦先生要出门吗？&rdquo;</div>
+<div>&nbsp;</div>
+<div>一回家就被我支使去还铲雪机的绘楠如此询问道。我装作在策划约会的中学生一般、万分腼腆地点了点头，犹疑道：&ldquo;啊，想邀请难得放假的精英院生去吃烧鸟，你看我能成功吗？&rdquo;</div>
+<div>&nbsp;</div>
+<div>于是事情就这么决定了。</div>
+<div>&nbsp;</div>
+<div>居酒屋选在了市郊的柚柚。冷清的环境乍看教人却步，实际上不论酒精饮料还是烧鸟本身，都是低薪阶层最能享受到的美味。我很有远见地预约了酒后代驾，虽然为了顺路采购而把轻型车开了出来，也不用介意饮酒的事情。</div>
+<div>&nbsp;</div>
+<div>绘楠就连喝酒也有几分任性。仗着是我请客不用自己付钱，他一口气把酒水单上所有的店家推荐都点了一杯，每种都浅尝辄止，喜欢的就留在自己面前，不喜欢的全部推给我。我惊讶地发现绘楠似乎酒量不太好，很快就喝到脸颊泛红了。</div>
+<div>&nbsp;</div>
+<div>&ldquo;听说酒后吐真言，&rdquo;我撑着腮歪头取笑他，&ldquo;在我面前是无所谓啦，平时可不能轻易喝酒哦。绘楠这样的酒量，一杯下肚就会被套出银行卡密码的。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;我还没醉，&rdquo;绘楠解决掉第二杯&mdash;&mdash;顺带一提，这杯是姜汁啤酒，柚子酒因为绘楠讨厌酸味的关系被推到了我面前，&ldquo;而且青浦先生也完全不可靠。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;哈？&rdquo;我深受打击。</div>
+<div>&nbsp;</div>
+<div>&ldquo;在保守秘密这一点上，牢不可破的加密方式，比会乱说话的青浦先生可靠得多。&rdquo;绘楠又仰头喝掉了第三杯，像小孩子一样把空掉的玻璃杯以嘴对嘴的危险衔接方式搭叠着。我赶紧在被摔破之前把它们抢救下来，一时间又是好奇又是好笑：&ldquo;我哪里乱说话了？&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;不能说，&rdquo;绘楠的表情一下子冷淡下来，&ldquo;在青浦先生认清自己的心意、强硬地决定为此努力之前，什么都不能说。&rdquo;</div>
+<div>&nbsp;</div>
+<div>煞有介事的表情唬得我都当真了，甚至暗地里反思起来的时候，绘楠却忽然趴在了桌子上：&ldquo;我醉了。&rdquo;</div>
+<div>&nbsp;</div>
+<div>喂&hellip;&hellip;</div>
+<div>&nbsp;</div>
+<div>说是喝醉了，绘楠的逻辑仍然很清晰，只有口齿变得含糊，听上去软软糯糯很是可爱。我试图把冰水推到他面前，却被轻易地辨认出了，厌恶地挪到一边。绘楠从他选中的饮料里挑了一杯清酒，慢慢地啜饮着。</div>
+<div>&nbsp;</div>
+<div>桌上的烧鸟已经只剩残骸，我又加点了几份烤蔬菜。绘楠已经停下了筷子，我便不再顾忌，往烤串里加了大量的辣酱与胡椒；因为是在冷清的居酒屋里，也不太在意吃东西的形象，酱汁都沾到了脸上。</div>
+<div>&nbsp;</div>
+<div>&ldquo;青浦先生的这里。&rdquo;原本抱着杯子乖乖沉默的绘楠，忽然伸手在我脸颊一刮，随即将那只手指含进了嘴里。</div>
+<div>&nbsp;</div>
+<div>&ldquo;&hellip;&hellip;好辣。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;&hellip;&hellip;活该。&rdquo;</div>
+<div>&nbsp;</div>
+<div>我为被辣到流出生理性眼泪的绘楠叫了一份拉面。餐盘端上来的时候，盘底的小樽旅游宣传册让我想起意外提前的利尻山之旅。冰天雪地里去探望孤寂伫立在海面上的利尻山，现下回忆起来，还真是激进又浪漫的行动。</div>
+<div>&nbsp;</div>
+<div>想到这里，话题也随之转到了假期安排上：&ldquo;绘楠假期打算做什么？&rdquo;</div>
+<div>&nbsp;</div>
+<div>我原本期待着绘楠会说出某个全然不可行的旅行活动，或者是无止尽的加班计划，然而这次，向来在我与他的活动中担任不负责任的策划的绘楠，却只是无所谓地耸了耸肩：&ldquo;没什么特别的。青浦先生呢？&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;我吗？&rdquo;</div>
+<div>&nbsp;</div>
+<div>被这样问起，我不由得犯了难。电视剧SP的稿费足以支撑一次国内旅行，目的地却实在不好确定。绘楠和我都是更偏好自然名胜的类型，这样算起来，金泽应该是不错的去处。</div>
+<div>&nbsp;</div>
+<div>还有高山。平时说起去高山还难免近乡情怯，想到要带绘楠回去，我却忽然期待起来。</div>
+<div>&nbsp;</div>
+<div>不过旅行毕竟是需要好好规划的事情，在这个醉酒任性的绘楠面前，还是应该说一些更短期、更直接、更有挑战的安排。</div>
+<div>&nbsp;</div>
+<div>于是，我坏笑着，从随身的公文包里取出了活页簿。</div>
+<div>&nbsp;</div>
+<div>&ldquo;大挑战！酒醉中、还能成功解开困难的密码吗？未来精英绘楠，关乎荣耀的一战！&rdquo;</div>
+<div>&nbsp;</div>
+<div>将酒杯举到面前冒充话筒的我，以夸张的面部表情和故意收紧的声线，讲出了像是综艺节目搞笑担当的台词。</div>
+<div>&nbsp;</div>
+<div>绘楠全程无动于衷地抱着酒杯冷淡旁观。</div>
+<div>&nbsp;</div>
+<div>&ldquo;&hellip;&hellip;不好笑吗？&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;不好笑。&rdquo;</div>
+<div>&nbsp;</div>
+<div>醉酒后年龄减半的幼稚版绘楠，跟成年版的他一样，冷漠无情地拒绝了我的幽默。</div>
+<div>&nbsp;</div>
+<div>&ldquo;正如之前所说的，在保守秘密这一点上，牢不可破的加密方式比任何人都可靠，&rdquo;绘楠又解决掉了一杯梅酒，安置完空杯时，眼神茫然地落向了被摊在面前的活页簿。</div>
+<div>&nbsp;</div>
+<div>我开始怀疑那因酒精而变得迷茫的视线能否成功将纸面文字传递到脑海里，而绘楠也的确很快地放弃阅读，开始了惯有的长篇大论：&ldquo;可是，古典的加密方法实在是太简单，几乎全部有必然的破解之道、跟醉不醉酒没有关系&mdash;&mdash;呐，青浦先生能够想出更难以破解的信息传递方式吗？&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;更困难的方法吗&hellip;&hellip;&rdquo;</div>
+<div>&nbsp;</div>
+<div>轻易被绘楠的演讲牵住思维的我，陷入了短暂的沉思。</div>
+<div>&nbsp;</div>
+<div>近代谍报类影视剧里所描述的字母移位的加密方式，其实是Caesar加密；侦探小说中更常见的利用圣经之类书籍进行替换的方式，其实质乃是Affine加密的一种；而像是女高中生之间流行的、通过携帯电话的九宫格字母盘加密的方式，实际上也是Vigenere加密的变体。这样一来，还能够想到的是&hellip;&hellip;</div>
+<div>&nbsp;</div>
+<div>&ldquo;隐喻、谜语之类的。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;这也是一种考虑，&rdquo;绘楠把挑中的最后一杯酒挪到自己面前，&ldquo;但是密码必须要能够被收信人完美无缺地解密，也就是说，明文必须是唯一的。斯芬克斯的谜语，谜底在字面上，到底是日文的&lsquo;人&rsquo;、&lsquo;人间&rsquo;、还是&lsquo;自己&rsquo;呢？如果解出来的明文有不同的表达，收信人做决定的时候就会迷惑。&rdquo;</div>
+<div>&nbsp;</div>
+<div>作家的身份让我很快察觉到了&ldquo;人&rdquo;、&ldquo;人间&rdquo;和俄底浦斯&ldquo;自己&rdquo;这三种看似等价的表述之间的差异。</div>
+<div>&nbsp;</div>
+<div>好比说，我是更乐于使用&ldquo;自己&rdquo;的类型；对比起&ldquo;人&rdquo;来说，更经常使用&ldquo;方&rdquo;；在讲出&ldquo;人间&rdquo;这个词的时候，多是在腹诽或自嘲；而绘楠就是会在对话里正面使用&ldquo;人类&rdquo;的类型。实际上，他也会使用&ldquo;方&rdquo;，但那仅仅是教养使然，跟礼貌什么的完全没有关系。</div>
+<div>&nbsp;</div>
+<div>&ldquo;青浦先生，人类的天性不是爱与和平，而是占有与争斗。&rdquo;对全人类毫无敬意地下了这样的断言，绘楠平淡地讲述道，&ldquo;战争时代、以及战争后短暂的和平时代，世界上最先进、最可靠的科技，都是应用在军工上的。在古典密码学的领域内，困难的加密挑战绝大部分来自于二战的军队。</div>
+<div>&nbsp;</div>
+<div>&ldquo;记得第二篇密文所使用的Vigenere加密法吗？稍微加以改进，把精致的算法与机械而非人脑结合起来，就生产出了不费任何思考也能够操作的密报机。</div>
+<div>&nbsp;</div>
+<div>&ldquo;数学家与机械师努力改进算法，想要做出更厉害的加密手段与操作更不易出错的机器；可士兵们被训练出操作能力之后，却总是更喜爱上一代的密报机，不断埋怨着优秀的新算法、与跟随算法更新换代的操作方法。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;这也是难免的吧，&rdquo;我微一咋舌，&ldquo;从手写稿换到打字机再到笔记本&mdash;&mdash;工具更新太快，我也很不适应啊。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;嗯&hellip;&hellip;对，青浦先生，你也是那样的，&rdquo;绘楠嘴角一翘，露出了像是嘲讽、又像是自嘲的微妙表情，&ldquo;讨厌思考、讨厌判断、讨厌取舍、讨厌改变&hellip;&hellip;安于现状、自欺欺人，永远沉浸在虚幻的安全感中，因为畏惧失败而不肯为真实的心意付出任何努力。你啊&hellip;&hellip;&rdquo;</div>
+<div>&nbsp;</div>
+<div>醉酒的绘楠似乎比平常更雄辩，我被这莫名的人格攻击堵得讲不出话来，勉强从牙缝里挤出了质疑的回应：&ldquo;我&mdash;&mdash;&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;青浦先生不如密报机可靠，却远比任何一种密报机都来得棘手。如果什么都不知道也就算了，&rdquo;绘楠说着，饮尽了面前最后一杯酒，像是试图夺走我的酒杯一般伸手，却错失了目标、碰触到我的侧脸，&ldquo;青浦先生，你明明就在这里，能不能再稍微对我&mdash;&mdash;&rdquo;</div>
+<div>&nbsp;</div>
+<div>因为持握冰啤酒杯而变得冰凉的指甲划过了我的嘴唇，一触即分。绘楠的手指颓然跌落，整个人也随之懊丧地伏在了桌面上。</div>
+<div>&nbsp;</div>
+<div>我心里乱糟糟的，一时想着他那些惹人生气的指责，一时想着他此刻惹人怜爱的姿态，根本拿不定心思该愤怒还是该关心，终于竭力组织好体面的措辞、想要与他进行一番成年人的对话时&mdash;&mdash;</div>
+<div>&nbsp;</div>
+<div>绘楠伏在桌案上，无声无息地睡着了。</div>
+<div>&nbsp;</div>
+<div>或许是很少喝酒的关系，绘楠醉倒后一觉睡到了次日中午，穿着大码的棕黄色连体睡衣，迎着阳光迷迷糊糊地从卧室里走出来的姿态，宛如一头刚刚从冬眠中醒来、本能地下山去捕猎的大熊。</div>
+<div>&nbsp;</div>
+<div>&ldquo;哟，&rdquo;我轻松地招呼道，&ldquo;头疼的话去急救箱拿那种蓝色的解酒药；早餐的苹果派在冰箱&mdash;&mdash;现在就当做Brunch吧，端过来之前记得热一下。&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠脚步一顿，一个指令一个动作地转身进了厨房。</div>
+<div>&nbsp;</div>
+<div>&ldquo;啊，吃完的话记得过来帮忙，&rdquo;我补充道，&ldquo;第五篇密文，我已经解密到一半，按照Vigenere的方法，重复单词的最短距离是2532，根据余1的字母频率排序推测密钥长度是6，然而T，H，B和e，t，a在字母表的顺差完全不同，我想不出解法了。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;&hellip;&hellip;&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠好像仍处在迷糊的状态中，端来了苹果派，边吮着手指边把脑袋凑到我的稿纸前。</div>
+<div>&nbsp;</div>
+<div>&ldquo;不需要相同顺差，&rdquo;绘楠的嗓子有点哑，想必是昨天说了太多没必要的话，&ldquo;就像Affine加密法一样，在有密码的加密方式里，明文字母与暗文字母的对应不一定是顺差的关系，只是顺差的情况更好解而已。&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠望着我画出的密文字母频率图：&ldquo;单纯从字母频率就可以解出同余的一组字母里全部的明文密文对应。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;可是，很难吧？&rdquo;我拿出自网络上抄写下来的世界范围英语文本字母频率表，犹豫道，&ldquo;前三位是领先又有区分度所以能够分辨；但是根据经验来说，'s'和'r'的出现频率不会相差很多，'f'和'g'也应该是类似的，这个太依赖于明文内容了吧&mdash;&mdash;就好像二流的滑冰选手参加竞赛，一半在实力，还有一半在运气。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;所以还需要考虑的是字母在单词里出现的位置，以及字母之间的连续性。&rdquo;绘楠把下颌搁在我肩头上，苹果派的馥郁香气随之钻入我的鼻子，实在是惹人分心，&ldquo;比如说，虽然在整体的英文文本中'e'比't'出现频率更高，但对于单词开头的字母而言，'t'的出现频率要远高于'e'。类似的，同样是常用的字母，'he'在英文单词中的出现频率显着高于'ho'，而'th'也高于'tm'或者'tn'。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;再往后就是三个字母的频率，比如'the'了？&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;没错，&rdquo;绘楠说着，想要伸手去掏衣兜，又在看到自己被苹果派染得黏糊糊的手指时停了下来，示意我去翻他的睡衣衣兜，&ldquo;我手机里有完整的频率图表，青浦先生帮我拿一下。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;手机吗？放在你床头了。&rdquo;我说着，起身往绘楠的卧室走去，&ldquo;昨天回家时怎么也叫不醒你，只好麻烦代驾的司机先生帮忙，两个人齐心协力才把你运回房间。怕你睡不好，我还帮你换了睡衣。很贴心吧？&rdquo;</div>
+<div>&nbsp;</div>
+<div>不知道为什么，客厅里绘楠的声音完全停止了，连啧啧有声吃着苹果派的响动都听不到。我拿着手机和钱包走回客厅时，正看到绘楠僵直地坐在原地，姿态生硬得好像原野里的稻草人。</div>
+<div>&nbsp;</div>
+<div>利用手机里记录的大量频率图表，绘楠和我最终解开了除6余1的密文字母里全部的明文密文对应，却没有继续用纸笔往下解密全篇。</div>
+<div>&nbsp;</div>
+<div>&ldquo;&hellip;&hellip;青浦先生没有借助计算机，就这样用纸和笔计算出了重复字母间隔和余1字母频率吗？&rdquo;绘楠露出混杂着钦佩与好笑的奇妙表情，&ldquo;很高兴看到青浦先生固执一回，但是啊，这种重复性劳动全部可以交给计算机，人类只要负责创造和抉择就好。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&mdash;&mdash;果然是有创造力的人才能讲出的傲慢台词。</div>
+<div>&nbsp;</div>
+<div>笔记本的计算力不如绘楠研究室的终端，解密需要的时间也更长。风扇飞转起来的时候，我想要趁机躲去房间休息，却被绘楠抓住了胳膊。</div>
+<div>&nbsp;</div>
+<div>&ldquo;青浦先生又想逃跑了。&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠的态度很寻常，语调也显得平淡，我却无由地察觉到了暴风雨临近的危险预兆，蹙眉道：&ldquo;我只想去休息片刻&mdash;&mdash;还有，那个&lsquo;又&rsquo;是怎么回事啊？&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;休息一夜还不够？&rdquo;绘楠垂下眼睛，无视了我惊讶的表情，&ldquo;跟青浦先生不一样，就算喝醉之后的事，我也全都记得。</div>
+<div>&nbsp;</div>
+<div>&ldquo;上午这样努力地尝试破译，是为了扯开话题、躲进日常的堡垒里吗？在安全的地方证明自己，失败了也可以随口自嘲了事，果然是青浦先生的作风。可是，我没有时间与青浦先生继续跳探戈舞了。</div>
+<div>&nbsp;</div>
+<div>&ldquo;现在，我们可以好好谈一次吗？&rdquo;</div>
+<div>&nbsp;</div>
+<div>握在我小臂上的手掌越收越紧，绘楠以完美的敬体和完全没有敬意的冷淡声音，如此对我宣战。</div>
+<div>&nbsp;</div>
+<div>&ldquo;&hellip;&hellip;要谈什么？&rdquo;</div>
+<div>&nbsp;</div>
+<div>漫长而尴尬的沉默之后，率先失去耐心的是我。</div>
+<div>&nbsp;</div>
+<div>开口时视线仍持续地游弋于方寸木地板上，仿佛试图通过其上的图案判别今冬的气候。我明知这样很不礼貌，却难以鼓起勇气面对绘楠。</div>
+<div>&nbsp;</div>
+<div>居酒屋那番言论给了我太大的打击。</div>
+<div>&nbsp;</div>
+<div>&ldquo;&lsquo;安于现状、自欺欺人，永远沉浸在虚幻的安全感中，因为畏惧失败而不肯为真实的心意付出任何努力&rsquo;&mdash;&mdash;要谈论这个吗？&rdquo;一字不错地重复出绘楠伤人的话语，我苦笑道，&ldquo;可是绘楠，你怎么会知道我真实的心意？&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;我知道，&rdquo;绘楠一如既往傲慢地答道。他漂亮的眼眸闪耀着的光芒，艳丽的姿容因为某种情绪而变得极富有攻击性，&ldquo;青浦先生不是知道我擅长解密吗？像人心这样不可靠的加密方式，破译简直再轻松不过了&mdash;&mdash;如果我知道，青浦先生要怎么做？&rdquo;</div>
+<div>&nbsp;</div>
+<div>&hellip;&hellip;</div>
+<div>&nbsp;</div>
+<div>假设太过荒谬，我失去了反驳的能力。室内安静到可以听到座钟的催促。</div>
+<div>&nbsp;</div>
+<div>&ldquo;又不说话了。上次问青浦先生假如我死掉会怎样，也没有得到回答&hellip;&hellip;是不擅长展示自己真实的想法，还是不擅长回答假设的问话？&rdquo;绘楠半真半假地抱怨了一句，忽然放开了我的手臂，&ldquo;那么，这次不是假设了，青浦先生愿意为我付出努力吗？&rdquo;</div>
+<div>&nbsp;</div>
+<div>他弯腰捡起钱包，从中抽出了一张蓝色的JR乘车券，强硬地塞进了我手里。</div>
+<div>&nbsp;</div>
+<div>绘楠说：&ldquo;青浦先生，我要走了。&rdquo;</div>
+<div>&nbsp;</div>
+<div>茫然地看着票面上札幌至东京的行程，还有其上2月9日的乘车信息，我实在是无法理解状况。先是突如其来的大批判，然后是信息量爆炸的假设题，最后竟然是一张明天的JR车票。</div>
+<div>&nbsp;</div>
+<div>我已经完全无法控制声音里的颤抖：&ldquo;不、不是说春天才&mdash;&mdash;&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;是春假，&rdquo;绘楠以非常官方的语气回答道，&ldquo;虽然北海道现在远不是春天，也已经到了春假的时间。我的交换时限在昨天就结束了。&rdquo;</div>
+<div>&nbsp;</div>
+<div>啊，对，绘楠只是北大的交换生，最后还是要回到东京的，就好像解噩天使也不会永远停留在人间。我颓然地退后一步，又想起手中还握着绘楠的车票，赶紧弯腰放在了桌案上。</div>
+<div>&nbsp;</div>
+<div>我的掌心湿漉漉的，不知何时冒出来的冷汗，最好还是不要接触到票面。有听说过类似的乌龙事件，最后旅程就那样半途而废的，绘楠的归程绝对不能这样不顺。</div>
+<div>&nbsp;</div>
+<div>不知道绘楠打包好行李没有，暴君先生最近完全没有整理的举动，不过家里也只有一些带不走的日用品而已，都是百元店的便宜货，没有带回东京的价值。</div>
+<div>&nbsp;</div>
+<div>告别仪式在哪里更合适呢？昨天已经去过柚柚了，札幌也没有更喜欢的居酒屋。怀石料理虽然高档却不适合告别&mdash;&mdash;实际上，只有酒最合适了，灌醉之后什么都不知道，再清醒的时候已经是时过境迁，好像无痛手术一样。</div>
+<div>&nbsp;</div>
+<div>还有礼物。配得上绘楠的礼物实在太难选，我能不能先欠着？以后也好有借口去找绘楠谈谈心、念念旧&mdash;&mdash;啊啊，真是糟糕的想法，这样会带给人困扰的。要干净利落地道别，一个拥抱，不能再奢求更多，以后街巷里偶遇能够觉得熟悉、点头致意&hellip;&hellip;</div>
+<div>&nbsp;</div>
+<div>脑子里塞满了各种各样的念头，我逐渐失去了自主呼吸的能力，必须默数着心跳、狠命地催促肺叶去翕合，才能将攫取血泡中的氧气。就这样调用了满身气力去维持着呼吸，我勉强从唇齿间挤出告别的祝福：</div>
+<div>&nbsp;</div>
+<div>&ldquo;那、就祝你一路顺风，真糟糕，我都没有准备&mdash;&mdash;&rdquo;</div>
+<div>&nbsp;</div>
+<div>戛然而止的句子就像戛然而止的思绪，我见到绘楠颇为气恼地瞪了我一眼，忽然向我微微躬身，万分诚挚、万分优雅地伸出右手，仿佛谢幕的魔术师，又好像期待着安可的钢琴家。</div>
+<div>&nbsp;</div>
+<div>绘楠问：&ldquo;青浦先生，你想要挽留我吗？&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠专注地看着我，眼神明亮得像星星一样：&ldquo;青浦先生，我在询问你真正的心意。以自己的意志作出判断、不要屈从于我的愿望。告诉我，你想要挽留我吗？&rdquo;</div>
+<div>&nbsp;</div>
+<div>我什么话都说不出来。</div>
+<div>&nbsp;</div>
+<div>倘使绘楠像平时那样强硬地要求了，我无论如何也会给予回应，哪怕是驾驶潜水艇地去到马里亚纳大海沟都在所不辞。我全身心地信任绘楠，信任他的判断与决定。因为怜爱、习惯、与这样全然的信任，只要绘楠提出，再疯狂的念头我也愿意去执行。</div>
+<div>&nbsp;</div>
+<div>可是这次绘楠丝毫没有平时暴君的气场。他就那样向我伸出一只手，使用了最平等、最温和的问句。他把发球权让渡给了我。</div>
+<div>&nbsp;</div>
+<div>&ldquo;青浦先生再强硬一点&hellip;&hellip;就好了&rdquo;、&ldquo;青浦先生希望我去学吗？&rdquo;、&ldquo;青浦先生想听吗？&rdquo;、&ldquo;你其实更喜爱那样吧。不需要思考、不需要判断、不需要取舍、不需要改变&rdquo;、&ldquo;人类只要负责创造和抉择就好&rdquo;&hellip;&hellip;绘楠曾经那些表意不明的句子，如今全部揭开了面纱。他是真的知道，而且他在期待我的判断。</div>
+<div>&nbsp;</div>
+<div>&ldquo;你想要挽留我吗？&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠不是在&ldquo;需要&rdquo;我，不是在&ldquo;说服&rdquo;我，他向我伸出手，等待着我的判断与决定。</div>
+<div>&nbsp;</div>
+<div>座钟吵闹仿佛心跳，耳鸣淹没了一切声响，我屡屡张合的嘴唇没能发出任何声音。</div>
+<div>&nbsp;</div>
+<div>那双星星般明亮的眼眸，逐渐地黯淡了。</div>
+<div>&nbsp;</div>
+<div>课间的5.39106&middot;咫尺之间</div>
+<div>&nbsp;</div>
+<div>做了很多乱七八糟的梦。</div>
+<div>&nbsp;</div>
+<div>梦见清晨的阳光从落地窗慷慨地洒落。绘楠穿着修身的浅色大衣，露出精致的衬衫领口，样貌比阳光更耀眼。他拖着拉杆箱走出这幢房子，前方是广袤又有趣、爱他也值得他爱的世界；</div>
+<div>&nbsp;</div>
+<div>梦见自己呆愣地坐在楼梯口，一墙之隔传来收拾东西的窸窣响动。庭院的雪被铲得太干净，什么都不剩下，视线也就不知道该往哪里放&mdash;&mdash;不管哪里，都有没来得及忘掉的回忆；</div>
+<div>&nbsp;</div>
+<div>梦见昏黄的光线像雾气一样笼罩着四周，绘楠微微垂下的眼睫镀着金色的光晕，睡颜天真纯善。明明醒来时是个暴君、喝醉时也是恶魔，毫无防备就这样沉沉睡去的姿态，却柔软得像朵云；</div>
+<div>&nbsp;</div>
+<div>梦见绘楠万分不情愿地跟我去参拜。熙攘的人群里一直紧紧扣进我指缝的手指，和摇完铃铛拍手许愿前忽然侧头望向我的视线&mdash;&mdash;比起这些，幸运抽中的大吉签也没那么重要；</div>
+<div>&nbsp;</div>
+<div>梦见勉为其难收下赔罪便当的绘楠，终于结束了跟我的冷战，有一句没一句地数落着我不该打搅他加班。想不明白绘楠怎么能一边吃一边说还不喷饭，视线不由自主地落在了他的嘴唇，又迅速地移开了；</div>
+<div>&nbsp;</div>
+<div>梦见稚内港口旁的廉价旅馆，海潮声吵到无法入眠。翻来覆去叹着气的我，忽然被绘楠霸道地箍住了肚子不让乱动，只好闭着眼百无聊赖地听逐渐共鸣的心跳。再醒来时，不知怎么已经变成了相拥的姿态；</div>
+<div>&nbsp;</div>
+<div>梦见自己对着三页密文一筹莫展，想着绘楠什么时候回来、什么时候能与我说说话，心中又是焦虑又是期待。那些情绪流淌成文字，很快写满了一周分量的文稿；</div>
+<div>&nbsp;</div>
+<div>梦见发着低烧的绘楠恹恹坐在暖炉边，有一口没一口地吃着茶碗蒸。落地窗外的枫树仍在落叶，地上已经积起白茫茫的新雪，枫叶飘落在新雪上，如同雪泥鸿爪，又好像白潭赤鲤。</div>
+<div>&nbsp;</div>
+<div>&hellip;&hellip;</div>
+<div>&nbsp;</div>
+<div>我做了不计其数的梦，醒来的时候茫然了很久，才意识到我又睡在了客厅。眼睛酸涩难堪，一眨便怔怔地滚落泪水；心里却不很难过，只感到无尽的空虚。</div>
+<div>&nbsp;</div>
+<div>空荡荡的家，就算把暖气开到最高也觉得寒冷。我蜷在沙发上，抱紧被子看向壁钟，发觉已然是正午时分。</div>
+<div>&nbsp;</div>
+<div>不知身在东京的绘楠，此刻在做些什么呢？</div>
+<div>&nbsp;</div>
+<div>想念轻柔地包裹住我的心脏，随之而来的不是疼痛，而是一种奇异的安宁。</div>
+<div>&nbsp;</div>
+<div>绘楠不属于我。</div>
+<div>&nbsp;</div>
+<div>这是根植在脑海中的信念。我以一种精神上毫无疑义的从属关系、全身心地信任绘楠，而绘楠不属于我。绘楠不属于任何人，他是无牵无挂的光。</div>
+<div>&nbsp;</div>
+<div>说来不好意思，我也是有一些微不足道的骄傲的，譬如少年时传奇的经历、出版过的优秀作品、至今仍对我存有好感的诸多读者&hellip;&hellip;但是这些本质上只是对过去的缅怀，不要说对未来、就是对现下，也毫无意义。</div>
+<div>&nbsp;</div>
+<div>而绘楠是不一样的。</div>
+<div>&nbsp;</div>
+<div>现在他能够与我同居、欣赏我些微的优点、去奔赴一些异想天开的旅行，是因为我曾经像萤火一样微弱地照亮过他的过去。我是旧时代的遗老，而绘楠，他才刚刚出发。他拥有无限的未来，和征服、享受那样的未来的能力。</div>
+<div>&nbsp;</div>
+<div>我总说绘楠是战车，是暴君，事实也是如此。立定目标之后，他会毫不偏移地直线前进，有毅力迎战一切困难也有能力解决一切苦难。他拥有最简单、最直白的正确。那样完整的光辉，就好像高山之巅才能见到的、360&deg;的彩虹。</div>
+<div>&nbsp;</div>
+<div>因为这样的正确，绘楠变得如此傲慢。</div>
+<div>&nbsp;</div>
+<div>不是说绘楠认为自己高于他人，恰恰相反，绘楠总是高估他人。正如健全者不能理解障碍者的苦痛，绘楠也不能理解为什么有人&ldquo;做不到&rdquo;。他臆想中的我是像他一样不老的少年，我的一切失意都仅仅是源于怠惰。他不相信我不能独立解开密码，也不相信我跟不上他的脚步。</div>
+<div>&nbsp;</div>
+<div>这种傲慢来源于从未遭受挫折的青春。我有点讨厌傲慢的人，却十分庆幸绘楠能保有这份傲慢。</div>
+<div>&nbsp;</div>
+<div>我早已失去了期盼未来、享受幸福、变得伟大的能力，跟绘楠相处的每一秒钟我都在更加深刻地意识到我们之间如鸿沟般难以弥补的差异。我愿意信任绘楠，是因为他的判断比我自己的更为可靠；不愿意对绘楠提出要求，是因为不信任我自己。</div>
+<div>&nbsp;</div>
+<div>绘楠对我懦弱的指责一点也没有错。说到底，我享受着与绘楠相处的时光，却从来不肯直视绘楠无限的未来，也从来没有勇气担负起两人份的漫长人生。</div>
+<div>&nbsp;</div>
+<div>绘楠曾经问我在害怕什么。我以前总不愿意思考这句问话的涵义，现在扪心自问，答案早已一清二楚：我害怕我的要求会影响绘楠对于两人间关系的认定，我害怕我的举动会破坏绘楠精心铺就的平衡。我害怕解剖自己，露出平凡怯懦的一面被绘楠看到。</div>
+<div>&nbsp;</div>
+<div>我害怕承担责任，宁愿做召之即来挥之即去的、住在记忆阁楼里的人物，也好过孤注一掷却终究失败。我害怕被绘楠落下。害怕渐行渐远、害怕意气消磨、害怕日久生厌。</div>
+<div>&nbsp;</div>
+<div>一点也不体面的分离也好，终将失去的渡厄天使也好，一切都是自食其果。</div>
+<div>&nbsp;</div>
+<div>最初的震惊过后，早已认命的我，内心平静又坦然。绘楠与我呢，就好像偶然同行的乌龟与骏马，多谢你陪我这一程，可是我们根本不般配。我希望他认识更好的人，在更辽阔的世界傲慢地微笑，过光辉美满的一生。</div>
+<div>&nbsp;</div>
+<div>到那个时候，我如果跟邻居炫耀说认识这样的厉害的人物，恐怕都会被嘲笑白日做梦吧？</div>
+<div>&nbsp;</div>
+<div>&hellip;&hellip;</div>
+<div>&nbsp;</div>
+<div>明明是已经习惯的自怨自艾自嘲，在视线一不小心落到桌案上的活页簿之后，内心却忽然涌起了微妙的不甘心。</div>
+<div>&nbsp;</div>
+<div>在我答应负起解密的责任时，绘楠笑得温柔又天真，是我很想去亲吻的样子。可我至今也不明白绘楠为什么要说这本活页簿更适合我。</div>
+<div>&nbsp;</div>
+<div>三流作家青浦先生，其实连高中都没有念过，对数学只有加减乘除的认知，推理能力也糟糕透顶。就是这样的我，在绘楠的帮助下，已经解开了整整五道起初看起来就觉得眼晕的密码，也逐渐对密码学有了一些心得&hellip;&hellip;</div>
+<div>&nbsp;</div>
+<div>这样的我，是真的糟糕到无法追上绘楠的脚步吗？</div>
+<div>&nbsp;</div>
+<div>是真的&ldquo;做不到&rdquo;吗？</div>
+<div>&nbsp;</div>
+<div>真、的、吗？</div>
+<div>&nbsp;</div>
+<div>狂妄的念头在心底像藤蔓般蔓延。我不知不觉咬紧了牙齿，身体轻微地颤抖起来。</div>
+<div>&nbsp;</div>
+<div>如果、如果我再努力一点、再拼命一点、在绘楠闲庭信步时候也用尽全力奔跑的话&mdash;&mdash;</div>
+<div>&nbsp;</div>
+<div>虚空中吞噬我所有难过的怪兽被诘问而死去，缺失的情绪骤然填满了身体。愤怒、痛苦、悔恨&hellip;&hellip;我抓紧了胸口的衣物，抽搐着肩膀、大口大口地喘着气，难受得好像身心都被撕作两半。</div>
+<div>&nbsp;</div>
+<div>习题六&middot;Belief</div>
+<div>&nbsp;</div>
+<div>Enigma Machine</div>
+<div>&nbsp;</div>
+<div>我开始正式地学习密码学。</div>
+<div>&nbsp;</div>
+<div>专程去了立原的店里买参考书。</div>
+<div>&nbsp;</div>
+<div>毕竟密码学是稍嫌偏门的学科，年轻可爱的兼职店员对我相当亲切，性格却实在有点小迷糊，业务也不是很熟练。还是深藏不露的立原店长亲自出马，才找到了掩埋在书架深处的密码学教材。</div>
+<div>&nbsp;</div>
+<div>我望着那本只比活页簿略厚一点的小册子，心中颇为忐忑：&ldquo;我缺乏基础&hellip;&hellip;这样也没问题吗？&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;这里写着，本教材前置课程包括微积分、概率论等。&rdquo;店员小姐翻开了前言的部分，&ldquo;青浦先生缺乏什么样的基础呢？&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;&hellip;&hellip;缺乏念过高中的基础。&rdquo;我万分羞愧地回答道。</div>
+<div>&nbsp;</div>
+<div>&hellip;&hellip;</div>
+<div>&nbsp;</div>
+<div>结束采购回家时，我怀里抱着字典一样厚的微积分导论、概率学入门还有高中的全部数学教材，密码学的单薄小册子被揣在了衣兜里。</div>
+<div>&nbsp;</div>
+<div>此前五道习题的破译过程中，绘楠给我讲解的都是直观又简洁的方法，真正读到教材才发现原理比那个复杂太多。我跳过了大部分关于存在性和可破译性的证明，直接翻到了方法论。如果说绘楠的解密方法是高屋建瓴，我就好像在盲人摸象，遇到不懂的内容就赶紧翻阅参考书。</div>
+<div>&nbsp;</div>
+<div>连函数的概念都没有接触过，大部分高等数学的内容对我来讲完全是天方夜谭。我用上了一生的耐心，到处收集资料，还厚着脸皮去咨询了绘楠研究室的助教Maurille先生。难得遇上能讲法语的人，就算是我这样没基础的数学初学者，Maurille也热情地指点了很多。</div>
+<div>&nbsp;</div>
+<div>例如看不懂&ldquo;在N维积分域上对M元函数做积分&rdquo;的专业表述，就把积分全部想象成微元加法；又例如算不来&ldquo;条件概率&rdquo;、&ldquo;联合概率&rdquo;和&ldquo;边缘概率&rdquo;，就把所有的概率分布列举出来、去数满足的情形&hellip;&hellip;这些对于念过高等数学的人来说毫无裨益、甚至有害于理解的技巧，对我也很有帮助。</div>
+<div>&nbsp;</div>
+<div>离开研究室的时候，我迟疑了很久也还是没有忍住，在道谢之余，小心地打探了绘楠的消息。Maurille错以为我在谈论绘楠的学业，笑着说一切顺利，绘楠刚去到欧洲进行访学。</div>
+<div>&nbsp;</div>
+<div>那么遥远的地方啊&hellip;&hellip;听闻这个消息，我在为绘楠欣喜之余，也难免感到了些微的寂寞。</div>
+<div>&nbsp;</div>
+<div>其实我有绘楠全部的联系方式，地址、邮箱、电话&hellip;&hellip;包括My number和驾照号也能背下来，不甘寂寞时想要与绘楠讲讲话、其实是再简单不过的事情。但是，在确认自己真的有能力跟上绘楠的脚步、彻底下定决心之前，我并不想轻率地发起联络。</div>
+<div>&nbsp;</div>
+<div>在破译复杂的古典密码的过程中，灵机一动、醍醐灌顶之类的事情几乎不可能发生。就像绘楠信奉的那样，密码学本质上来讲是数学性质的必然，使用正确的算法和足够的计算力才是关键。</div>
+<div>&nbsp;</div>
+<div>我不会编程，对笔记本的使用停留在文档处理上，在计算力这一点上毕竟力有未逮，只好在兼职杂志上发布招聘广告，雇佣了一位念情报科学的本科生西野君，请他做我的编程老师，教我把写下的文字步骤编成计算机软体。</div>
+<div>&nbsp;</div>
+<div>大概是因为我写下的破译流程太不规范，西野君与我的交流颇为费力，解密的进展也很是有限。在了解我的目标之后，西野君很不理解地问我，为什么不直接去拜托理学部研究密码学的人，他们对付这种内容肯定是手到擒来。我想不出来要怎么简洁地把情况解释清楚，只好讲出了&ldquo;为了重要的人，想要证明自己&rdquo;这样宽泛暧昧的句子。</div>
+<div>&nbsp;</div>
+<div>&ldquo;啊啊，我明白的！&rdquo;西野君却意外地感同身受，拍着手掌叫了起来，&ldquo;我也有过！高中时代暗恋过的女孩子，笑起来左颊有苹果花似的可爱酒窝，兴趣爱好是听钢琴曲。察觉这件事之后我就开始了钢琴演奏的学习。拼着一口气坚持了将近一年、一个小节一个小节地向后学，想要能够弹完致爱丽丝全曲那一天，鼓足勇气去向她告白。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;那、结果呢？&rdquo;我的心脏扑扑直跳。</div>
+<div>&nbsp;</div>
+<div>&ldquo;&hellip;&hellip;失败了。&rdquo;西野君的脸迅速地垮下来，&ldquo;说是要专心学业准备入试考，其实是觉得我太鲁莽了吧？因为一直在体育部、没有接触过音乐的关系，我乐理知识相当差，握惯了钢笔和球拍的手指弹起钢琴来也僵硬得不像话。好不容易准备好的曲子，其实根本算不上好听&hellip;&hellip;听说她也在北大念书，可之后就再也没有遇见过了。啊啊，惨败的青春呀。&rdquo;</div>
+<div>&nbsp;</div>
+<div>虽然是这样惨败的结局，西野君却好像忽然被鼓舞了，热情地与我交流着破译的思路，还教会我写作伪代码&mdash;&mdash;是一种类似于自然语言的、不涉及编程细节只描述算法的代码。</div>
+<div>&nbsp;</div>
+<div>在使用了这种写作规范之后，西野君与我的交流顺畅了许多，代码的编写也在短短半天内就完成了。其后虽然因为我的失误，出现了一些代码翻译成机器语言时的问题，也有时会运行出意味不明的结果，多谢西野君的指导，最后全都解决了。</div>
+<div>&nbsp;</div>
+<div>调试完成的代码在笔记本上飞快地运行着，带得风扇呼呼作响。我那一整天都过得神思不属，饭做到一半也会关掉瓦斯去观察运行情况，以不知道是期待还是恐惧的心情等待着最终的结果。</div>
+<div>&nbsp;</div>
+<div>就好像一次复杂无比的掷骰子&mdash;&mdash;我这样想着，又觉得这样的比喻是错误的。不是概率、不是或许、不是命中注定，就算这次失败了也没关系，我会以千百倍的努力继续下去。在关于绘楠的事情上，我早已下定决心。</div>
+<div>&nbsp;</div>
+<div>最后得到明文时，匆忙打印出来的文字怎么也无法透过溢满泪水的眼眶传递到脑海中。我在想的只有一件事。</div>
+<div>&nbsp;</div>
+<div>我想念绘楠。</div>
+<div>&nbsp;</div>
+<div>我很想他。</div>
+<div>&nbsp;</div>
+<div>我再一次去到了北海道大学，向Maurille先生询问了绘楠这个系在东大所在的校区，回程路过了樱花林，还遇见了迎面走来的西野君和他身边个头矮矮的女孩子。西野君夸张地挥舞着双手讲述着什么，女孩子专注地看着他，两人举止亲昵又可爱。</div>
+<div>&nbsp;</div>
+<div>停下脚步跟西野君打招呼时，意外地听到他对我道谢。</div>
+<div>&nbsp;</div>
+<div>谢什么呢？</div>
+<div>&nbsp;</div>
+<div>我颔首与女孩子微笑致意。对方笑起来的时候，左颊露出了好像苹果花一样的可爱酒窝。</div>
+<div>&nbsp;</div>
+<div>这个季节新千岁飞羽田的机票有点贵，我很幸运地买到了经济舱折扣票，于凌晨时分挥别银装素裹的北海道，降落在了东京的人潮。</div>
+<div>&nbsp;</div>
+<div>Maurille先生说绘楠已经结束了欧洲的访学，我却仍然打不通他的电话。按照记忆中的地方拜访他租住的房间时，信箱里塞得满满的信件也说明主人尚未归来。给绘楠的手机邮箱发了信，我转而前往绘楠的研究室所在的东大校区。</div>
+<div>&nbsp;</div>
+<div>研究室的老师接待了我，说绘楠此刻已经赶赴加拿大的数学年会做发表，大概还需要一周才会回来。礼貌地告辞之后，我仔细地盘算起经费问题，想着是在这边继续等待、还是回到北海道规划下一次旅程。</div>
+<div>&nbsp;</div>
+<div>不是说不失望，只是，一旦下定决心，我注意力就好像转移了，更在意接下来的安排，而非已有的得失。</div>
+<div>&nbsp;</div>
+<div>路过红绿灯时，遇到了穿着毛绒套装散发传单的店员。</div>
+<div>&nbsp;</div>
+<div>我以前在欧洲旅行时也做过类似的职业，闷罐似的玩偶服不管在哪个季节穿着都是煎熬。本着同情的心态主动索要了传单，我漫不经心地翻看起来，却发现了是札幌也有的连锁咖啡店。</div>
+<div>&nbsp;</div>
+<div>&mdash;&mdash;我与绘楠就是在北大附近的分店相遇的，记得绘楠还有这家店的会员卡。</div>
+<div>&nbsp;</div>
+<div>抱着试试看的心情，我走进了装修得好像大教堂一样、洛可可式的店面。样貌甜美的店员小姐递过来了菜单，我的眼神落在绘楠喜欢的抹茶冰淇淋华夫饼上，一边点餐一边随口打探道：&ldquo;这个，据说是店里的招牌甜品？&rdquo;</div>
+<div>&nbsp;</div>
+<div>店员露出了为难的笑容：&ldquo;倒也不算&hellip;&hellip;因为做得太甜了，客人们好像都不太喜欢&mdash;&mdash;啊！&rdquo;她忽然惊呼起来：&ldquo;青浦先生！您是写《自行车漂流记》的青浦先生吧？&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;诶、没错&hellip;&hellip;&rdquo;完全没意料到这样的展开，我茫然地点了点头。</div>
+<div>&nbsp;</div>
+<div>&ldquo;咿&mdash;&mdash;果然是！提到这种甜品我就想起来了。&rdquo;</div>
+<div>&nbsp;</div>
+<div>店员兴奋得脸都泛红了，絮絮叨叨讲了很久，据说是一直喜欢我作品的老读者，还曾经托出版社给我寄过告白信。</div>
+<div>&nbsp;</div>
+<div>&ldquo;我是没有见过作家先生本人啦，&rdquo;店员伊田小姐捧着脸颊，表情万分梦幻，&ldquo;但是青浦先生东京书迷会的会长经常来这边吃饭，他有随身带着五年前东大草坪见面会的照片。我可是拜托了很久，他才舍得拿出来给大家看的哦。&rdquo;</div>
+<div>&nbsp;</div>
+<div>唉，没错，我就是那种没人气到杂志专栏都不会登照片的三流作家。这么没人气的我，有书迷会就算了、居然还有东京分会&mdash;&mdash;恐怕是由小猫三两只组成的冷清机构。</div>
+<div>&nbsp;</div>
+<div>不过，随身携带纸质照片&hellip;&hellip;这个习惯听起来有点耳熟。这位会长大概也是个可爱的人。</div>
+<div>&nbsp;</div>
+<div>&ldquo;对了，会长他呀，是店里唯一一个不嫌甜而重复点冰淇淋华夫的老顾客，所以一看到这道甜品我就想起来了。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&hellip;&hellip;是巧合？</div>
+<div>&nbsp;</div>
+<div>心底生出了渺茫的期待，我故作平静地问道：&ldquo;会长的名字是什么呢？我有一位在附近的朋友，叫做绘楠，他也很爱吃这个。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;诶，不愧是作家先生的朋友，名字都这么有趣呢。&rdquo;伊田小姐念了几遍&ldquo;绘楠&rdquo;的发音，掩着嘴笑起来，&ldquo;不过不是哦，是过目就忘的平凡名字。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&hellip;&hellip;果然只是巧合。</div>
+<div>&nbsp;</div>
+<div>这样想着的同时，我忽然回忆起了租房协议上，类似于铃木一郎的没有存在感的名字。</div>
+<div>&nbsp;</div>
+<div>&ldquo;会长上周还回来过哦，不过最近似乎又是去了外国开会的样子，&rdquo;伊田小姐因为没办法通知会长而可惜地皱起眉，随即想起了什么，碎步跑去前台拿来了顾客留言簿，&ldquo;好不容易遇到青浦先生，可以给店里留下顾客签名吗？&rdquo;</div>
+<div>&nbsp;</div>
+<div>顾客留言簿也是装饰精致的洛可可风格。我翻到上周的日期标注，在留言与涂鸦之间，注意到了一个皱着眉头的Q版人物画。老实讲，画得不算好&hellip;&hellip;但是那样傲慢的神情，一眼就能认出来画像的主人是谁。</div>
+<div>&nbsp;</div>
+<div>Q版绘楠身边还有一大团被匆匆涂黑的墨迹，隐约能看出原本也是个Q版小人。我看着被涂黑的小人脑袋上&ldquo;バカ&rdquo;的加粗片假名，不知为什么，再次拥有了身为那个&ldquo;笨蛋&rdquo;的自觉。</div>
+<div>&nbsp;</div>
+<div>不愧是地狱级任性的绘楠啊&hellip;&hellip;</div>
+<div>&nbsp;</div>
+<div>想象着绘楠闷闷不乐画着小人的一幕，我的心脏逐渐柔软下来。想快点见到他、想对他道歉、想告诉他更多的事情&mdash;&mdash;在那之前，我在留言簿最新的页面上画了两个并肩的Q版小人。表情傲慢的那个，佩戴上了&ldquo;暴君&rdquo;的头衔。</div>
+<div>&nbsp;</div>
+<div>画完之后，我颇为满意地署上了名。虽然都是儿童Q版画，就尊重事实这一点来看，明显是我的版本更胜一筹嘛。</div>
+<div>&nbsp;</div>
+<div>我本来想留在东京等绘楠，却在午餐还没结束的时候就接到了札幌的房东询问续签或解约的电话。虽然房子是绘楠租，跟房东打交道的事情却因为他嫌麻烦而完全交给了我。一年之约即将到期，想着绘楠反正不会回北海道了，我决定回去解掉租约，顺便整理行李搬回本岛。</div>
+<div>&nbsp;</div>
+<div>伊田小姐在我离开时热情洋溢地询问能在东京留到几时，我只好道歉解释说还有事情要回札幌解决，即刻就要启程。因为伊田小姐看起来太沮丧的缘故，还特意给她写下了祝福与签名，这才终于能够抽身离开。</div>
+<div>&nbsp;</div>
+<div>回程机票已经没有合适的经济舱了。因为要退租和准备下次彻底搬来东京的费用，我把目光转向了比较便宜的火车票。JR的车票当然在预算内，普通的列车似乎也不错&hellip;&hellip;这样思索着，在排到窗口的时候，我却选择了购买青春十八的套票。</div>
+<div>&nbsp;</div>
+<div>不日就要返回东京，多日票更合算一些。除此之外，更重要的是&ldquo;青春十八&rdquo;的涵义。在我看来，恋爱是青春的附赠品，而追求绘楠的这一系列疯狂举动，就好像是放弃了年龄积累起的世故、圆滑、疲累和自欺，重新拾起了丢失在记忆中的、赤｀裸而坦诚的少年形象。</div>
+<div>&nbsp;</div>
+<div>这是重返青春的旅程。</div>
+<div>&nbsp;</div>
+<div>我一路上走走停停，说是归程却更像是在散心，沿途还有心情给绘楠的邮箱发送问候和当地风景。在仙台和函馆各留宿了一夜，民宿房间温馨精致，我却悲哀地发现自己开始认床了。</div>
+<div>&nbsp;</div>
+<div>&mdash;&mdash;都怪绘楠。过去的整整一年里，只要是出门旅行，两个人都会一起睡。我已经被惯坏了。</div>
+<div>&nbsp;</div>
+<div>回到札幌的那天下午，春天也终于愿意光顾这座极北的岛屿。从JR回家的路上，我观赏着风和日丽的景色，却在接近家里时看到了难以置信的一幕：白色拉杆箱横在家门前，绘楠霸气地曲起一条腿坐在其上，脸色黑得好像极夜的天空。</div>
+<div>&nbsp;</div>
+<div>已经分不清是惊喜还是惊吓了，我疾步走过去，刚想开口问候，就被绘楠不客气地打断了未出口的言辞。</div>
+<div>&nbsp;</div>
+<div>&ldquo;因为青浦先生太没担当的缘故，只能自己追过来了。&rdquo;绘楠板着那张漂亮脸蛋，怒气冲冲地瞪着我，&ldquo;看到邮箱留言的瞬间就决定买机票提前回东京，越洋航班刚刚落地，又收到伊田的电话，说青浦先生到过咖啡店。兴冲冲地赶过去，却没有见到青浦先生，反而在伊田的提醒下发现了留言簿上某人对我毫无道理的&lsquo;暴君&rsquo;指责。&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠本人不满这个形容，现在看起来却完全就是焦躁又无处泻火的暴君：&ldquo;伊田说青浦先生有事回札幌了。我又气又急，害怕青浦先生来找我的勇气也只是昙花一现，不管不顾地连夜飞回了札幌，结果回家也没有看到青浦先生。&rdquo;</div>
+<div>&nbsp;</div>
+<div>语气里的怨念都要溢出来了。</div>
+<div>&nbsp;</div>
+<div>并不觉得自己做错了什么，看到这样的绘楠，我不禁也有几分心虚，低声辩解道：&ldquo;其实我在路上一直有给你邮箱发信&hellip;&hellip;&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;是啊，所以我现在才等在这里。&rdquo;绘楠不爽地移开眼，&ldquo;要不然，我会以为青浦先生又懦弱地逃跑了。&rdquo;</div>
+<div>&nbsp;</div>
+<div>再次被指责懦弱，我难免有点生气，而在那之上，又是难得的自信与热血：&ldquo;这可不是懦弱&mdash;&mdash;是我难得的强硬啊，绘楠。&rdquo;</div>
+<div>&nbsp;</div>
+<div>这样说着，自从与绘楠重逢之后一直在我心胸激荡的情绪终于挣脱了桎梏、找到合适的出口。在北海道姗姗来迟的和煦春风里，我扔掉了行李箱，以试图把他整个人嵌进我生命中的力道、狠狠地拥抱了绘楠。</div>
+<div>&nbsp;</div>
+<div>身体贴近才地发现绘楠的背脊僵硬得好像冻住的鱼，质感良好的衬衫背后也已然汗透了小半。在我催促之后，绘楠终于懂得伸出双手，以同样的力度反手搂上我的肩膀，脸上仍然是傲慢又不屑的表情，身体却已经放松了很多。</div>
+<div>&nbsp;</div>
+<div>明明也没有那么成竹在胸&hellip;&hellip;</div>
+<div>&nbsp;</div>
+<div>我不知该微笑还是该叹气，只好更紧地搂住绘楠的腰，脑袋也偎进了他的肩窝，尽我所能地传达着自己的心意与勇气。</div>
+<div>&nbsp;</div>
+<div>&mdash;&mdash;呐，绘楠，你可以更相信我、更依赖我一些。</div>
+<div>&nbsp;</div>
+<div>我的决心与觉悟，可不是仅此而已啊。</div>
+<div>&nbsp;</div>
+<div>习题七&middot;Love</div>
+<div>&nbsp;</div>
+<div>Autokey cipher</div>
+<div>&nbsp;</div>
+<div>在家门口还气势汹汹地讲了半天，绘楠回家后却明显地展露出疲态。只是上楼放个行李箱的功夫，再到客厅时，我便发现他歪在沙发上、悄然地睡着了。</div>
+<div>&nbsp;</div>
+<div>多伦多飞东京是整整14小时的航班，绘楠没有休息就赶去了咖啡店，又匆匆忙忙飞来札幌，还提前回家等我，现在恐怕已经超过48小时没睡过了。</div>
+<div>&nbsp;</div>
+<div>这时候就需要哀叹自己的臂力了。实在没能力独立把绘楠运进卧室，我只好硬起心肠，俯身轻拍绘楠的脸颊，试图叫醒他。</div>
+<div>&nbsp;</div>
+<div>跟我不同，绘楠睡着之后也只有脸好看，睡姿糟糕得要命。初夏主卧喷灭虫剂的时候，绘楠起初是睡在了沙发上，结果三秒钟后被子就被踢掉，十分钟以内人也咚地一声掉到了地上，只好怏怏地上楼跟我挤次卧。</div>
+<div>&nbsp;</div>
+<div>我叫了半天才得到回应，绘楠闷闷地哼了一声，半睡半醒地站起来，整个人黏在我身上，眼睛都懒得睁开。费尽千辛万苦把他拖回床上，我刚想起身就被绘楠拽住胳膊、轻易地摔回了他怀里：&ldquo;不准逃走。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&mdash;&mdash;在暴君面前，声明自己的无辜是毫无益处的。</div>
+<div>&nbsp;</div>
+<div>更何况我根本舍不得叫醒绘楠争论。</div>
+<div>&nbsp;</div>
+<div>认命地踢掉了鞋子爬进被窝，我将室内灯调到最暗，仔细打量了多日不见的绘楠。带着些许疲惫与满足的睡颜与每次仓促旅行时并无二致，感受到我的靠近就霸道缠过来不许乱动的手脚也是一如既往恼人。</div>
+<div>&nbsp;</div>
+<div>想要触碰绘楠的心情被这严酷又甜蜜的禁锢彻底阻止了。我默然望着绘楠的睡颜，渐渐也感到眼皮沉重。</div>
+<div>&nbsp;</div>
+<div>青春十八折腾了三天两夜才到家，外宿的两天又一直睡不好，只有像这样亲密地陪伴在绘楠身边，胸膛里那颗挑剔的心脏才终于承认有了归属、像春日归巢的雀鸟一般、喜悦而轻快地跃动着。</div>
+<div>&nbsp;</div>
+<div>一夜无梦。</div>
+<div>&nbsp;</div>
+<div>醒来的时候，朦胧的视线尚未聚焦，便被绘楠霸道地摁住了肩膀。他整个人凑在我身上，距离令人发指地近：&ldquo;青浦先生，不要装睡。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;&hellip;&hellip;啊，&rdquo;我用力眨了两次眼睛才终于清醒，嘟哝道，&ldquo;谁装睡了啊。&rdquo;</div>
+<div>&nbsp;</div>
+<div>只是舍不得起床、想再睡个回笼觉而已。明明是第一次睡在绘楠的房间，却舒适得好像身体里的肋骨一样。之前所谓认床的陋习，果然是被绘楠惯坏了吧。</div>
+<div>&nbsp;</div>
+<div>&ldquo;&hellip;&hellip;&rdquo;</div>
+<div>&nbsp;</div>
+<div>已经按照他的意思、两人清醒地交汇了视线，绘楠却意外地词穷。他就那样沉默地看着我，逐渐俯下身，与我额头相抵。万分暧昧的姿态里，我的心脏微妙地悸动起来，手脚都不知道往哪里放，嘴上却不受控制地说出了傻话：&ldquo;你已经洗漱过了吗？&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;？&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;口气很清新。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;&hellip;&hellip;青浦先生的浪漫细胞只在随笔小说里起作用吗？&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;&hellip;&hellip;参照对象是用数学谈恋爱的未来精英绘楠的话，我至少能被评选上北海道第一情圣。&rdquo;</div>
+<div>&nbsp;</div>
+<div>垃圾话也没能缓解尴尬暧昧的气氛。</div>
+<div>&nbsp;</div>
+<div>绘楠不甘不愿地松开我，靠在床头坐了起来。他的右手手背懒洋洋地搭在额头上，睡衣袖口滑落到手肘附近，露出漂亮的小臂轮廓。视线不小心黏在了那里，心情也逐渐舒缓下来，我翻过身，仰望着绘楠的侧脸，有意想说点什么，又觉得随便哪句话都会显得轻佻。</div>
+<div>&nbsp;</div>
+<div>打破沉默的毫无意外是横冲直撞的绘楠战车，可是绘楠挑起的话题我却完全无法理解：&ldquo;第六题的明文，青浦先生已经解开了吧。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;&hellip;&hellip;真的要清早聊这个吗？&rdquo;</div>
+<div>&nbsp;</div>
+<div>旖旎的气氛荡然无存，被窝结界里回荡着我周身的谜之挫败感。</div>
+<div>&nbsp;</div>
+<div>绘楠一撇嘴：&ldquo;毕竟我是&lsquo;用数学谈恋爱的绘楠&rsquo;啊，按照青浦先生的原话。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;&hellip;&hellip;胡说些什么啊！&rdquo;在反应过来绘楠的文字游戏的瞬间，我的脸颊已经烧到发烫，只好把头埋进枕头里当鸵鸟。半晌，我深吸一口气，故作镇静地坐起身，&ldquo;的确是解开了，得到了Maurille先生和情报科学系本科生西野君很多的帮助。&rdquo;</div>
+<div>&nbsp;</div>
+<div>是非常新奇的体验。</div>
+<div>&nbsp;</div>
+<div>逐渐失去对新事物的接受能力、故步自封、闭门造车的我，能够在没有绘楠的暴力推动的前提下，主动地为了自己的目的去求索与探知；</div>
+<div>&nbsp;</div>
+<div>已经习惯于用自嘲模糊话题、掩盖缺憾的我，能够忍耐着羞耻向他人暴露自己的无知，去索求帮助、艰难而坚持地进行沟通交流；</div>
+<div>&nbsp;</div>
+<div>在从未接触过、甚至连想象都困难的新领域里，挖掘出些许乐趣，对世界重新产生了好奇心。本以为是朽木般的人生，也在融雪的季节里枯木逢春，重新树立了自信&hellip;&hellip;</div>
+<div>&nbsp;</div>
+<div>无论从哪个方面来看，都是意想不到、却又惹人喜爱的新奇体验。</div>
+<div>&nbsp;</div>
+<div>从在立原的店里买下数量夸张的教材讲起，一路说到Maurille先生帮我解答数学疑惑，还有西野君的计算机软体编写教学，不知不觉间我已经讲得兴奋起来，热血沸腾地比划着当时自己如何英勇地解决了困难，又如何沉稳地解出了明文。</div>
+<div>&nbsp;</div>
+<div>&ldquo;第六题的加密方法是类似于Enigma的多次加密，模拟了二级转子加反射板的结构，有着非常复杂的加密设计，&rdquo;绘楠单手支颐，微笑着注视我，认真道，&ldquo;青浦先生真厉害。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;啊&hellip;&hellip;&rdquo;</div>
+<div>&nbsp;</div>
+<div>自卖自夸完全没有问题，被绘楠称赞一句却会羞耻到耳根泛红。我短促地应了一声，还是无法坦然面对这种甜蜜的负担。</div>
+<div>&nbsp;</div>
+<div>绘楠接着说：&ldquo;不过，第七题还没有解开吧。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;是哦&hellip;&hellip;&rdquo;</div>
+<div>&nbsp;</div>
+<div>因为我根本还没有去读第七题，解完第六题就信心百倍，不管不顾地飞去东京找绘楠告白了。简直跟高中时期的西野君一样鲁莽&hellip;&hellip;</div>
+<div>&nbsp;</div>
+<div>&ldquo;青浦先生想知道谜底吗？我已经破译了全文，&rdquo;说到这里，绘楠露出了颇为微妙的神情，&ldquo;也基本上确认了笔记主人的身份。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;哈？&rdquo;</div>
+<div>&nbsp;</div>
+<div>破译全文还好理解，为什么能知道笔记的主人&hellip;&hellip;我想，恐怕是这位在扉页也不肯写下大名、最开始六篇明文里对实际人物地点全部含糊其辞的神秘作者，在最后一篇明文里终于不甘寂寞地决定表明自己的名字了吧。</div>
+<div>&nbsp;</div>
+<div>&ldquo;最后一篇密文使用了Autokey加密，&rdquo;绘楠介绍道，&ldquo;利用一个密钥和明文自身来进行加密，相当于Vigenere加密法里密钥是&lsquo;原始的&rsquo;密钥加上明文的形式。此时密钥不短于明文，猜密钥长度、取余计算字母频率的方法都是无效的。&rdquo;</div>
+<div>&nbsp;</div>
+<div>毕竟也读过了密码学的教材，我对描述性的句子还是有印象的。Autokey加密不仅是古典密码学的范畴，在现代通讯技术里也有流加密形式的实现，是相对来说比较安全的加密方法。</div>
+<div>&nbsp;</div>
+<div>&ldquo;那，绘楠是如何解开明文的？&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠耸耸肩：&ldquo;作者没有为难人的意思，从密钥加密的明文到最终密文的转换只使用了简单的顺差，拿常用单词多试了几遍就测试出了原始密钥偏移量，之后的事情就很简单了。&rdquo;</div>
+<div>&nbsp;</div>
+<div>说得轻描淡写，实际上肯定也是超大的计算量。不过此刻我更在意的是另一件事：&ldquo;然后呢？明文里出现了作者的名字吗？&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;不，是密钥。&rdquo;绘楠说，&ldquo;密钥是IHARAHIKARU.&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;IHARAHIKARU.&rdquo;</div>
+<div>&nbsp;</div>
+<div>我重复了一遍这个发音，仍然是一头雾水：&ldquo;いはら-ひかる，是名字吧？井原光、伊原耀&hellip;&hellip;能够念作ひかる的汉字太多了，分辨不出来是哪个。&rdquo;</div>
+<div>&nbsp;</div>
+<div>这也是日文的特性之一。仅仅知道假名，还是ひかる这种再常见不过的假名，几乎没有希望猜测出汉字写法，更不要说就此找到名字的主人。</div>
+<div>&nbsp;</div>
+<div>&ldquo;的确如此，但是事有凑巧，&rdquo;绘楠又露出了那种颇为微妙的神情，&ldquo;&hellip;&hellip;青浦先生知道立原的店主姓什么吗？&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;姓什么&hellip;&hellip;难道不姓立原（たちはら）吗？&rdquo;我疑惑道。这个称呼是从年轻可爱的兼职店员小姐那里听到的。虽然是性格迷糊的类型，兼职店员小姐没道理会记错店长的姓啊。</div>
+<div>&nbsp;</div>
+<div>&ldquo;虽然所有人都误会是&lsquo;立原&rsquo;、而且店长也这么默认了，但实际上店长的姓是&lsquo;位原&rsquo;，念法是いはら。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;&hellip;&hellip;什么？&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;店前的招牌，不是破破烂烂的吗？&rdquo;绘楠从手机相册里翻出了我们在立原店附近的合照，比划着那个被风雨侵蚀、字迹模糊不清的招牌，&ldquo;灯箱上&lsquo;位原&rsquo;里的&lsquo;イ&rsquo;开业没多久就被弄脏了，往来的学生叫习惯了&lsquo;立原&rsquo;，店长也就默认了这种叫法。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;&hellip;&hellip;还会有这种事啊。&rdquo;</div>
+<div>&nbsp;</div>
+<div>我接过绘楠递来的手机，仔细观察着那个看上去有十年以上历史的灯牌。被提醒之后，的确能看出污损的部分是类似&lsquo;イ&rsquo;的字形。</div>
+<div>&nbsp;</div>
+<div>&ldquo;这是北大学生中间流传的、有年头的八卦了。那时候的邮政系统并不像现在这样严谨，在多次把写着&lsquo;立原&rsquo;的包裹投递到记录着&lsquo;位原&rsquo;的地址之后，连邮局也不得不拜托位原先生澄清事实，&rdquo;绘楠说着，很有针对性地看了我一眼，&ldquo;大概位原先生有着跟某人一样&lsquo;随遇而安&rsquo;的性格，干脆把邮局的自宅名也更改成了&lsquo;立原&rsquo;。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&hellip;&hellip;明明是褒义词的&ldquo;随遇而安&rdquo;，被绘楠念出了强烈的嘲讽语气。我摸了摸鼻子，明智地决定不同他计较，继续推测道：&ldquo;位原店长的名字，应该刚好就是ひかる吧。那么，是位原店长乌龙卖掉了自己的密码本吗？&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;不对，&rdquo;绘楠否认了我的猜测，&ldquo;青浦先生，你会用自己的名字作为密码吗？&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;&hellip;&hellip;被你嘲讽之后就没有过了。&rdquo;</div>
+<div>&nbsp;</div>
+<div>认识绘楠之前，写稿用的电脑密码就是自己的名字，公文包密码也是自己的生日，后来这些全部被绘楠轻易破解了。现在，我的电脑、各种网站、邮箱还有公文包的密码，全部换成了绘楠的名字和生日。这种事情，大概是不适合讲出来的&hellip;&hellip;</div>
+<div>&nbsp;</div>
+<div>&ldquo;青浦先生现在使用的密码，应该是我的名字吧？&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;&hellip;&hellip;为什么这也能猜到！&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;因为我也是，&rdquo;绘楠很无辜地摊开手，&ldquo;之前的每次加密教学，第一反应都是用青浦先生的名字作为密钥。实际上，就连家门的电子锁，密码也一直是青浦先生名字，不过经过了一点简单的加密变换。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&mdash;&mdash;整整13页无规律的密码表，那些加密变换绝对不是像绘楠所说的那样&ldquo;简单&rdquo;。</div>
+<div>&nbsp;</div>
+<div>&ldquo;最后一篇密文使用了位原店长的名字作为密钥并不意味着笔记主人是位原店长，但笔记主人至少是认识位原店长的，而且位原店长一定是这七篇笔记里至关重要的人物，&rdquo;绘楠总结道，&ldquo;但是这样一来就说不通了。七篇笔记里除了引用歌词的部分之外，从始至终都只出现过笔记作者&lsquo;我&rsquo;和那个&lsquo;命定之人&rsquo;。如果位原店长就是那位&lsquo;命定之人&rsquo;&hellip;&hellip;&rdquo;</div>
+<div>&nbsp;</div>
+<div>说到这里，绘楠第三次露出了那种介于尴尬与迷茫之间的微妙表情：&ldquo;其实最初解开第一篇密文时我就感到奇怪，密文的内容太私人了，不像是位原店里平常售卖的那些课程笔记和文学手记。&rdquo;</div>
+<div>&nbsp;</div>
+<div>也难怪绘楠有这种想法。虽然写作手法隐晦、还大量引用歌词作遮掩，每篇解开的明文，其实中心思想都是&ldquo;我&rdquo;与&ldquo;命定之人&rdquo;的私人情感。</div>
+<div>&nbsp;</div>
+<div>带着这样的想法，我回想起了购买这本笔记时的情形：未扯尽的邮政包裹封条还残留在活页簿封面上，孤零零地被放置在收纳未上架新品书籍的木箱子里，被我拿去收银台结账时，店长似乎还露出了些许疑惑的表情。</div>
+<div>&nbsp;</div>
+<div>&ldquo;&hellip;&hellip;也许，这只是个误会。&rdquo;</div>
+<div>&nbsp;</div>
+<div>这本密码学的笔记很有可能是笔记作者寄给位原先生的私人物品，只是意外地被性格迷糊的店员小姐拆了包，当做刚收到的商品出售了。</div>
+<div>&nbsp;</div>
+<div>在立原的店里，笔记类商品的定价是统一标准、按照厚度出售的。位原店长虽然注意到这本笔记的奇怪之处&mdash;&mdash;例如，他发现了这本笔记不在他近期的进货单里&mdash;&mdash;却也没有阻止，笔记就这样流落到了我们手上。</div>
+<div>&nbsp;</div>
+<div>&ldquo;感觉&hellip;&hellip;很对不起位原店长。&rdquo;</div>
+<div>&nbsp;</div>
+<div>虽然买下笔记纯粹是因为误会，就这样阅读了他人寄给店长的加密信件，我仍然感到了愧疚。</div>
+<div>&nbsp;</div>
+<div>绘楠倒是心安理得：&ldquo;如果不是被你买下，这本笔记很有可能永远尘封在立原的店里无人问津的书架深处，而位原先生恐怕也永远都不会知道世界上存在过一本寄给他的私人密码本。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;倒也可以这么说&hellip;&hellip;&rdquo;我叹了口气，忽然想起了另一个疑问，&ldquo;活页簿里贴着邮票的信封，又是怎么回事？如果没有那个，我们就不会把笔记误认成是读者挑战了。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;啊，就像我最初的推测那样，&rdquo;绘楠轻啧一声，&ldquo;笔记主人的确是想要收到笔记的人解密并寄回信，只是&lsquo;TA&rsquo;期待收到笔记的人是位原店长而已。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;可是，&rdquo;我略感不安，&ldquo;已经过去这么久，恐怕当初的包裹封面已经被店员小姐扔掉了，位原店长怎么知道回信地址？&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;有办法知道。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;诶？&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;信封上贴了90日元的邮票，&rdquo;绘楠露出了惹人厌的傲慢笑容，很明显早已胸有成竹，&ldquo;之前以为是笔记主人未雨绸缪，现在确认收信人就是位原店长之后，这种行为的目的性就很明确了。日本国内邮政，定形信封不超重的情况下统一邮费，青浦先生知道吗？&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;&hellip;&hellip;&rdquo;</div>
+<div>&nbsp;</div>
+<div>从来没有写过信、投稿也是使用简易书留的我，完全无从回答。</div>
+<div>&nbsp;</div>
+<div>&ldquo;是65日元，&rdquo;绘楠鄙夷地瞥了我一眼，&ldquo;青浦先生果然从来没有给写信的热心读者回过信吧。&rdquo;</div>
+<div>&nbsp;</div>
+<div>后半句话意味颇深，我不禁怀疑绘楠是不是也给我写过告白信之类的。但他很快就若无其事地把话题带回了邮费上：&ldquo;只有一个例外：投递到冲绳的信件，地址在美军基地附近的话，需要25日元的特别投递费用。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;从英文的流畅使用和第一篇密文里提到的The first time ever I saw your face来看，笔记主人居住在那附近的可能性也更高。本来还在怀疑第三篇密文里サライ这首歌不是冲绳会流行的类型，但查询之后发现是《爱心救地球》的片尾曲，这样歌曲传唱度也能够对上了，&rdquo;绘楠下了结论，&ldquo;总之，大概可以确定信件是从那边发出的。&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠的推理应该是可靠的。除此之外，我还想到了没那么可靠却更加&ldquo;浪漫&rdquo;的部分。</div>
+<div>&nbsp;</div>
+<div>位原店长至今还在店里放那首The first time ever I saw your face。之前就觉得歌曲偏爵士的散漫风格和书店很不搭调，原来是有着特别的纪念意义&hellip;&hellip;位原店长他，说不定一直在意着笔记作者，也有留意那边的联络方式。</div>
+<div>&nbsp;</div>
+<div>终于拼凑起完整的故事，我满足地叹了口气，随口计划道：&ldquo;搬家之前，先去把活页簿还给立原&mdash;&mdash;位原店长吧，顺便告诫他不要这么随便地处理友人信物。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;友人吗&hellip;&hellip;&rdquo;绘楠不置可否地重复了一遍。</div>
+<div>&nbsp;</div>
+<div>&ldquo;对了，你刚刚说家门口的电子锁是用我的名字加密的，那明文是什么？&rdquo;至今都对整整13页的密码表心有余悸，想起这个话题，我便顺口问了出来。</div>
+<div>&nbsp;</div>
+<div>&ldquo;那个啊，是我把某个短语以青浦先生的名字作为密钥、用365种不同的加密方法制作的密码表。本来想着每天一句，刚好可以用满一年，结果呢&hellip;&hellip;&rdquo;绘楠刻意只解释了一半，似笑非笑地望着我，一点没有讲出下文的意思。</div>
+<div>&nbsp;</div>
+<div>&ldquo;&hellip;&hellip;我认错。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;真敷衍。&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠勉为其难地接受了我的道歉。他的嘴角噙着颇为奇异的笑容，俯身在我耳边低声道：&ldquo;是夏目漱石的名句哦，英文版本的。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&hellip;&hellip;</div>
+<div>&nbsp;</div>
+<div>夏目漱石的名句很多，英文译版更是只多不少，要说著名到不会产生歧义的话，似乎只有&mdash;&mdash;我的脸都要涨成绯色的了，整个人像赤身裸｀体暴露在撒哈拉42&deg;的阳光下，浑身都是灼烧的热度。</div>
+<div>&nbsp;</div>
+<div>太过分了吧，这种内容的密码，在绘楠跟我同居的家门口使用&hellip;&hellip;</div>
+<div>&nbsp;</div>
+<div>绘楠却一点也不体谅我的窘境，趁热打铁，开始了丝毫没有夏目漱石式含蓄美感的告白了：&ldquo;我喜欢青浦先生。最开始喜欢的是青浦先生的文章，热情又有趣，让人忍不住思索文字背后的作者是怎样的人。东大草坪那次聚会，看到青浦先生本人的时候真的特别吃惊，完全没想到是这样的&mdash;&mdash;&rdquo;</div>
+<div>&nbsp;</div>
+<div>我仓促地打断道：&ldquo;是啦，本来以为是文艺青年，结果看到了懦弱的中年人，很失望哦？&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;恰恰相反，是一见钟情。&rdquo;</div>
+<div>&nbsp;</div>
+<div>完了，富士山的泥土与岩浆彻底沸腾了。我被热血冲刷得连脑子都不太清醒，刚想不管不顾去亲吻绘楠，就被他握住双手反剪到背后。绘楠跨坐在我身上，眼神危险得好像随时会被触怒的喷火巨龙：&ldquo;那么，青浦先生对我呢？&rdquo;</div>
+<div>&nbsp;</div>
+<div>明明是你情我愿的场景，在绘楠暴君的气场下也好像是强取豪夺，我被逼得无路可逃，忍无可忍地咆哮起来：&ldquo;&hellip;&hellip;当然是也喜欢了！混蛋，你到底知不知道啊！&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;我知道，&rdquo;绘楠的表情忽然微妙起来，&ldquo;我生日那天，青浦先生喝醉了，流着泪扑进我怀里向我告白。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;哈？&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;结果隔天醒来，青浦先生什么都不记得了。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;&hellip;&hellip;&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;酒醉示爱的时候害羞又热情，清醒的时候却迟迟不肯告白。想不明白的我最开始还以为青浦先生对我有什么疑虑，努力地展示了能力与心意，结果青浦先生反而离得更远了，怎么都不肯靠近一步。最后才知道是青浦先生对自己有疑虑&mdash;&mdash;真是愚蠢的念头。&rdquo;</div>
+<div>&nbsp;</div>
+<div>绘楠说着，忽然在我脖颈一侧咬了一口。我反射性地一抖：&ldquo;你干嘛！&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;这是惩罚哦，&rdquo;绘楠摩挲着那个牙印，&ldquo;想要亲吻青浦先生，同时也想要惩罚青浦先生之前愚蠢的念头&mdash;&mdash;决定了，初吻必须是青浦先生主动。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;自说自话的家伙&hellip;&hellip;&rdquo;</div>
+<div>&nbsp;</div>
+<div>完全体会不到霸道又甜蜜的话语里&ldquo;惩罚&rdquo;的涵义，我如此腹诽一句，刚想要好好和暴君清算一下&ldquo;初吻&rdquo;和&ldquo;惩罚&rdquo;的问题，绘楠却很快地改变了话题：&ldquo;青浦先生，我要回东京了，你跟我回去吗？&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;啊、对，等一下&mdash;&mdash;&rdquo;</div>
+<div>&nbsp;</div>
+<div>我从绘楠的掌控下挣脱出来，想要去拿放在柜子上的钱包，用剩下的两张青春十八，邀请绘楠奔赴重返青春&mdash;&mdash;唔，对于绘楠来说，大概是一直未曾结束的青春&mdash;&mdash;的旅程，还没来得及行动，就听到了绘楠压低声线、温柔又性｀感的声音：</div>
+<div>&nbsp;</div>
+<div>&ldquo;如果青浦先生不答应，我恐怕会做出一些很不合适的事情哦&hellip;&hellip;&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;&hellip;&hellip;&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;当然，就算青浦先生爽快答应了，我也一样会做。&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;&hellip;&hellip;&rdquo;</div>
+<div>&nbsp;</div>
+<div>&ldquo;青浦先生不愿意吗？&rdquo;</div>
+<div>&nbsp;</div>
+<div>这种问题要人怎么回答啊！</div>
+<div>&nbsp;</div>
+<div>我恼羞成怒，搂住绘楠的脖子，狠狠地吻上了他的嘴唇。</div>
+<div>&nbsp;</div>
+<div>跋</div>
+<div>&nbsp;</div>
+<div>在英国流浪的时候，曾经遇到过传教的教会信徒。</div>
+<div>&nbsp;</div>
+<div>他们是热心又温柔的人，虽然会拦住像我这样无辜的路人，用长篇大论的绚丽言辞去描述一些难以想象的神迹，却也会同时递上廉价的热咖啡和苹果，礼貌的态度比政府的街头调查员更能打动人。</div>
+<div>&nbsp;</div>
+<div>时至今日，咖啡、苹果还有神迹的细节我已经全部忘记，唯一记得的一句话，是圣经里关于&ldquo;爱&rdquo;的描述。</div>
+<div>&nbsp;</div>
+<div>&ldquo;爱是恒久忍耐又有恩慈，爱是不嫉妒。&rdquo;</div>
+<div>&nbsp;</div>
+<div>是优雅动人的句子，但是事实如何，那时的我尚不明白。</div>
+<div>&nbsp;</div>
+<div>爱只是那样和煦又安宁的情感吗？或者，爱也有更加激烈的部分呢？</div>
+<div>&nbsp;</div>
+<div>真的爱上某人的到时候，像我这样乏味的性格，会不会变得有趣起来？一直麻木的心脏，会不会重新跳动得鲜活？会不会在痛苦与喜乐中跌宕、看到不一样的风景？会不会就算丢脸地追到天涯海角也舍不得失去，像重回少年时代一样，抛弃经验与圆滑，为对方做一切浪漫的蠢事？</div>
+<div>&nbsp;</div>
+<div>时至今日，笔者终于幸运地陷入了爱河，也即将离开北海道，进入人生的新阶段。那么亲爱的读者们呢？</div>
+<div>&nbsp;</div>
+<div>祝诸君幸福。</div>
+<div>&nbsp;</div>
+<div>平成19年春 青浦的北海道人间礼赞&middot;完</div>
+<div>&nbsp;</div>
+<div>正文完</div></div>
+
+  </div>
+            <div style="text-align: center;margin: 15px 15px 15px 15px; border-top:1px #e0e0e0 dashed">
+                <p style="font-size: 18px;line-height: 25px; color: #9a9a9a;padding: 15px 15px 15px 15px;">不忘初心，用愛發電，歡迎請站長喝一杯愛心咖啡！</p>
+                <div class="zanzhu"><button class="layui-btn  layui-btn-danger"><i class="layui-icon layui-icon-rmb"></i>打賞支持</button></div>
+            </div>
+        </div>
+
+        <!--小説上下文-->
+        <div style='margin:10px 0px;overflow:hidden;'>
+            <div id='pre' style="margin:5px 0px;display:inline-block;"><a href='https://flymore.ga/book/other/2017-10-01/71452.html'>专宠屌丝少爷——万支</a></div>
+            <div id='next' style='margin:5px 0px;float:right;display:inline-block;'><a href='https://flymore.ga/book/other/2017-10-01/71458.html'>超自然关系——乔林夕か</a></div>
+        </div>
+
+        <!--評論模塊-->
+        <div class="fly-panel detail-box" hidden id="flyReply">
+            <fieldset class="layui-elem-field layui-field-title" style="text-align: center;">
+                <legend>評論</legend>
+            </fieldset>
+
+            <ul class="jieda" id="jieda">
+                <!-- 無數據時 -->
+                <li class="fly-none">暫停提供評論服務！</li>
+            </ul>
+
+        </div>
+    </div>
+
+    <div class="layui-col-md4">
+
+        <div class="fly-panel" style="padding: 20px 0; text-align: center;">
+            <div class="layui-anim avatar"><a href="javascript:"><img alt="再賤就再見" src="https://flymore.ga/skin/default/images/avatar.jpg" style="width:120px; height:120px; border-radius:100%;"></a></div>
+            <h1>
+                <a href="javascript:" style="font-size: 24px">再賤就再見</a>
+                <i class="layui-icon layui-icon-male" style="font-size: 22px; color: #1E9FFF;"></i>
+            </h1>
+            <p style="color: #999999;margin: 8px">
+                <a href="mailto:iflymore@yandex.com" target="_blank" title="email"><i class="layui-icon layui-icon-email" style="padding-right: 5px;"></i> <span>聯絡我們</span></a>
+                &nbsp;<i class="layui-icon layui-icon-location"></i> <span>耽美 - 中國</span>
+            </p>
+            <p style="color: #999999;margin: 8px">為每一位到來的朋友，傳遞純真的夢想！</p>
+            <hr />
+            <div>
+                <a href="https://t.me/xbbchat" target="_blank" title="telegram"><i class="layui-icon layui-icon-release"  style="font-size: 32px;padding-right: 15px;"></i></a>
+                <a href="https://paypal.me/flymore/" target="_blank" title="paypal"><i class="layui-icon layui-icon-dollar" style="font-size: 32px;padding-right: 15px;"></i></a>
+                <a href="mailto:iflymore@yandex.com" target="_blank" title="service"><i style="font-size: 32px;" class="layui-icon layui-icon-dialogue"></i></a>
+            </div>
+        </div>
+
+        <dl class="fly-panel fly-list-one">
+            <dt class="fly-panel-title"><i class="layui-icon layui-icon-read"></i>  最新小説</dt>
+                        <dd>[其他]<a href="https://flymore.ga/book/other/2020-04-06/91693.html">穿书之怀上豪门老男人的孩子（包子）下+番外――甜腻小米粥</a> <span><i class="layui-icon">&#xe60e;</i> 2020-04-06</span></dd>
+                        <dd>[其他]<a href="https://flymore.ga/book/other/2020-04-06/91692.html">穿书之怀上豪门老男人的孩子（包子）中――甜腻小米粥</a> <span><i class="layui-icon">&#xe60e;</i> 2020-04-06</span></dd>
+                        <dd>[其他]<a href="https://flymore.ga/book/other/2020-04-06/91691.html">穿书之怀上豪门老男人的孩子（包子）上――甜腻小米粥</a> <span><i class="layui-icon">&#xe60e;</i> 2020-04-06</span></dd>
+                        <dd>[其他]<a href="https://flymore.ga/book/other/2020-04-06/91690.html">快穿之破坏者――零点风浅</a> <span><i class="layui-icon">&#xe60e;</i> 2020-04-06</span></dd>
+                        <dd>[其他]<a href="https://flymore.ga/book/other/2020-04-06/91689.html">老子今天不信鬼――鲤什么</a> <span><i class="layui-icon">&#xe60e;</i> 2020-04-06</span></dd>
+                        <dd>[其他]<a href="https://flymore.ga/book/other/2020-04-06/91688.html">末日之黑暗后的曙光（五）+番外――北冥魑</a> <span><i class="layui-icon">&#xe60e;</i> 2020-04-06</span></dd>
+                        <dd>[其他]<a href="https://flymore.ga/book/other/2020-04-06/91687.html">末日之黑暗后的曙光（四）――北冥魑</a> <span><i class="layui-icon">&#xe60e;</i> 2020-04-06</span></dd>
+                        <dd>[其他]<a href="https://flymore.ga/book/other/2020-04-06/91686.html">末日之黑暗后的曙光（三）――北冥魑</a> <span><i class="layui-icon">&#xe60e;</i> 2020-04-06</span></dd>
+                        <dd>[其他]<a href="https://flymore.ga/book/other/2020-04-06/91685.html">末日之黑暗后的曙光（二）――北冥魑</a> <span><i class="layui-icon">&#xe60e;</i> 2020-04-06</span></dd>
+                        <dd>[其他]<a href="https://flymore.ga/book/other/2020-04-06/91684.html">末日之黑暗后的曙光（一）――北冥魑</a> <span><i class="layui-icon">&#xe60e;</i> 2020-04-06</span></dd>
+                    </dl>
+
+        <dl class="fly-panel fly-list-one">
+            <dt class="fly-panel-title"><i class="layui-icon layui-icon-read"></i>  推薦小説</dt>
+                    </dl>
+
+        <dl class="fly-panel fly-list-one">
+            <dt class="fly-panel-title"><i class="layui-icon layui-icon-read"></i>  熱門小説</dt>
+                        <dd>[其他]<a href="https://flymore.ga/book/other/2018-01-08/73634.html">婚婚欲睡（一）――廿乱</a> <span><i class="layui-icon">&#xe60e;</i> 2018-01-08</span></dd>
+                        <dd>[其他]<a href="https://flymore.ga/book/other/2018-04-27/75663.html">重生之据说我家崽还有亲爹（包子）上――水查查</a> <span><i class="layui-icon">&#xe60e;</i> 2018-04-27</span></dd>
+                        <dd>[其他]<a href="https://flymore.ga/book/other/2018-02-21/74451.html">好孕成双（包子 一）――会武功的小狐狸</a> <span><i class="layui-icon">&#xe60e;</i> 2018-02-21</span></dd>
+                        <dd>[其他]<a href="https://flymore.ga/book/other/2017-10-07/71924.html">我爸爸是霸总秦三少（包子）上——大圆子</a> <span><i class="layui-icon">&#xe60e;</i> 2017-10-07</span></dd>
+                        <dd>[其他]<a href="https://flymore.ga/book/other/2017-11-06/72472.html">含桃（一）——绿野千鹤</a> <span><i class="layui-icon">&#xe60e;</i> 2017-11-06</span></dd>
+                        <dd>[其他]<a href="https://flymore.ga/book/other/2017-11-06/72435.html">老祖画风总是不对（一）——riverqueen</a> <span><i class="layui-icon">&#xe60e;</i> 2017-11-06</span></dd>
+                        <dd>[其他]<a href="https://flymore.ga/book/other/2019-01-11/81130.html">富二代遇上富一代 中――浩瀚</a> <span><i class="layui-icon">&#xe60e;</i> 2019-01-11</span></dd>
+                        <dd>[其他]<a href="https://flymore.ga/book/other/2017-02-01/15137.html">商品----骨谷</a> <span><i class="layui-icon">&#xe60e;</i> 2017-02-01</span></dd>
+                        <dd>[其他]<a href="https://flymore.ga/book/other/2017-10-18/72129.html">反派的花式洗白史（一）——凤黎九惜</a> <span><i class="layui-icon">&#xe60e;</i> 2017-10-18</span></dd>
+                        <dd>[其他]<a href="https://flymore.ga/book/other/2018-07-01/76945.html">伪装幼崽当卧底 中――言朝暮</a> <span><i class="layui-icon">&#xe60e;</i> 2018-07-01</span></dd>
+                    </dl>
+    </div>
+
+    </div>
+    </div>
+
+
+    <div class="fly-footer">
+    <p>Copyright &copy; 2013-<script type='text/javascript'>var creditsyear = new Date();document.write(creditsyear.getFullYear());</script> <a href="https://www.flymore.ga">丹樂網</a></p>
+    <p class="layui-hide-xs">本站所有内容全部来源于互联网，版权归属于原作者，如果对作品内容、版权等方面有质疑，或对本站有意见建议请发送Email至<a href='mailto:iflymore@yandex.com'>iflymore@yandex.com</a>，感谢您的合作与支持。</p>
+</div>
+
+<a href="#" id="back-to-top"><i class="layui-icon" style="font-size: 36px;">&#xe604;</i></a>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/layui-src@2.5.4/dist/layui.js"></script>
+<script src='https://flymore.ga/skin/default/js/lang.min.js'></script>
+<script src="https://flymore.ga/skin/default/js/site.min.js"></script>
+    </body>
+</html>
